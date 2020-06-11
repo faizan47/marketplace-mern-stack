@@ -1,6 +1,13 @@
 const express = require('express');
 const app = express();
+const port = process.env.PORT || 5000;
+const mongoose = require('mongoose');
+const { mongoURI } = require('./config/keys');
+require('./models/User');
 
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }, () =>
+	console.log('Successfully connected to the database')
+);
 app.get('/', (req, res) => res.send('It works!'));
 
-app.listen(5000, () => console.log('Listening on port 5000'));
+app.listen(port, () => console.log('Listening on port 5000'));
