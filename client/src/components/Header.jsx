@@ -7,7 +7,7 @@ class Header extends Component {
 			<nav className="navbar" role="navigation" aria-label="main navigation">
 				<div className="navbar-brand">
 					<a className="navbar-item" href="/">
-						<img src={logo} />
+						<img src={logo} alt="logo" />
 					</a>
 					<a
 						role="button"
