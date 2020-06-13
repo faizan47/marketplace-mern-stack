@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const { hashPassword, comparePassword } = require('../services/bcrypt');
 
-module.exports = (app) => {
+module.exports = app => {
 	app.post('/api/signup', async (req, res) => {
 		const { name, email, password } = req.body;
 		const hashedPassword = await hashPassword(password);

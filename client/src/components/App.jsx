@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Header from './Header';
-import SignUpForm from './SignUpForm';
+import SignUpForm from './form/SignUpForm';
 
 class App extends Component {
 	render() {

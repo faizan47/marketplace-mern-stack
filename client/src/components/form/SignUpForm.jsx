@@ -1,19 +1,23 @@
 import React from 'react';
-import FormField from './form/FormField';
-import { reduxForm } from 'redux-form';
+import FormField from './FormField';
+import { reduxForm, Field } from 'redux-form';
 import { Link } from 'react-router-dom';
-import { signUpInputs } from './form/formInputs';
+import { signUpInputs } from './formInputs';
+import { signUp } from '../../actions';
+import { connect } from 'react-redux';
 
 class SignUpForm extends React.Component {
 	renderInputs = () => {
-		return signUpInputs.map((field) => <FormField key={field.name} field={field} />);
+		return signUpInputs.map(field => <FormField key={field.name} fieldAttrs={field} />);
 	};
-	onSubmit = (e) => {
-		console.log(e);
+	onSubmit = values => {
+		console.log(values);
+
+		// this.props.signUp(values);
 	};
 	render() {
 		return (
-			<section className="section px-0">
+			<section className="section">
 				<form className="column is-half" onSubmit={this.props.handleSubmit(this.onSubmit)}>
 					{this.renderInputs()}
 					<div className="field is-grouped">
@@ -31,14 +35,18 @@ class SignUpForm extends React.Component {
 		);
 	}
 }
-const validate = (values) => {
+const validate = values => {
+	console.log(values);
+
 	const errors = {};
 	console.log(values);
 
 	return errors;
 };
+const mapStateToProps = state => {
+	// console.log(state);
 
-export default reduxForm({
-	form: 'signUp',
-	validate
-})(SignUpForm);
+	return {};
+};
+
+export default reduxForm({ form: 'signUp' })(connect(mapStateToProps, { signUp })(SignUpForm));
