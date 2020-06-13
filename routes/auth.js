@@ -11,32 +11,40 @@ module.exports = app => {
 
 		if (!isNewUser) {
 			// console.log(isNewUser);
-			const user = await new User({
+			await new User({
 				name,
 				email,
 				password: hashedPassword,
 				joinDate: new Date()
 			}).save();
-			return res.send(user);
+			return res.send('Success!');
 		}
 		return res.status(409).send({ message: 'User already registered' });
 	});
 
 	app.post('/api/signin', async (req, res) => {
-		const { email, role, password } = req.body;
-		console.log(req.body);
+		const { email, password } = req.body;
 		const user = await User.findOne({ email });
+		if (!user) res.status(404).send('User not found');
 		const isVerified = await comparePassword(user.password, password);
 		if (isVerified) {
 			req.session.userId = user._id;
-			res.send({ email, role });
+			res.send({ email, role: user.role });
 		} else {
 			res.send('Invalid email or password.');
 		}
 	});
-	app.post('/api/signout', (req, res) => {
+	app.get('/api/signout', (req, res) => {
 		req.session = null;
 		// redirect to be handled in react
 		res.redirect('/');
+	});
+	app.get('/api/current_user', async (req, res) => {
+		if (req.session.userId) {
+			const { email, role, name } = await User.findById(req.session.userId);
+			res.send({ email, role, name });
+		}
+
+		res.send(false);
 	});
 };
