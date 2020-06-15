@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
+import FormTemplate from '../FormTemplate';
+import { createListingInputs } from './listingFileInputs';
 
-class CreateAd extends Component {
+class CreateListing extends Component {
+	onSubmit = (values) => {
+		console.log(values);
+	};
 	render() {
 		return (
 			<section className="section">
-				<h1 className="title">Create an Ad</h1>
+				<h1 className="title">Create a Listing</h1>
+				<FormTemplate inputs={createListingInputs} onSubmit={this.onSubmit} form="createListing" />
 			</section>
 		);
 	}
 }
 
-export default CreateAd;
+export default CreateListing;

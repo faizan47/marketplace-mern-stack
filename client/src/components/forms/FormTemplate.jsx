@@ -7,11 +7,11 @@ import capitalizeFirstLetter from '../../utils/capitalizeFirstLetter';
 
 class FormTemplate extends React.Component {
 	renderInputs = () => {
-		return this.props.inputs.map(field => (
+		return this.props.inputs.map((field) => (
 			<Field name={field.name} component={FormField} key={field.name} fieldAttrs={field} />
 		));
 	};
-	onSubmit = values => {
+	onSubmit = (values) => {
 		this.props.onSubmit(values, this.props.history);
 	};
 	render() {
