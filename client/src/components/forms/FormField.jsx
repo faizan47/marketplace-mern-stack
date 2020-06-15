@@ -1,12 +1,6 @@
 import React, { Fragment } from 'react';
-import ReactCloudinaryUploader from '@app-masters/react-cloudinary-uploader';
-let options = {
-	cloud_name: '',
-	upload_preset: '',
-	multiple: true,
-	returnJustUrl: true,
-	showPoweredBy: false
-};
+import MultiImageInput from 'react-multiple-image-input';
+
 const FormField = ({ input, label, htmlType, placeholder, iconClass, selectOptions, meta: { error, touched } }) => {
 	const renderInputType = htmlType => {
 		switch (htmlType) {
@@ -14,29 +8,18 @@ const FormField = ({ input, label, htmlType, placeholder, iconClass, selectOptio
 				return <textarea className="textarea" {...input} placeholder={placeholder} />;
 			case 'file':
 				return (
-					<div className="file ">
-						<label className="file-label">
-							<input className="file-input" type="" name="resume" multiple />
-							<span
-								onClick={() => {
-									ReactCloudinaryUploader.open(options)
-										.then(image => {
-											if (this.props.returnJustUrl) image = image.url;
-											console.log('image', image);
-										})
-										.catch(err => {
-											console.error(err);
-										});
-								}}
-								className="file-cta"
-							>
-								<span className="file-icon">
-									<i className="fas fa-upload" />
-								</span>
-								<span className="file-label">Upload some images…</span>
-							</span>
-						</label>
-					</div>
+					// <div className="file ">
+					// 	<label className="file-label">
+					// 		<input className="file-input" type="" name="resume" multiple />
+					// 		<span className="file-cta">
+					// 			<span className="file-icon">
+					// 				<i className="fas fa-upload" />
+					// 			</span>
+					// 			<span className="file-label">Upload some images…</span>
+					// 		</span>
+					// 	</label>
+					// </div>
+					<MultiImageInput max={3} images={setImages} setImages={setImages} />
 				);
 			case 'select':
 				return (
@@ -47,13 +30,6 @@ const FormField = ({ input, label, htmlType, placeholder, iconClass, selectOptio
 						<span className="icon is-left">
 							<i className={`fas ${iconClass}`} />
 						</span>
-						<ReactCloudinaryUploader
-							cloudName={options.cloud_name}
-							uploadPreset={options.upload_preset}
-							onUploadSuccess={image => {
-								console.log('image', image);
-							}}
-						/>
 					</div>
 				);
 			default:
