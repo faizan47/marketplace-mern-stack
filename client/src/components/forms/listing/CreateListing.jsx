@@ -3,7 +3,7 @@ import FormTemplate from '../FormTemplate';
 import { createListingInputs } from './listingFileInputs';
 
 class CreateListing extends Component {
-	onSubmit = (values) => {
+	onSubmit = values => {
 		console.log(values);
 	};
 	render() {

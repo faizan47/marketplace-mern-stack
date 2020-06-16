@@ -4,14 +4,24 @@ import { Field, reduxForm } from 'redux-form';
 import { Link, withRouter } from 'react-router-dom';
 import isEmailValid from '../../utils/isEmailValid';
 import capitalizeFirstLetter from '../../utils/capitalizeFirstLetter';
+import Select from './inputs/Select';
 
 class FormTemplate extends React.Component {
 	renderInputs = () => {
 		return this.props.inputs.map(({ name, type, label, placeholder, iconClass, htmlType, selectOptions }) => {
+			let detectType = type;
+			switch (type) {
+				case 'file':
+					detectType = 'file';
+				case 'select':
+					return <Select key={name} name={name} selectOptions={selectOptions || []} iconClass={iconClass} />;
+				default:
+					detectType = type;
+			}
 			return (
 				<Field
 					name={name}
-					type={type}
+					type={detectType}
 					component={FormField}
 					key={name}
 					label={label}
@@ -47,7 +57,7 @@ class FormTemplate extends React.Component {
 const validate = (values, { inputs }) => {
 	const errors = {};
 	inputs.map(({ name, type }) => {
-		if (!values[name]) {
+		if (!values[name] && type !== 'file') {
 			return (errors[name] = `${capitalizeFirstLetter(name)} is required.`);
 		} else if (type === 'email' && !isEmailValid(values[name])) {
 			return (errors[name] = 'Invalid email');

@@ -22,6 +22,9 @@ class App extends Component {
 					<Route path="/createListing">
 						<CreateListing />
 					</Route>
+					<Route path="/">
+						<CreateListing />
+					</Route>
 				</div>
 			</BrowserRouter>
 		);
