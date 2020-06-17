@@ -1,37 +1,42 @@
 import React from 'react';
-import FormField from './FormField';
+// import FormField from './FormField';
 import { Field, reduxForm } from 'redux-form';
 import { Link, withRouter } from 'react-router-dom';
 import isEmailValid from '../../utils/isEmailValid';
 import capitalizeFirstLetter from '../../utils/capitalizeFirstLetter';
 import Select from './inputs/Select';
+import ImageUpload from './inputs/ImageUpload';
+import Textarea from './inputs/Textarea';
+import Input from './inputs/Input';
 
 class FormTemplate extends React.Component {
 	renderInputs = () => {
 		return this.props.inputs.map(({ name, type, label, placeholder, iconClass, htmlType, selectOptions }) => {
-			let detectType = type;
 			switch (type) {
-				case 'file':
-					detectType = 'file';
-				case 'select':
-					return <Select key={name} name={name} selectOptions={selectOptions || []} iconClass={iconClass} />;
+				// case 'file':
+				// 	return <Field type="text" name={name} component={<ImageUpload name={name} />} />;
+				// case 'select':
+				// 	return (
+				// 		<Field
+				// 			name={name}
+				// 			component={
+				// 				<Select
+				// 					key={name}
+				// 					name={name}
+				// 					selectOptions={selectOptions || []}
+				// 					iconClass={iconClass}
+				// 				/>
+				// 			}
+				// 			type={type}
+				// 		/>
+				// 	);
+				// case 'textarea':
+				// 	return <Field name={name} component={<Textarea />} type="text" />;
 				default:
-					detectType = type;
+					return <Field name={name} type="text" component={() => Input(name)} key={name} />;
 			}
-			return (
-				<Field
-					name={name}
-					type={detectType}
-					component={FormField}
-					key={name}
-					label={label}
-					placeholder={placeholder}
-					iconClass={iconClass}
-					htmlType={htmlType}
-					selectOptions={selectOptions}
-				/>
-			);
 		});
+		// htmlType, iconClass, input, placeholder
 	};
 	onSubmit = values => {
 		this.props.onSubmit(values, this.props.history);
