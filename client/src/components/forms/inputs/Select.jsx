@@ -6,7 +6,7 @@ export default ({ name, selectOptions, iconClass }) => {
 		<div className="control has-icons-left">
 			<div className="select ">
 				<Field name={name} component="select">
-					{selectOptions.map(option => <option key={option}>{option}</option>)}
+					{selectOptions.map((option) => <option key={option}>{option}</option>)}
 				</Field>
 			</div>
 			<span className="icon is-left">

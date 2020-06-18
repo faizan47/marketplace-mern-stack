@@ -15,30 +15,36 @@ class FormTemplate extends React.Component {
 			switch (type) {
 				// case 'file':
 				// 	return <Field type="text" name={name} component={<ImageUpload name={name} />} />;
-				// case 'select':
-				// 	return (
-				// 		<Field
-				// 			name={name}
-				// 			component={
-				// 				<Select
-				// 					key={name}
-				// 					name={name}
-				// 					selectOptions={selectOptions || []}
-				// 					iconClass={iconClass}
-				// 				/>
-				// 			}
-				// 			type={type}
-				// 		/>
-				// 	);
-				// case 'textarea':
-				// 	return <Field name={name} component={<Textarea />} type="text" />;
+				case 'select':
+					return <Select key={name} name={name} selectOptions={selectOptions} iconClass={iconClass} />;
+				case 'textarea':
+					return (
+						<Field key={name} name={name} component={Textarea} {...{ placeholder, label }} type="text" />
+					);
 				default:
-					return <Field name={name} type="text" component={() => Input(name)} key={name} />;
+					// console.log(name, 'default');
+
+					return (
+						<Field
+							name={name}
+							key={name}
+							type="text"
+							component={Input}
+							{...{
+								htmlType,
+								placeholder,
+								iconClass,
+								label
+							}}
+						/>
+					);
 			}
 		});
 		// htmlType, iconClass, input, placeholder
 	};
-	onSubmit = values => {
+	onSubmit = (values) => {
+		console.log(values);
+
 		this.props.onSubmit(values, this.props.history);
 	};
 	render() {

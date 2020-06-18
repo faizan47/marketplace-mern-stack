@@ -10,15 +10,7 @@ export const createListingInputs = [
 		name: 'listingDescription',
 		label: 'Enter more information about your requirement',
 		placeholder: 'We need 500 N95 masks as soon as possible. They need to be ISI & ISO certified.',
-		type: 'text',
-		htmlType: 'textarea'
-	},
-	{
-		name: 'quantity',
-		label: 'Enter quantity needed',
-		placeholder: '1500',
-		type: 'number',
-		iconClass: 'fa-balance-scale'
+		type: 'textarea'
 	},
 	{
 		name: 'category',
@@ -29,10 +21,18 @@ export const createListingInputs = [
 		selectOptions: [ 'Cars', 'Furniture', 'Electronics & Appliances', 'Mobiles', 'Bikes', 'Textile' ]
 	},
 	{
-		name: 'ListingImages',
-		label: 'Upload some images',
-		type: 'file',
-		iconClass: 'fa-file-image',
-		htmlType: 'file'
+		name: 'quantity',
+		label: 'Enter quantity needed',
+		placeholder: '1500',
+		type: 'number',
+		iconClass: 'fa-balance-scale'
 	}
+
+	// {
+	// 	name: 'ListingImages',
+	// 	label: 'Upload some images',
+	// 	type: 'file',
+	// 	iconClass: 'fa-file-image',
+	// 	htmlType: 'file'
+	// }
 ];
