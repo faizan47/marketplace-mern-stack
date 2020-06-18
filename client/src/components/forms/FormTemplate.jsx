@@ -1,5 +1,4 @@
 import React from 'react';
-// import FormField from './FormField';
 import { Field, reduxForm } from 'redux-form';
 import { Link, withRouter } from 'react-router-dom';
 import isEmailValid from '../../utils/isEmailValid';
@@ -13,8 +12,17 @@ class FormTemplate extends React.Component {
 	renderInputs = () => {
 		return this.props.inputs.map(({ name, type, label, placeholder, iconClass, htmlType, selectOptions }) => {
 			switch (type) {
-				// case 'file':
-				// 	return <Field type="text" name={name} component={<ImageUpload name={name} />} />;
+				case 'file':
+					return (
+						<Field
+							key={name}
+							type="file"
+							multiple={true}
+							name={name}
+							component={ImageUpload}
+							{...{ name }}
+						/>
+					);
 				case 'select':
 					return <Select key={name} name={name} selectOptions={selectOptions} iconClass={iconClass} />;
 				case 'textarea':
@@ -26,8 +34,8 @@ class FormTemplate extends React.Component {
 
 					return (
 						<Field
-							name={name}
 							key={name}
+							name={name}
 							type="text"
 							component={Input}
 							{...{
@@ -42,9 +50,7 @@ class FormTemplate extends React.Component {
 		});
 		// htmlType, iconClass, input, placeholder
 	};
-	onSubmit = (values) => {
-		console.log(values);
-
+	onSubmit = values => {
 		this.props.onSubmit(values, this.props.history);
 	};
 	render() {

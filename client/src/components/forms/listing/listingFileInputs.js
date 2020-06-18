@@ -26,13 +26,12 @@ export const createListingInputs = [
 		placeholder: '1500',
 		type: 'number',
 		iconClass: 'fa-balance-scale'
+	},
+	{
+		name: 'ListingImages',
+		label: 'Upload some images',
+		type: 'file',
+		iconClass: 'fa-file-image',
+		htmlType: 'file'
 	}
-
-	// {
-	// 	name: 'ListingImages',
-	// 	label: 'Upload some images',
-	// 	type: 'file',
-	// 	iconClass: 'fa-file-image',
-	// 	htmlType: 'file'
-	// }
 ];
