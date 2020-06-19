@@ -50,7 +50,7 @@ class FormTemplate extends React.Component {
 		});
 		// htmlType, iconClass, input, placeholder
 	};
-	onSubmit = values => {
+	onSubmit = (values) => {
 		this.props.onSubmit(values, this.props.history);
 	};
 	render() {

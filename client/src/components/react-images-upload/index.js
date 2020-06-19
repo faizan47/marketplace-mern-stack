@@ -64,8 +64,6 @@ class ReactImageUploadComponent extends React.Component {
 
 		// Iterate over all uploaded files
 		for (let i = 0; i < files.length; i++) {
-			//#faizan
-			this.props.input.onDrop(e);
 			let file = files[i];
 			let fileError = {
 				name: file.name
@@ -96,11 +94,11 @@ class ReactImageUploadComponent extends React.Component {
 
 		const { singleImage } = this.props;
 
-		Promise.all(allFilePromises).then(newFilesData => {
+		Promise.all(allFilePromises).then((newFilesData) => {
 			const dataURLs = singleImage ? [] : this.state.pictures.slice();
 			const files = singleImage ? [] : this.state.files.slice();
 
-			newFilesData.forEach(newFileData => {
+			newFilesData.forEach((newFileData) => {
 				dataURLs.push(newFileData.dataURL);
 				files.push(newFileData.file);
 			});
@@ -137,7 +135,7 @@ class ReactImageUploadComponent extends React.Component {
    Remove the image from state
    */
 	removeImage(picture) {
-		const removeIndex = this.state.pictures.findIndex(e => e === picture);
+		const removeIndex = this.state.pictures.findIndex((e) => e === picture);
 		const filteredPictures = this.state.pictures.filter((e, index) => index !== removeIndex);
 		const filteredFiles = this.state.files.filter((e, index) => index !== removeIndex);
 
@@ -221,8 +219,6 @@ class ReactImageUploadComponent extends React.Component {
 	}
 
 	render() {
-		console.log(this.props.input);
-
 		return (
 			<div className={'fileUploader ' + this.props.className} style={this.props.style}>
 				<div className="fileContainer" style={this.props.fileContainerStyle}>
@@ -239,8 +235,8 @@ class ReactImageUploadComponent extends React.Component {
 					</button>
 					<input
 						type="file"
-						ref={input => (this.inputElement = input)}
-						name={this.props.input.name}
+						ref={(input) => (this.inputElement = input)}
+						name={this.props.name}
 						multiple={!this.props.singleImage}
 						onChange={this.onDropFile}
 						onClick={this.onUploadClick}
