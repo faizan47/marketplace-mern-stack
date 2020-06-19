@@ -16,7 +16,7 @@ class FormTemplate extends React.Component {
 					return (
 						<Field
 							key={name}
-							type="file"
+							type="text"
 							multiple={true}
 							name={name}
 							component={ImageUpload}
@@ -30,8 +30,6 @@ class FormTemplate extends React.Component {
 						<Field key={name} name={name} component={Textarea} {...{ placeholder, label }} type="text" />
 					);
 				default:
-					// console.log(name, 'default');
-
 					return (
 						<Field
 							key={name}
@@ -50,7 +48,7 @@ class FormTemplate extends React.Component {
 		});
 		// htmlType, iconClass, input, placeholder
 	};
-	onSubmit = (values) => {
+	onSubmit = values => {
 		this.props.onSubmit(values, this.props.history);
 	};
 	render() {

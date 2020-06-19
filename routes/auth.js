@@ -40,8 +40,8 @@ module.exports = app => {
 		if (req.session.userId) {
 			const { email, role, name } = await User.findById(req.session.userId);
 			res.send({ email, role, name });
+		} else {
+			res.send(false);
 		}
-
-		res.send(false);
 	});
 };

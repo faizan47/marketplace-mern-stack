@@ -1,13 +1,13 @@
 export const createListingInputs = [
 	{
-		name: 'listingTitle',
+		name: 'title',
 		label: 'Enter a short title for your requirement',
 		placeholder: 'Need 500 N95 masks',
 		type: 'text',
 		iconClass: 'fa-info'
 	},
 	{
-		name: 'listingDescription',
+		name: 'description',
 		label: 'Enter more information about your requirement',
 		placeholder: 'We need 500 N95 masks as soon as possible. They need to be ISI & ISO certified.',
 		type: 'textarea'
@@ -28,10 +28,9 @@ export const createListingInputs = [
 		iconClass: 'fa-balance-scale'
 	},
 	{
-		name: 'ListingImages',
+		name: 'images',
 		label: 'Upload some images',
 		type: 'file',
-		iconClass: 'fa-file-image',
-		htmlType: 'file'
+		iconClass: 'fa-file-image'
 	}
 ];

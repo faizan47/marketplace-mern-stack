@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import FormTemplate from '../FormTemplate';
 import { createListingInputs } from './listingFileInputs';
+import { connect } from 'react-redux';
+import { createListing } from '../../../actions';
+import { withRouter } from 'react-router-dom';
 
 class CreateListing extends Component {
-	onSubmit = (values) => {
-		console.log(values);
+	onSubmit = async values => {
+		this.props.createListing(values, this.props.history);
 	};
 	render() {
 		return (
@@ -16,4 +19,4 @@ class CreateListing extends Component {
 	}
 }
 
-export default CreateListing;
+export default connect(null, { createListing })(withRouter(CreateListing));
