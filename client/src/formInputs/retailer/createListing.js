@@ -14,7 +14,7 @@ export const createListingInputs = [
 	},
 	{
 		name: 'category',
-		label: 'Select your category',
+		label: 'Select a category',
 		placeholder: '1500',
 		type: 'select',
 		iconClass: 'fa-tag',

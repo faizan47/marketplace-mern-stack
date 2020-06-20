@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
-import logo from './images/bulma-logo.png';
+import logo from '../../images/bulma-logo.png';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchUser, signOut } from '../actions';
+import { fetchUser, signOut } from '../../actions';
 
 class Header extends Component {
 	componentDidMount() {
@@ -56,7 +56,18 @@ class Header extends Component {
 					</span>
 				</div>
 				<div id="navbarBasicExample" className="navbar-menu">
+					<div className="navbar-start">
+						<Link to="listings" className="navbar-item">
+							Listings
+						</Link>
+					</div>
 					<div className="navbar-end">
+						<Link to="myListings" className="navbar-item">
+							My Listings
+						</Link>
+						<Link to="messages" className="navbar-item">
+							Messages
+						</Link>
 						<div className="navbar-item">
 							<div className="buttons">{this.renderMenu()}</div>
 						</div>

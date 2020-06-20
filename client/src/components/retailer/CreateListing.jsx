@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import FormTemplate from '../FormTemplate';
-import { createListingInputs } from './listingFileInputs';
+import FormTemplate from '../formComponents/FormTemplate';
+import { createListingInputs } from '../../formInputs/retailer/createListing';
 import { connect } from 'react-redux';
-import { createListing } from '../../../actions';
+import { createListing } from '../../actions';
 import { withRouter } from 'react-router-dom';
 
 class CreateListing extends Component {
@@ -13,7 +13,12 @@ class CreateListing extends Component {
 		return (
 			<section className="section">
 				<h1 className="title">Create a Listing</h1>
-				<FormTemplate inputs={createListingInputs} onSubmit={this.onSubmit} form="createListing" />
+				<FormTemplate
+					initialValues={{ category: 'defaultSelect' }}
+					inputs={createListingInputs}
+					onSubmit={this.onSubmit}
+					form="createListing"
+				/>
 			</section>
 		);
 	}

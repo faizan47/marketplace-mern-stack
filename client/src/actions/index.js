@@ -24,7 +24,9 @@ export const signOut = history => async dispatch => {
 };
 
 export const createListing = (createListingFormData, history) => async dispatch => {
-	let { images } = createListingFormData;
+	console.log(createListingFormData);
+
+	let { images } = createListingFormData || {};
 	const imageURLs = await uploadToCloudinary(images);
 	createListingFormData.images = imageURLs;
 	const response = await axios.post('/api/listing', createListingFormData);

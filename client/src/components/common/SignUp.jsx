@@ -1,12 +1,12 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { signUpInputs } from './authFormInputs';
-import { signUp } from '../../../actions';
+import { signUpInputs } from '../../formInputs/common/signUpInputs';
+import { signUp } from '../../actions/';
 import { connect } from 'react-redux';
-import FormTemplate from '../FormTemplate';
+import FormTemplate from '../formComponents/FormTemplate';
 
-class SignInForm extends React.Component {
-	onSubmit = (values) => {
+class SignUp extends React.Component {
+	onSubmit = values => {
 		this.props.signUp(values, this.props.history);
 	};
 	render() {
@@ -19,4 +19,4 @@ class SignInForm extends React.Component {
 	}
 }
 
-export default connect(null, { signUp })(withRouter(SignInForm));
+export default connect(null, { signUp })(withRouter(SignUp));

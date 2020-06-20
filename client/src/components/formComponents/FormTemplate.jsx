@@ -3,14 +3,14 @@ import { Field, reduxForm } from 'redux-form';
 import { Link, withRouter } from 'react-router-dom';
 import isEmailValid from '../../utils/isEmailValid';
 import capitalizeFirstLetter from '../../utils/capitalizeFirstLetter';
-import Select from './inputs/Select';
-import ImageUpload from './inputs/ImageUpload';
-import Textarea from './inputs/Textarea';
-import Input from './inputs/Input';
+import Select from '../formComponents/Select';
+import ImageUpload from '../formComponents/ImageUpload';
+import Textarea from '../formComponents/Textarea';
+import Input from '../formComponents/Input';
 
 class FormTemplate extends React.Component {
 	renderInputs = () => {
-		return this.props.inputs.map(({ name, type, label, placeholder, iconClass, htmlType, selectOptions }) => {
+		return this.props.inputs.map(({ name, type, label, placeholder, iconClass, selectOptions }) => {
 			switch (type) {
 				case 'file':
 					return (
@@ -20,11 +20,19 @@ class FormTemplate extends React.Component {
 							multiple={true}
 							name={name}
 							component={ImageUpload}
-							{...{ name }}
+							{...{ name, label }}
 						/>
 					);
 				case 'select':
-					return <Select key={name} name={name} selectOptions={selectOptions} iconClass={iconClass} />;
+					return (
+						<Select
+							key={name}
+							name={name}
+							selectOptions={selectOptions}
+							{...{ label }}
+							iconClass={iconClass}
+						/>
+					);
 				case 'textarea':
 					return (
 						<Field key={name} name={name} component={Textarea} {...{ placeholder, label }} type="text" />
@@ -34,10 +42,9 @@ class FormTemplate extends React.Component {
 						<Field
 							key={name}
 							name={name}
-							type="text"
 							component={Input}
 							{...{
-								htmlType,
+								type,
 								placeholder,
 								iconClass,
 								label
@@ -72,7 +79,7 @@ class FormTemplate extends React.Component {
 const validate = (values, { inputs }) => {
 	const errors = {};
 	inputs.map(({ name, type }) => {
-		if (!values[name] && type !== 'file') {
+		if ((!values[name] && type !== 'file') || values[name] === 'defaultSelect') {
 			return (errors[name] = `${capitalizeFirstLetter(name)} is required.`);
 		} else if (type === 'email' && !isEmailValid(values[name])) {
 			return (errors[name] = 'Invalid email');
@@ -82,4 +89,6 @@ const validate = (values, { inputs }) => {
 	return errors;
 };
 
-export default reduxForm({ validate })(withRouter(FormTemplate));
+export default reduxForm({
+	validate
+})(withRouter(FormTemplate));

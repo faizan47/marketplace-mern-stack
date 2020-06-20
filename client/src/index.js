@@ -6,11 +6,7 @@ import reducers from './reducers';
 import { Provider } from 'react-redux';
 import 'bulma/css/bulma.css';
 import thunk from 'redux-thunk';
-
-// temporary
-import axios from 'axios';
-window.axios = axios;
-
+import './style.css';
 const store = createStore(reducers, applyMiddleware(thunk));
 
 ReactDOM.render(
