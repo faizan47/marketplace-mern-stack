@@ -12,15 +12,18 @@ class FormTemplate extends React.Component {
 	renderInputs = () => {
 		return this.props.inputs.map(({ name, type, label, placeholder, iconClass, selectOptions }) => {
 			switch (type) {
-				case 'file':
+				case 'number':
 					return (
 						<Field
 							key={name}
-							type="text"
-							multiple={true}
 							name={name}
-							component={ImageUpload}
-							{...{ name, label }}
+							component={Input}
+							{...{
+								type,
+								placeholder,
+								iconClass,
+								label
+							}}
 						/>
 					);
 				case 'select':
@@ -36,6 +39,17 @@ class FormTemplate extends React.Component {
 				case 'textarea':
 					return (
 						<Field key={name} name={name} component={Textarea} {...{ placeholder, label }} type="text" />
+					);
+				case 'file':
+					return (
+						<Field
+							key={name}
+							type="text"
+							multiple={true}
+							name={name}
+							component={ImageUpload}
+							{...{ name, label }}
+						/>
 					);
 				default:
 					return (
@@ -78,7 +92,11 @@ class FormTemplate extends React.Component {
 }
 const validate = (values, { inputs }) => {
 	const errors = {};
+
 	inputs.map(({ name, type }) => {
+		if (type === 'number' && values[name].length && isNaN(values[name])) {
+			return 'Must be a number.';
+		}
 		if ((!values[name] && type !== 'file') || values[name] === 'defaultSelect') {
 			return (errors[name] = `${capitalizeFirstLetter(name)} is required.`);
 		} else if (type === 'email' && !isEmailValid(values[name])) {

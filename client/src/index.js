@@ -4,8 +4,8 @@ import App from './components/App';
 import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers';
 import { Provider } from 'react-redux';
-import 'bulma/css/bulma.css';
 import thunk from 'redux-thunk';
+import 'bulma/css/bulma.css';
 import './style.css';
 const store = createStore(reducers, applyMiddleware(thunk));
 

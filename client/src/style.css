@@ -1,3 +1,6 @@
 .label::first-letter {
 	text-transform: capitalize;
 }
+.field-select {
+	padding: 10px 0;
+}

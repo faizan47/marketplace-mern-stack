@@ -5,13 +5,14 @@ export default ({ name, selectOptions, iconClass, label }) => {
 	const renderSelect = ({ input, meta: { touched, error }, children }) => (
 		<Fragment>
 			<select {...input}>{children}</select>
-			{touched && error && <p className="help is-danger">{error}</p>}
+			{touched && error && <p className="help is-danger pb-1">{error}</p>}
 		</Fragment>
 	);
+
 	return (
-		<div className="field">
+		<div className="field field-select">
 			<div className="control has-icons-left">
-				<div className="select ">
+				<div className="select is-fullwidth">
 					<Field name={name} component={renderSelect}>
 						<option disabled value="defaultSelect">
 							{label}
