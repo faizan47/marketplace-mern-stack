@@ -94,9 +94,6 @@ const validate = (values, { inputs }) => {
 	const errors = {};
 
 	inputs.map(({ name, type }) => {
-		if (type === 'number' && values[name].length && isNaN(values[name])) {
-			return 'Must be a number.';
-		}
 		if ((!values[name] && type !== 'file') || values[name] === 'defaultSelect') {
 			return (errors[name] = `${capitalizeFirstLetter(name)} is required.`);
 		} else if (type === 'email' && !isEmailValid(values[name])) {

@@ -5,7 +5,7 @@ const UserSchema = new Schema({
 	name: String,
 	email: String,
 	password: String,
-	role: { type: String, default: 'visitor' },
+	role: { type: String, default: 'retailer' },
 	joinDate: Date
 });
 

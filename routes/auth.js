@@ -26,7 +26,7 @@ module.exports = app => {
 		const isVerified = await comparePassword(user.password, password);
 		if (isVerified) {
 			req.session.userId = user._id;
-			res.send({ email, role: user.role });
+			res.send(user.role);
 		} else {
 			res.status(401).send('Invalid email or password.');
 		}
@@ -38,8 +38,8 @@ module.exports = app => {
 	});
 	app.get('/api/current_user', async (req, res) => {
 		if (req.session.userId) {
-			const { email, role, name } = await User.findById(req.session.userId);
-			res.send({ email, role, name });
+			const { role } = await User.findById(req.session.userId);
+			res.send({ role });
 		} else {
 			res.send(false);
 		}

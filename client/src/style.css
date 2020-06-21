@@ -4,3 +4,14 @@
 .field-select {
 	padding: 10px 0;
 }
+
+/* Inline #6 | http://localhost:9000/listings */
+
+.bottom-absolute {
+	position: absolute;
+	bottom: 0;
+}
+.right-absolute {
+	position: absolute;
+	right: 0;
+}
