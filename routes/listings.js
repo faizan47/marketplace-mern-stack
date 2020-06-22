@@ -20,4 +20,25 @@ module.exports = app => {
 			.sort({ datePosted: -1 });
 		res.send(listingsByUserId);
 	});
+
+	app.delete('/api/listings/delete/:listingId', requireLogin, async (req, res) => {
+		const userId = req.session.userId;
+
+		const listing = await Listing.findOneAndDelete({
+			_user: userId,
+			_id: req.params.listingId
+		});
+
+		res.send(listing._id);
+	});
+	// app.get('/api/listings/:listingId', requireLogin, async (req, res) => {
+	// 	const userId = req.session.userId;
+
+	// 	const listing = await Listing.findOne({
+	// 		_user: userId,
+	// 		_id: req.params.listingId
+	// 	});
+
+	// 	res.send(listing);
+	// });
 };

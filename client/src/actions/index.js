@@ -1,4 +1,14 @@
-import { SIGN_UP, SIGN_IN, SIGN_OUT, FETCH_USER, CREATE_LISTING, FETCH_LISTINGS, FETCH_MY_LISTINGS } from './types';
+import {
+	SIGN_UP,
+	SIGN_IN,
+	SIGN_OUT,
+	FETCH_USER,
+	CREATE_LISTING,
+	FETCH_LISTINGS,
+	FETCH_MY_LISTINGS,
+	DELETE_LISTING,
+	FETCH_LISTING_BY_ID
+} from './types';
 import axios from 'axios';
 import uploadToCloudinary from '../utils/uploadToCloudinary';
 
@@ -40,4 +50,14 @@ export const fetchListings = () => async dispatch => {
 export const fetchMyListings = () => async dispatch => {
 	const response = await axios.get('/api/listings/self');
 	dispatch({ type: FETCH_MY_LISTINGS, payload: response.data });
+};
+
+export const deleteListing = listingId => async dispatch => {
+	const response = await axios.delete(`/api/listings/delete/${listingId}`);
+	dispatch({ type: DELETE_LISTING, payload: response.data });
+};
+
+export const fetchListingById = listingId => async dispatch => {
+	const response = await axios.get(`/api/listings/${listingId}`);
+	dispatch({ type: FETCH_LISTING_BY_ID, payload: response.data });
 };

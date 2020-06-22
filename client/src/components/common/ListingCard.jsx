@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
+import React from 'react';
+import ListingMeta from './ListingMeta';
 
-const ListingCard = ({ images, title, category, datePosted }) => {
+const ListingCard = ({ images, title, category, datePosted, role, listingId }) => {
 	const renderImage = (images = []) => {
 		return images.length ? images[0] : 'https://bulma.io/images/placeholders/128x128.png';
 	};
@@ -23,18 +23,7 @@ const ListingCard = ({ images, title, category, datePosted }) => {
 					</div>
 				</div>
 				<div className="media-right">
-					<div className="level-left">
-						<a to="/" className="level-item">
-							<span className="icon">
-								<i className="fas fa-reply is-large" />
-							</span>
-						</a>
-						<a to="/" className="level-item">
-							<span className="icon has-text-danger ">
-								<i className="fas fa-heart is-large" />
-							</span>
-						</a>
-					</div>
+					<ListingMeta role={role} listingId={listingId} />
 					<div className="level-left bottom-absolute right-absolute">
 						<span className="tag is-light">Posted on {new Date(datePosted).toLocaleDateString()}</span>
 					</div>

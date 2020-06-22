@@ -8,12 +8,20 @@ class MyListings extends Component {
 		this.props.fetchMyListings();
 	}
 	renderListings = () =>
-		this.props.myListings.map(({ _id, title, category, datePosted, images }) => (
-			<ListingCard key={_id} title={title} category={category} datePosted={datePosted} images={images} />
-		));
+		this.props.myListings.map(({ _id, title, category, datePosted, images }) => {
+			return (
+				<ListingCard
+					key={_id}
+					listingId={_id}
+					title={title}
+					category={category}
+					datePosted={datePosted}
+					images={images}
+					role="retailer"
+				/>
+			);
+		});
 	render() {
-		// console.log(this.props.myListings);
-
 		return (
 			<section className="section">
 				<h1 className="title is-1">My Listings</h1>

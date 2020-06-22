@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import 'bulma/css/bulma.css';
 import './style.css';
+
 const store = createStore(reducers, applyMiddleware(thunk));
 
 ReactDOM.render(

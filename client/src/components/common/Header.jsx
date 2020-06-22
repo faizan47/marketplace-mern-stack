@@ -15,10 +15,10 @@ class Header extends Component {
 			case !!this.props.auth:
 				return (
 					<Fragment>
-						<Link to="signup" className="button is-primary">
+						<Link to="/signup" className="button is-primary">
 							<strong>Sign up</strong>
 						</Link>
-						<Link to="signin" className="button is-light">
+						<Link to="/signin" className="button is-light">
 							Sign in
 						</Link>
 					</Fragment>
@@ -57,15 +57,15 @@ class Header extends Component {
 				</div>
 				<div id="navbarBasicExample" className="navbar-menu">
 					<div className="navbar-start">
-						<Link to="listings" className="navbar-item">
+						<Link to="/listings" className="navbar-item">
 							Listings
 						</Link>
 					</div>
 					<div className="navbar-end">
-						<Link to="myListings" className="navbar-item">
+						<Link to="/myListings" className="navbar-item">
 							My Listings
 						</Link>
-						<Link to="messages" className="navbar-item">
+						<Link to="/messages" className="navbar-item">
 							Messages
 						</Link>
 						<div className="navbar-item">
