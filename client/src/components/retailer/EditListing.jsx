@@ -8,11 +8,10 @@ class EditListing extends Component {
 	listingId = this.props.match.params.listingId;
 
 	componentDidMount() {
+		// this.props.fetchListingById(this.listingId);
 		this.props.fetchListingById(this.listingId);
 	}
-	onSubmit = async values => {
-		// console.log(values.images, 'NEW');
-		// console.log(this.props.currentListing.images);
+	onSubmit = values => {
 		this.props.updateListing(values, this.props.history);
 	};
 	render() {
@@ -23,8 +22,6 @@ class EditListing extends Component {
 				</section>
 			);
 		} else {
-			console.log(this.props.currentListing);
-
 			return (
 				<section className="section">
 					<h1 className="title">Edit Listing</h1>

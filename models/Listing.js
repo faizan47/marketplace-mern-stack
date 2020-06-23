@@ -6,7 +6,7 @@ const ListingSchema = new Schema({
 	quantity: Number,
 	description: String,
 	category: String,
-	images: { type: [ String ], default: undefined },
+	images: { type: [ String ] },
 	_user: { type: Schema.Types.ObjectId, ref: 'User' },
 	datePosted: Date
 });

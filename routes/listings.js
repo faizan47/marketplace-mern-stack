@@ -15,9 +15,7 @@ module.exports = app => {
 
 	app.get('/api/listings/self', requireLogin, async (req, res) => {
 		const userId = req.session.userId;
-		const listingsByUserId = await Listing.find({ _user: userId })
-			.select('-_user -quantity')
-			.sort({ datePosted: -1 });
+		const listingsByUserId = await Listing.find({ _user: userId }).select('-_user').sort({ datePosted: -1 });
 		res.send(listingsByUserId);
 	});
 
@@ -51,7 +49,7 @@ module.exports = app => {
 			{ title, description, category, quantity, images }
 		);
 
-		// console.log(listing);
+		console.log(listing);
 
 		res.send([ listing ]);
 	});

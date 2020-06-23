@@ -11,7 +11,7 @@ const ListingCard = ({ images, title, category, datePosted, role, listingId }) =
 			<article className="media is-relative">
 				<figure className="media-left">
 					<p className="image is-128x128">
-						<img src={renderImage(images)} />
+						<img alt="listing cover" src={renderImage(images)} />
 					</p>
 				</figure>
 				<div className="media-content">

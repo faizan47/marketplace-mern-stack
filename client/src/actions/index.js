@@ -37,18 +37,14 @@ export const signOut = history => async dispatch => {
 export const createListing = (createListingFormData, history) => async dispatch => {
 	let { images } = createListingFormData || {};
 	const imageURLs = await uploadToCloudinary(images);
-	createListingFormData.images = imageURLs;
-	const response = await axios.post('/api/listings', createListingFormData);
+	const response = await axios.post('/api/listings', { ...createListingFormData, images: imageURLs });
 	dispatch({ type: CREATE_LISTING, payload: response.data });
-	history.push('/');
+	history.push('/myListings');
 };
 export const updateListing = (updateListingFormData, history) => async dispatch => {
 	let { images, _id } = updateListingFormData;
 	const imageURLs = await uploadToCloudinary(images);
-	updateListingFormData.images = imageURLs;
-	console.log(_id);
-
-	const response = await axios.patch(`/api/listings/${_id}`, updateListingFormData);
+	const response = await axios.patch(`/api/listings/${_id}`, { ...updateListingFormData, images: imageURLs });
 	dispatch({ type: UPDATE_LISTING, payload: response.data });
 	history.push('/myListings');
 };

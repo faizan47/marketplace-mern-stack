@@ -4,17 +4,23 @@ import ImageUploader from 'react-images-upload';
 class ImageUpload extends Component {
 	state = { pictures: [] };
 
-	// onDrop = pictures => {
-	// 	this.setState({
-	// 		pictures: this.state.pictures.concat(pictures)
-	// 	});
-	// 	console.log(this.state.pictures.concat(pictures));
-	// };
-	onChange = image => {
+	onDrop = (pictureFiles, pictureDataURLs) => {
+		// https://stackoverflow.com/questions/40811451/remove-duplicates-from-a-array-of-objects
+		const uniqueFiles = pictureFiles.filter(function(a) {
+			return !this[a.name] && (this[a.name] = true);
+		}, Object.create(null));
+		this.setState({
+			pictures: this.state.pictures.concat(pictureFiles)
+		});
+
 		const { input: { onChange } } = this.props;
-		onChange([ ...image, ...this.props.defaultImages ]);
+		const URLs = pictureDataURLs.filter(url => url.includes('res.cloudinary'));
+
+		onChange([ ...uniqueFiles, ...URLs ]);
 	};
 	render() {
+		// console.log(this.state.pictures);
+
 		return (
 			<div className="field">
 				<div className="label">{this.props.label}</div>
@@ -25,7 +31,7 @@ class ImageUpload extends Component {
 					withIcon={true}
 					buttonText="Upload"
 					buttonClassName="button is-light"
-					onChange={this.onChange}
+					onChange={this.onDrop}
 					imgExtension={[ '.jpg', '.gif', '.png', '.gif' ]}
 					maxFileSize={5242880}
 					withPreview

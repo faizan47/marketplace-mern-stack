@@ -9,11 +9,13 @@ class Listings extends Component {
 	}
 
 	renderListings = () =>
-		this.props.listings.map(({ _id, title, category, datePosted, images }) => (
-			<ListingCard key={_id} title={title} category={category} datePosted={datePosted} images={images} />
-		));
+		this.props.listings.map(({ _id, title, category, datePosted, images }) => {
+			return <ListingCard key={_id} title={title} category={category} datePosted={datePosted} images={images} />;
+		});
 
 	render() {
+		console.log(this.props.listings);
+
 		return (
 			<section className="section">
 				<h1 className="title is-1">Listings</h1>

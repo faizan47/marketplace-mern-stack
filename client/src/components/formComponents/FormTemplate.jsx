@@ -95,7 +95,7 @@ const validate = (values, { inputs }) => {
 
 	inputs.map(({ name, type }) => {
 		if ((!values[name] && type !== 'file') || values[name] === 'defaultSelect') {
-			return (errors[name] = `${capitalizeFirstLetter(name)} is required.`);
+			return (errors[name] = `${capitalizeFirstLetter(name)} s required.`);
 		} else if (type === 'email' && !isEmailValid(values[name])) {
 			return (errors[name] = 'Invalid email');
 		}
