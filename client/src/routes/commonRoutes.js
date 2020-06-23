@@ -6,14 +6,8 @@ import Listings from '../components/common/Listings';
 
 export default () => (
 	<Fragment>
-		<Route path="/signup">
-			<SignUp />
-		</Route>
-		<Route path="/listings">
-			<Listings />
-		</Route>
-		<Route path="/signin">
-			<SignIn />
-		</Route>
+		<Route path="/signup" component={SignUp} />
+		<Route path="/listings" component={Listings} />
+		<Route path="/signin" component={SignIn} />
 	</Fragment>
 );

@@ -4,21 +4,22 @@ import ImageUploader from 'react-images-upload';
 class ImageUpload extends Component {
 	state = { pictures: [] };
 
-	onDrop = pictures => {
-		this.setState({
-			pictures: this.state.pictures.concat(pictures)
-		});
-	};
+	// onDrop = pictures => {
+	// 	this.setState({
+	// 		pictures: this.state.pictures.concat(pictures)
+	// 	});
+	// 	console.log(this.state.pictures.concat(pictures));
+	// };
 	onChange = image => {
 		const { input: { onChange } } = this.props;
-		onChange(image);
+		onChange([ ...image, ...this.props.defaultImages ]);
 	};
 	render() {
 		return (
 			<div className="field">
 				<div className="label">{this.props.label}</div>
 				<ImageUploader
-					myFunction={this.onChange}
+					defaultImages={this.props.defaultImages}
 					input={this.props.input}
 					name={this.props.name}
 					withIcon={true}

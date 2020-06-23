@@ -26,7 +26,7 @@ class Header extends Component {
 			default:
 				return (
 					<Fragment>
-						<Link to="CreateListing" className="button is-primary">
+						<Link to="/CreateListing" className="button is-primary">
 							<strong>Create an Ad</strong>
 						</Link>
 						<button onClick={() => this.props.signOut(this.props.history)} className="button">

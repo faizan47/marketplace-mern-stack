@@ -31,14 +31,28 @@ module.exports = app => {
 
 		res.send(listing._id);
 	});
-	// app.get('/api/listings/:listingId', requireLogin, async (req, res) => {
-	// 	const userId = req.session.userId;
+	app.get('/api/listings/:listingId', requireLogin, async (req, res) => {
+		const userId = req.session.userId;
+		const listing = await Listing.findOne({
+			_user: userId,
+			_id: req.params.listingId
+		}).select('title description category quantity images');
 
-	// 	const listing = await Listing.findOne({
-	// 		_user: userId,
-	// 		_id: req.params.listingId
-	// 	});
+		res.send([ listing ]);
+	});
+	app.patch('/api/listings/:listingId', requireLogin, async (req, res) => {
+		const userId = req.session.userId;
+		const { title, description, category, quantity, images } = req.body;
+		const listing = await Listing.findByIdAndUpdate(
+			{
+				_user: userId,
+				_id: req.params.listingId
+			},
+			{ title, description, category, quantity, images }
+		);
 
-	// 	res.send(listing);
-	// });
+		// console.log(listing);
+
+		res.send([ listing ]);
+	});
 };

@@ -1,8 +1,10 @@
-import { FETCH_MY_LISTINGS, FETCH_LISTING_BY_ID, DELETE_LISTING } from '../actions/types';
+import { FETCH_MY_LISTINGS, FETCH_LISTING_BY_ID, DELETE_LISTING, UPDATE_LISTING } from '../actions/types';
 
 const myListingsReducer = (state = [], action) => {
 	switch (action.type) {
 		case FETCH_MY_LISTINGS:
+			return action.payload;
+		case UPDATE_LISTING:
 			return action.payload;
 		case FETCH_LISTING_BY_ID:
 			return action.payload;

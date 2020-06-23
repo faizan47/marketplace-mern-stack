@@ -7,7 +7,8 @@ import {
 	FETCH_LISTINGS,
 	FETCH_MY_LISTINGS,
 	DELETE_LISTING,
-	FETCH_LISTING_BY_ID
+	FETCH_LISTING_BY_ID,
+	UPDATE_LISTING
 } from './types';
 import axios from 'axios';
 import uploadToCloudinary from '../utils/uploadToCloudinary';
@@ -41,7 +42,16 @@ export const createListing = (createListingFormData, history) => async dispatch 
 	dispatch({ type: CREATE_LISTING, payload: response.data });
 	history.push('/');
 };
+export const updateListing = (updateListingFormData, history) => async dispatch => {
+	let { images, _id } = updateListingFormData;
+	const imageURLs = await uploadToCloudinary(images);
+	updateListingFormData.images = imageURLs;
+	console.log(_id);
 
+	const response = await axios.patch(`/api/listings/${_id}`, updateListingFormData);
+	dispatch({ type: UPDATE_LISTING, payload: response.data });
+	history.push('/myListings');
+};
 export const fetchListings = () => async dispatch => {
 	const response = await axios.get('/api/listings');
 	dispatch({ type: FETCH_LISTINGS, payload: response.data });

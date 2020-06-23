@@ -7,17 +7,9 @@ import EditListing from '../components/retailer/EditListing';
 
 export default () => (
 	<Fragment>
-		<Route path="/createListing">
-			<CreateListing />
-		</Route>
-		<Route path="/myListings">
-			<MyListings />
-		</Route>
-		<Route path="/messages">
-			<Messages />
-		</Route>
-		<Route path="/edit/:listingId">
-			<EditListing />
-		</Route>
+		<Route path="/createListing" component={CreateListing} />
+		<Route path="/myListings" component={MyListings} />
+		<Route path="/messages" component={Messages} />
+		<Route path="/edit/:listingId" component={EditListing} />
 	</Fragment>
 );

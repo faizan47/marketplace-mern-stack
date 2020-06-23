@@ -48,7 +48,7 @@ class FormTemplate extends React.Component {
 							multiple={true}
 							name={name}
 							component={ImageUpload}
-							{...{ name, label }}
+							{...{ name, label, defaultImages: this.props.initialValues.images }}
 						/>
 					);
 				default:
