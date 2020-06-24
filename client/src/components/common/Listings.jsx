@@ -10,7 +10,17 @@ class Listings extends Component {
 
 	renderListings = () =>
 		this.props.listings.map(({ _id, title, category, datePosted, images }) => {
-			return <ListingCard key={_id} title={title} category={category} datePosted={datePosted} images={images} />;
+			return (
+				<ListingCard
+					key={_id}
+					title={title}
+					category={category}
+					datePosted={datePosted}
+					images={images}
+					listingId={_id}
+					listingSlug={title.split(' ').join('-').toLowerCase()}
+				/>
+			);
 		});
 
 	render() {

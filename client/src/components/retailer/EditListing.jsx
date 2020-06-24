@@ -3,6 +3,7 @@ import FormTemplate from '../formComponents/FormTemplate';
 import { createListingInputs } from '../../formInputs/retailer/createListing';
 import { connect } from 'react-redux';
 import { fetchListingById, updateListing } from '../../actions';
+import ContentLoader from 'react-content-loader';
 
 class EditListing extends Component {
 	listingId = this.props.match.params.listingId;
@@ -17,7 +18,7 @@ class EditListing extends Component {
 		if (!this.props.currentListing) {
 			return (
 				<section className="section">
-					<h3 className="title">Loading....</h3>
+					<ContentLoader />
 				</section>
 			);
 		} else {

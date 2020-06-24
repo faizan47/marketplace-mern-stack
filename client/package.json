@@ -10,6 +10,7 @@
     "bulma": "^0.9.0",
     "react": "^16.13.1",
     "react-amazing-proxy": "^1.0.63",
+    "react-content-loader": "^5.1.0",
     "react-dom": "^16.13.1",
     "react-images-upload": "^1.2.8",
     "react-redux": "^7.2.0",
@@ -19,7 +20,8 @@
     "redux-file-upload": "0.0.19",
     "redux-form": "^8.3.6",
     "redux-forms": "^1.0.0-3",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "time_ago_in_words": "^1.2.1"
   },
   "scripts": {
     "start": "node node_modules/react-amazing-proxy/start",

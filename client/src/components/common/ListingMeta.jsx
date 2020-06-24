@@ -7,12 +7,12 @@ const ListingMeta = ({ role, listingId, deleteListing }) => {
 	return role === 'retailer' ? (
 		<div className="level-left">
 			<span className="level-item">
-				<Link to={`edit/${listingId}`} className="icon has-text-info">
+				<Link to={`edit/${listingId}`} className="cursor icon has-text-info">
 					<i className="far fa-edit fa-lg" />
 				</Link>
 			</span>
 			<span onClick={() => deleteListing(listingId)} className="level-item">
-				<span className="icon has-text-danger">
+				<span className="cursor icon has-text-danger">
 					<i className="far fa-trash-alt fa-lg" />
 				</span>
 			</span>
@@ -20,12 +20,12 @@ const ListingMeta = ({ role, listingId, deleteListing }) => {
 	) : (
 		<div className="level-left">
 			<span className="level-item">
-				<span className="icon has-text-info">
+				<span className="cursor icon has-text-info">
 					<i className="far fa-envelope fa-lg" />
 				</span>
 			</span>
 			<span className="level-item">
-				<span className="icon has-text-danger">
+				<span className="cursor icon has-text-danger">
 					<i className="far fa-heart fa-lg" />
 				</span>
 			</span>

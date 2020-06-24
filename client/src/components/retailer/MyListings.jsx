@@ -18,6 +18,7 @@ class MyListings extends Component {
 					datePosted={datePosted}
 					images={images}
 					role="retailer"
+					listingSlug={title.split(' ').join('-').toLowerCase()}
 				/>
 			);
 		});
