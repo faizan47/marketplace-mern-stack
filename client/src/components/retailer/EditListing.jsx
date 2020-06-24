@@ -8,7 +8,6 @@ class EditListing extends Component {
 	listingId = this.props.match.params.listingId;
 
 	componentDidMount() {
-		// this.props.fetchListingById(this.listingId);
 		this.props.fetchListingById(this.listingId);
 	}
 	onSubmit = values => {

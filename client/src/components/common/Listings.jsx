@@ -14,8 +14,6 @@ class Listings extends Component {
 		});
 
 	render() {
-		console.log(this.props.listings);
-
 		return (
 			<section className="section">
 				<h1 className="title is-1">Listings</h1>

@@ -16,7 +16,7 @@ export default async (images = []) => {
 				return picture;
 			}
 		});
-
 		return await Promise.all(promises);
 	}
+	return images;
 };
