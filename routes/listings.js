@@ -9,7 +9,7 @@ module.exports = app => {
 			_user: req.session.userId,
 			datePosted: Date.now()
 		}).save();
-		res.send(listing);
+		res.send([ listing ]);
 	});
 
 	app.get('/api/listings', async (req, res) => {
@@ -38,7 +38,7 @@ module.exports = app => {
 		const listing = await Listing.findOne({
 			_user: userId,
 			_id: req.params.listingId
-		}).select('title description category quantity images');
+		}).select('-_user');
 
 		res.send([ listing ]);
 	});

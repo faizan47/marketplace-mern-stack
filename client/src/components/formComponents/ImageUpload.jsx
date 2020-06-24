@@ -19,7 +19,7 @@ class ImageUpload extends Component {
 		onChange([ ...uniqueFiles, ...URLs ]);
 	};
 	render() {
-		// console.log(this.state.pictures);
+		console.log(this.props.defaultImages);
 
 		return (
 			<div className="field">

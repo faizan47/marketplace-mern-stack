@@ -38,8 +38,6 @@ export const createListing = (createListingFormData, history) => async dispatch 
 	let { images } = createListingFormData;
 
 	const imageURLs = await uploadToCloudinary(images);
-	console.log(imageURLs);
-
 	const response = await axios.post('/api/listings', { ...createListingFormData, images: imageURLs });
 	dispatch({ type: CREATE_LISTING, payload: response.data });
 	history.push('/myListings');
@@ -50,7 +48,7 @@ export const updateListing = (updateListingFormData, history) => async dispatch 
 	const response = await axios.patch(`/api/listings/${_id}`, { ...updateListingFormData, images: imageURLs });
 	dispatch({ type: UPDATE_LISTING, payload: response.data });
 	history.push('/myListings');
-};
+};	
 export const fetchListings = () => async dispatch => {
 	const response = await axios.get('/api/listings');
 	dispatch({ type: FETCH_LISTINGS, payload: response.data });
