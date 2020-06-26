@@ -13,7 +13,13 @@ class SignInForm extends React.Component {
 		return (
 			<Fragment>
 				<h1 className="title is-1">Sign In</h1>
-				<FormTemplate form="signIn" inputs={signInInputs} onSubmit={this.onSubmit} />
+				<FormTemplate
+					SubmitBtnText="Sign In"
+					cancelBtnLink="/"
+					form="signIn"
+					inputs={signInInputs}
+					onSubmit={this.onSubmit}
+				/>
 			</Fragment>
 		);
 	}

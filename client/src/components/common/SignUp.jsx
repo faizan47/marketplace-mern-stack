@@ -13,7 +13,13 @@ class SignUp extends React.Component {
 		return (
 			<Fragment>
 				<h1 className="title is-1">Sign Up</h1>
-				<FormTemplate form="signUp" inputs={signUpInputs} onSubmit={this.onSubmit} />
+				<FormTemplate
+					SubmitBtnText="Sign Up"
+					cancelBtnLink="/"
+					form="signUp"
+					inputs={signUpInputs}
+					onSubmit={this.onSubmit}
+				/>
 			</Fragment>
 		);
 	}

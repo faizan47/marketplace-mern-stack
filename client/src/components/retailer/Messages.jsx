@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 export default class Messages extends Component {
 	render() {
 		return (
-			<section className="section">
+			<Fragment>
 				<h1 className="title is-1">Messages</h1>
-			</section>
+			</Fragment>
 		);
 	}
 }

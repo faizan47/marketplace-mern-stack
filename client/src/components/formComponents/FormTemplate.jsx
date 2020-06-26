@@ -77,10 +77,10 @@ class FormTemplate extends React.Component {
 				{this.renderInputs()}
 				<div className="field is-grouped">
 					<div className="control">
-						<button className="button is-link">Sign In</button>
+						<button className="button is-link">{this.props.SubmitBtnText}</button>
 					</div>
 					<div className="control">
-						<Link to="/" className="button is-link is-light">
+						<Link to={this.props.cancelBtnLink} className="button is-link is-light">
 							Cancel
 						</Link>
 					</div>

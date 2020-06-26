@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import ListingCard from '../common/ListingCard';
 import { connect } from 'react-redux';
 import { fetchMyListings } from '../../actions';
@@ -22,10 +22,10 @@ class MyListings extends Component {
 		));
 	render() {
 		return (
-			<section className="section">
+			<Fragment>
 				<h1 className="title is-1">My Listings</h1>
 				{this.renderListings()}
-			</section>
+			</Fragment>
 		);
 	}
 }
