@@ -19,11 +19,11 @@ const ListingMeta = ({ role, listingId, deleteListing }) => {
 		</div>
 	) : (
 		<div className="level-left">
-			<span className="level-item">
+			{/* <span className="level-item">
 				<span className="cursor icon has-text-info">
 					<i className="far fa-envelope fa-lg" />
 				</span>
-			</span>
+			</span> */}
 			<span className="level-item">
 				<span className="cursor icon has-text-danger">
 					<i className="far fa-heart fa-lg" />

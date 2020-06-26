@@ -19,8 +19,6 @@ class ImageUpload extends Component {
 		onChange([ ...uniqueFiles, ...URLs ]);
 	};
 	render() {
-		console.log(this.props.defaultImages);
-
 		return (
 			<div className="field">
 				<div className="label">{this.props.label}</div>

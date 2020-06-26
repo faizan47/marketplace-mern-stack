@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { fetchListings } from '../../actions';
 import ListingCard from './ListingCard';
@@ -27,10 +27,10 @@ class Listings extends Component {
 
 	render() {
 		return (
-			<section className="section">
+			<Fragment>
 				<h1 className="title is-1">Listings</h1>
 				{this.props.listings.length ? this.renderListings() : <ContentLoader />}
-			</section>
+			</Fragment>
 		);
 	}
 }

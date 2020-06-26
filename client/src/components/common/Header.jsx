@@ -2,36 +2,54 @@ import React, { Component, Fragment } from 'react';
 import logo from '../../images/bulma-logo.png';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchUser, signOut } from '../../actions';
+import { fetchUser } from '../../actions';
+import NavButtons from './NavButtons';
 
 class Header extends Component {
 	componentDidMount() {
 		this.props.fetchUser();
 	}
+
 	renderMenu = () => {
 		switch (this.props.auth) {
 			case null:
 				return '';
-			case !!this.props.auth:
+			case false:
 				return (
-					<Fragment>
-						<Link to="/signup" className="button is-primary">
-							<strong>Sign up</strong>
-						</Link>
-						<Link to="/signin" className="button is-light">
-							Sign in
-						</Link>
-					</Fragment>
+					<NavButtons cta={{ link: 'signup', text: 'Sign Up' }} lightBtn={{ text: 'Sign In' }} hideSignOut />
 				);
 			default:
-				return (
+				return this.props.auth.role === 'retailer' ? (
 					<Fragment>
-						<Link to="/CreateListing" className="button is-primary">
-							<strong>Create an Ad</strong>
+						<Link to="/myListings" className="navbar-item">
+							My Listings
 						</Link>
-						<button onClick={() => this.props.signOut(this.props.history)} className="button">
-							<strong>Sign out</strong>
-						</button>
+						<Link to="/messages" className="navbar-item">
+							Messages
+						</Link>
+						<Link to="/favourites" className="navbar-item">
+							Favourites
+						</Link>
+						<NavButtons
+							cta={{ link: 'CreateListing', text: 'Create an Ad' }}
+							lightBtn={{ text: 'Sign Out' }}
+						/>
+					</Fragment>
+				) : (
+					<Fragment>
+						<Link to="/myProposals" className="navbar-item">
+							My Proposals
+						</Link>
+						<Link to="/favourites" className="navbar-item">
+							Favourites
+						</Link>
+						<div className="navbar-item">
+							<div className="tags has-addons are-medium">
+								<span className="tag">Credits</span>
+								<span className="tag is-info">40</span>
+							</div>
+						</div>
+						<NavButtons cta={{ link: 'AddCredits', text: 'Add Credits' }} lightBtn={{ text: 'Sign Out' }} />
 					</Fragment>
 				);
 		}
@@ -58,24 +76,14 @@ class Header extends Component {
 				<div id="navbarBasicExample" className="navbar-menu">
 					<div className="navbar-start">
 						<Link to="/listings" className="navbar-item">
-							Listings
+							Browse Listings
 						</Link>
 					</div>
-					<div className="navbar-end">
-						<Link to="/myListings" className="navbar-item">
-							My Listings
-						</Link>
-						<Link to="/messages" className="navbar-item">
-							Messages
-						</Link>
-						<div className="navbar-item">
-							<div className="buttons">{this.renderMenu()}</div>
-						</div>
-					</div>
+					<div className="navbar-end">{this.renderMenu()}</div>
 				</div>
 			</nav>
 		);
 	}
 }
 const mapStateToProps = state => ({ auth: state.auth });
-export default connect(mapStateToProps, { fetchUser, signOut })(withRouter(Header));
+export default connect(mapStateToProps, { fetchUser })(Header);

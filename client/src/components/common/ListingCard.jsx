@@ -34,7 +34,7 @@ const ListingCard = ({ images, title, category, datePosted, role, listingId, lis
 				</div>
 				<div className="media-right">
 					<ListingMeta role={role} listingId={listingId} />
-					<div className="level-left bottom-absolute is-pulled-right">
+					<div className="level-left bottom-absolute right-absolute">
 						<span className="tag is-light">{time_ago_in_words(new Date(datePosted))}</span>
 					</div>
 				</div>

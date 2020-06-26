@@ -16,9 +16,11 @@ export default class App extends Component {
 						<Route path="/">
 							<Header />
 						</Route>
-						{commonRoutes()}
-						{distributorRoutes()}
-						{retailerRoutes()}
+						<section className="section">
+							{commonRoutes()}
+							{distributorRoutes()}
+							{retailerRoutes()}
+						</section>
 					</div>
 					<Route path="/">
 						<Footer />

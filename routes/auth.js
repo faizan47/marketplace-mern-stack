@@ -26,7 +26,8 @@ module.exports = app => {
 		const isVerified = await comparePassword(user.password, password);
 		if (isVerified) {
 			req.session.userId = user._id;
-			res.send(user.role);
+			const { role } = user;
+			res.send({ role });
 		} else {
 			res.status(401).send('Invalid email or password.');
 		}

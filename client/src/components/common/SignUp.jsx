@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import { signUpInputs } from '../../formInputs/common/signUpInputs';
 import { signUp } from '../../actions/';
@@ -11,10 +11,10 @@ class SignUp extends React.Component {
 	};
 	render() {
 		return (
-			<section className="section">
-				<h1 className="title">Sign Up</h1>
+			<Fragment>
+				<h1 className="title is-1">Sign Up</h1>
 				<FormTemplate form="signUp" inputs={signUpInputs} onSubmit={this.onSubmit} />
-			</section>
+			</Fragment>
 		);
 	}
 }

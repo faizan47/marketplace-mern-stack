@@ -4,6 +4,7 @@ import SignIn from '../components/common/SignIn';
 import SignUp from '../components/common/SignUp';
 import Listings from '../components/common/Listings';
 import ListingSingle from '../components/common/ListingSingle';
+import Favourites from '../components/common/Favourites';
 
 export default () => (
 	<Fragment>
@@ -11,5 +12,6 @@ export default () => (
 		<Route path="/listings" component={Listings} />
 		<Route path="/signin" component={SignIn} />
 		<Route path="/listing/:listingSlug" component={ListingSingle} />
+		<Route path="/favourites" component={Favourites} />
 	</Fragment>
 );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Component } from 'react';
 import { fetchListingById } from '../../actions';
@@ -35,9 +35,9 @@ class ListingSingle extends Component {
 				</section>
 			);
 		} else {
-			console.log(this.props.currentListing);
 			return (
-				<section className="section">
+				<Fragment>
+					{' '}
 					<div className="columns">
 						<div className="column is-two-thirds">
 							<div className="card">
@@ -100,8 +100,10 @@ class ListingSingle extends Component {
 										<div className="media-left">
 											<figure className="image is-48x48">
 												<img
-													src="https://bulma.io/images/placeholders/96x96.png"
-													alt="Placeholder image"
+													className="is-rounded"
+													src={`https://ui-avatars.com/api/?name=${this.props.currentListing
+														._user.name}&background=3298dc&color=fff&format=svg`}
+													alt="retailer image"
 												/>
 											</figure>
 										</div>
@@ -128,7 +130,7 @@ class ListingSingle extends Component {
 							</div>
 						</div>
 					</div>
-				</section>
+				</Fragment>
 			);
 		}
 	}

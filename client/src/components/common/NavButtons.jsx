@@ -1,20 +1,40 @@
-import React from 'react';
+import React, { Fragment, Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { signOut } from '../../actions';
 
-const NavButtons = props => {
-	const onButtonClick = () => {
-		props.signOut(props.history);
+class NavButtons extends Component {
+	onSignOut = () => {
+		this.props.signOut(this.props.history);
 	};
-	return (
-		<div className="buttons">
-			<Link to="CreateListing" className="button is-primary">
-				<strong>Create an Ad</strong>
-			</Link>
-			<button onClick={onButtonClick} className="button is-light">
-				<strong>Sign out</strong>
-			</button>
-		</div>
-	);
-};
 
-export default withRouter(NavButtons);
+	renderCta = () => (
+		<Link to={this.props.cta.link} className="button is-primary">
+			<strong>{this.props.cta.text}</strong>
+		</Link>
+	);
+	renderLightButton = () =>
+		this.props.hideSignOut ? (
+			<Link to="/signin" className="button is-light">
+				{this.props.lightBtn.text}
+			</Link>
+		) : (
+			<button onClick={this.onSignOut} className="button is-light">
+				<strong>{this.props.lightBtn.text}</strong>
+			</button>
+		);
+
+	render() {
+		return (
+			<div className="navbar-item">
+				<div className="buttons">
+					{this.renderCta()}
+					{this.renderLightButton()}
+				</div>
+			</div>
+		);
+	}
+}
+
+const mapStateToProps = state => ({ auth: state.auth });
+export default connect(mapStateToProps, { signOut })(withRouter(NavButtons));

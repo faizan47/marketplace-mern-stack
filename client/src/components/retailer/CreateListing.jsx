@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import FormTemplate from '../formComponents/FormTemplate';
 import { createListingInputs } from '../../formInputs/retailer/createListing';
 import { connect } from 'react-redux';
@@ -11,7 +11,7 @@ class CreateListing extends Component {
 	};
 	render() {
 		return (
-			<section className="section">
+			<Fragment>
 				<h1 className="title">Create a Listing</h1>
 				<FormTemplate
 					initialValues={{ category: 'defaultSelect' }}
@@ -19,7 +19,7 @@ class CreateListing extends Component {
 					onSubmit={this.onSubmit}
 					form="createListing"
 				/>
-			</section>
+			</Fragment>
 		);
 	}
 }

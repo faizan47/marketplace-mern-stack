@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Listing = mongoose.model('Listing');
-const requireLogin = require('../middlewares/require`Log`in');
+const requireLogin = require('../middlewares/requireLogin');
 
 module.exports = app => {
 	app.post('/api/listings', requireLogin, async (req, res) => {
