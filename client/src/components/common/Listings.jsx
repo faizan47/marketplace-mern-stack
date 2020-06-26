@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchListings } from '../../actions';
 import ListingCard from './ListingCard';
+import ContentLoader from 'react-content-loader';
 
 class Listings extends Component {
 	componentDidMount() {
 		this.props.fetchListings();
 	}
 
-	renderListings = () =>
-		this.props.listings.map(({ _id, title, category, datePosted, images }) => {
+	renderListings = () => {
+		return this.props.listings.map(({ _id, title, category, datePosted, images }) => {
 			return (
 				<ListingCard
 					key={_id}
@@ -22,12 +23,13 @@ class Listings extends Component {
 				/>
 			);
 		});
+	};
 
 	render() {
 		return (
 			<section className="section">
 				<h1 className="title is-1">Listings</h1>
-				{this.renderListings()}
+				{this.props.listings.length ? this.renderListings() : <ContentLoader />}
 			</section>
 		);
 	}

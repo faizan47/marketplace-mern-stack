@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Listing = mongoose.model('Listing');
-const requireLogin = require('../middlewares/requireLogin');
+const requireLogin = require('../middlewares/require`Log`in');
 
 module.exports = app => {
 	app.post('/api/listings', requireLogin, async (req, res) => {
@@ -19,7 +19,10 @@ module.exports = app => {
 
 	app.get('/api/listings/self', requireLogin, async (req, res) => {
 		const userId = req.session.userId;
-		const listingsByUserId = await Listing.find({ _user: userId }).select('-_user').sort({ datePosted: -1 });
+		const listingsByUserId = await Listing.find({ _user: userId })
+			.populate({ path: '_user', select: 'name joinDate' })
+			.sort({ datePosted: -1 })
+			.exec();
 		res.send(listingsByUserId);
 	});
 
@@ -33,12 +36,10 @@ module.exports = app => {
 
 		res.send(listing._id);
 	});
-	app.get('/api/listings/:listingId', requireLogin, async (req, res) => {
-		const userId = req.session.userId;
-		const listing = await Listing.findOne({
-			_user: userId,
-			_id: req.params.listingId
-		}).select('-_user');
+	app.get('/api/listings/:listingId', async (req, res) => {
+		const listing = await (await Listing.findById(req.params.listingId))
+			.populate({ path: '_user', select: 'name joinDate' })
+			.execPopulate();
 
 		res.send([ listing ]);
 	});
