@@ -94,9 +94,12 @@ const validate = (values, { inputs }) => {
 
 	inputs.map(({ name, type }) => {
 		if ((!values[name] && type !== 'file') || values[name] === 'defaultSelect') {
-			return (errors[name] = `${capitalizeFirstLetter(name)} s required.`);
+			return (errors[name] = `${capitalizeFirstLetter(name)} is required.`);
 		} else if (type === 'email' && !isEmailValid(values[name])) {
 			return (errors[name] = 'Invalid email');
+		}
+		if (name === 'password confirmation' && values[name] !== values.password) {
+			return (errors[name] = 'Passwords must match');
 		}
 		return values[name];
 	});

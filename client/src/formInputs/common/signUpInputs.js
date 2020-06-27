@@ -7,6 +7,13 @@ export const signUpInputs = [
 		iconClass: 'fa-user'
 	},
 	{
+		name: 'company',
+		label: 'Enter your company name',
+		placeholder: 'Acme Corporation',
+		type: 'text',
+		iconClass: 'fa-building'
+	},
+	{
 		name: 'email',
 		label: 'Enter your email',
 		placeholder: 'john.doe@example.com',
@@ -16,6 +23,13 @@ export const signUpInputs = [
 	{
 		name: 'password',
 		label: 'Enter your password',
+		placeholder: 'mySecretPassword',
+		type: 'password',
+		iconClass: 'fa-lock'
+	},
+	{
+		name: 'password confirmation',
+		label: 'Reenter your password',
 		placeholder: 'mySecretPassword',
 		type: 'password',
 		iconClass: 'fa-lock'
