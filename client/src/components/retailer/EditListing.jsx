@@ -30,6 +30,8 @@ class EditListing extends Component {
 						inputs={createListingInputs}
 						onSubmit={this.onSubmit}
 						form="editListing"
+						SubmitBtnText="Update Listing"
+						cancelBtnLink="/myListings"
 					/>
 				</section>
 			);

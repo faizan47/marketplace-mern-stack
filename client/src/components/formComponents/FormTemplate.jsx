@@ -7,73 +7,96 @@ import Select from '../formComponents/Select';
 import ImageUpload from '../formComponents/ImageUpload';
 import Textarea from '../formComponents/Textarea';
 import Input from '../formComponents/Input';
+import Switch from './Switch';
 
 class FormTemplate extends React.Component {
 	renderInputs = () => {
-		return this.props.inputs.map(({ name, type, label, placeholder, iconClass, selectOptions }) => {
-			switch (type) {
-				case 'number':
-					return (
-						<Field
-							key={name}
-							name={name}
-							component={Input}
-							{...{
-								type,
-								placeholder,
-								iconClass,
-								label
-							}}
-						/>
-					);
-				case 'select':
-					return (
-						<Select
-							key={name}
-							name={name}
-							selectOptions={selectOptions}
-							{...{ label }}
-							iconClass={iconClass}
-						/>
-					);
-				case 'textarea':
-					return (
-						<Field key={name} name={name} component={Textarea} {...{ placeholder, label }} type="text" />
-					);
-				case 'file':
-					return (
-						<Field
-							key={name}
-							type="text"
-							multiple={true}
-							name={name}
-							component={ImageUpload}
-							{...{ name, label, defaultImages: this.props.initialValues.images }}
-						/>
-					);
-				default:
-					return (
-						<Field
-							key={name}
-							name={name}
-							component={Input}
-							{...{
-								type,
-								placeholder,
-								iconClass,
-								label
-							}}
-						/>
-					);
+		return this.props.inputs.map(
+			({ name, type, label, placeholder, iconClass, selectOptions, switchOptions, switchValues }) => {
+				switch (type) {
+					case 'number':
+						return (
+							<Field
+								key={name}
+								name={name}
+								component={Input}
+								{...{
+									type,
+									placeholder,
+									iconClass,
+									label
+								}}
+							/>
+						);
+					case 'select':
+						return (
+							<Select
+								key={name}
+								name={name}
+								selectOptions={selectOptions}
+								{...{ label }}
+								iconClass={iconClass}
+							/>
+						);
+					case 'switch':
+						return (
+							<Field
+								key={name}
+								name={name}
+								component={Switch}
+								{...{ name, label, switchOptions }}
+								type="checkbox"
+								// format={val => (val === 'false' ? 'distributor' : 'retailer')}
+							/>
+						);
+
+					case 'textarea':
+						return (
+							<Field
+								key={name}
+								name={name}
+								component={Textarea}
+								{...{ placeholder, label }}
+								type="text"
+							/>
+						);
+					case 'file':
+						return (
+							<Field
+								key={name}
+								type="text"
+								multiple={true}
+								name={name}
+								component={ImageUpload}
+								{...{ name, label, defaultImages: this.props.initialValues.images }}
+							/>
+						);
+					default:
+						return (
+							<Field
+								key={name}
+								name={name}
+								component={Input}
+								{...{
+									type,
+									placeholder,
+									iconClass,
+									label
+								}}
+							/>
+						);
+				}
 			}
-		});
+		);
 	};
 	onSubmit = values => {
+		// console.log(values, 'VALUES');
+
 		this.props.onSubmit(values, this.props.history);
 	};
 	render() {
 		return (
-			<form className="column is-half px-0" onSubmit={this.props.handleSubmit(this.props.onSubmit)}>
+			<form className="column is-half px-0" onSubmit={this.props.handleSubmit(this.onSubmit)}>
 				{this.renderInputs()}
 				<div className="field is-grouped">
 					<div className="control">

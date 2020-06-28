@@ -8,7 +8,9 @@ import {
 	FETCH_MY_LISTINGS,
 	DELETE_LISTING,
 	FETCH_LISTING_BY_ID,
-	UPDATE_LISTING
+	UPDATE_LISTING,
+	ADD_TO_FAVOURITES,
+	REMOVE_FROM_FAVOURITES
 } from './types';
 import axios from 'axios';
 import uploadToCloudinary from '../utils/uploadToCloudinary';
@@ -48,7 +50,7 @@ export const updateListing = (updateListingFormData, history) => async dispatch 
 	const response = await axios.patch(`/api/listings/${_id}`, { ...updateListingFormData, images: imageURLs });
 	dispatch({ type: UPDATE_LISTING, payload: response.data });
 	history.push('/myListings');
-};	
+};
 export const fetchListings = () => async dispatch => {
 	const response = await axios.get('/api/listings');
 	dispatch({ type: FETCH_LISTINGS, payload: response.data });
@@ -67,4 +69,13 @@ export const deleteListing = listingId => async dispatch => {
 export const fetchListingById = listingId => async dispatch => {
 	const response = await axios.get(`/api/listings/${listingId}`);
 	dispatch({ type: FETCH_LISTING_BY_ID, payload: response.data });
+};
+
+export const addToFavourites = listingId => async dispatch => {
+	const response = await axios.post('/api/favourites/', { listingId });
+	dispatch({ type: ADD_TO_FAVOURITES, payload: response.data });
+};
+export const removeFromFavourites = listingId => async dispatch => {
+	const response = await axios.delete(`/api/favourites/${listingId}`);
+	dispatch({ type: REMOVE_FROM_FAVOURITES, payload: response.data });
 };

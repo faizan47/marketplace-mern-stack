@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import logo from '../../images/bulma-logo.png';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchUser } from '../../actions';
 import NavButtons from './NavButtons';

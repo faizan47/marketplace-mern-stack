@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { deleteListing } from '../../actions';
 import { Link } from 'react-router-dom';
+import MarkAsFavourite from './MarkAsFavourite';
 
 const ListingMeta = ({ role, listingId, deleteListing }) => {
 	return role === 'retailer' ? (
@@ -24,11 +25,7 @@ const ListingMeta = ({ role, listingId, deleteListing }) => {
 					<i className="far fa-envelope fa-lg" />
 				</span>
 			</span> */}
-			<span className="level-item">
-				<span className="cursor icon has-text-danger">
-					<i className="far fa-heart fa-lg" />
-				</span>
-			</span>
+			<MarkAsFavourite listingId={listingId} />
 		</div>
 	);
 };

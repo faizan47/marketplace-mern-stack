@@ -19,6 +19,7 @@ class SignUp extends React.Component {
 					form="signUp"
 					inputs={signUpInputs}
 					onSubmit={this.onSubmit}
+					// initialValues={{ role: 'retailer' }}
 				/>
 			</Fragment>
 		);

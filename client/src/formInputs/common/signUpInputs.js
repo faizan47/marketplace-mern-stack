@@ -34,4 +34,11 @@ export const signUpInputs = [
 		type: 'password',
 		iconClass: 'fa-lock'
 	}
+	// {
+	// 	name: 'role',
+	// 	type: 'switch',
+	// 	switchOptions: { left: 'Retailer', right: 'Distributor' },
+	// 	label: 'Sign up as',
+	// 	switchValues: { left: 'retailer', right: 'distributor' }
+	// }
 ];

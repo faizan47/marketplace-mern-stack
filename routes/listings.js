@@ -51,7 +51,7 @@ module.exports = app => {
 				_user: userId,
 				_id: req.params.listingId
 			},
-			{ title, description, category, quantity, images: images || [] }
+			{ title, description, category, quantity, images }
 		);
 
 		res.send([ listing ]);

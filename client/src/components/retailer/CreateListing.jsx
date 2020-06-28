@@ -18,6 +18,8 @@ class CreateListing extends Component {
 					inputs={createListingInputs}
 					onSubmit={this.onSubmit}
 					form="createListing"
+					SubmitBtnText="Create"
+					cancelBtnLink="/myListings"
 				/>
 			</Fragment>
 		);
