@@ -4,7 +4,7 @@ import { addToFavourites, removeFromFavourites } from '../../actions';
 
 class MarkAsFavourite extends Component {
 	toggleFavourites = () => {
-		if (!this.props.favourites) return; // handle non logged in users
+		if (!this.props.favourites) return; // handle non logged in
 		if (!this.props.favourites.includes(this.props.listingId)) {
 			return this.props.addToFavourites(this.props.listingId);
 		}

@@ -3,6 +3,15 @@ const User = mongoose.model('User');
 const requireLogin = require('../middlewares/requireLogin');
 
 module.exports = app => {
+	app.get('/api/favourites/', requireLogin, async (req, res) => {
+		const userId = req.session.userId;
+		const { favourites } = await User.findById(userId)
+			.select('favourites -_id')
+			.populate({ path: 'favourites' })
+			.exec();
+		res.send(favourites);
+	});
+
 	app.post('/api/favourites/', requireLogin, async (req, res) => {
 		const userId = req.session.userId;
 		const { listingId } = req.body;
