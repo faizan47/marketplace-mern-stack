@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { getFavourites } from '../../actions';
+import { fetchFavourites } from '../../actions';
 import ListingCard from '../common/ListingCard';
 import ContentLoader from 'react-content-loader';
 
 class Favourites extends Component {
 	componentDidMount() {
-		this.props.getFavourites();
+		this.props.fetchFavourites();
 	}
 	renderFavouriteListings = () => {
 		return this.props.myFavourites.map(({ _id, title, category, datePosted, images }) => {
@@ -36,4 +36,4 @@ class Favourites extends Component {
 const mapStateToProps = state => {
 	return { myFavourites: state.myFavourites };
 };
-export default connect(mapStateToProps, { getFavourites })(Favourites);
+export default connect(mapStateToProps, { fetchFavourites })(Favourites);

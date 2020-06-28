@@ -1,29 +1,32 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addToFavourites, removeFromFavourites } from '../../actions';
+import { addToFavourites, removeFromFavourites, fetchFavourites } from '../../actions';
 
 class MarkAsFavourite extends Component {
-	toggleFavourites = () => {
-		if (!this.props.favourites) return; // handle non logged in
-		if (!this.props.favourites.includes(this.props.listingId)) {
+	isFavourite = () => {
+		return this.props.favourites.find(({ _id }) => _id === this.props.listingId);
+	};
+	renderIconClass = () => {
+		if (!this.props.favourites) return 'far';
+		return this.isFavourite() ? 'fas' : 'far';
+	};
+	toggleFavourite = () => {
+		if (!this.props.favourites) return;
+		if (!this.isFavourite()) {
 			return this.props.addToFavourites(this.props.listingId);
 		}
 		return this.props.removeFromFavourites(this.props.listingId);
 	};
-	renderIconClass = () => {
-		if (!this.props.favourites) return 'far';
-		return this.props.favourites.includes(this.props.listingId) ? 'fas' : 'far';
-	};
 	render() {
 		return (
 			<span className="level-item">
-				<span onClick={this.toggleFavourites} className="cursor icon has-text-danger">
+				<span onClick={this.toggleFavourite} className="cursor icon has-text-danger">
 					<i className={`${this.renderIconClass()} fa-heart fa-lg `} />
 				</span>
 			</span>
 		);
 	}
 }
-const mapStateToProps = state => ({ favourites: state.auth.favourites });
+const mapStateToProps = state => ({ favourites: state.myFavourites });
 
-export default connect(mapStateToProps, { addToFavourites, removeFromFavourites })(MarkAsFavourite);
+export default connect(mapStateToProps, { addToFavourites, removeFromFavourites, fetchFavourites })(MarkAsFavourite);
