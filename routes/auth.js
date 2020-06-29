@@ -27,6 +27,7 @@ module.exports = app => {
 		const isVerified = await comparePassword(user.password, password);
 		if (isVerified) {
 			req.session.userId = user._id;
+			await user.populate('favourites', '-id -__v -_user').execPopulate();
 			const { role, favourites } = user;
 			res.send({ role, favourites });
 		} else {
@@ -39,7 +40,9 @@ module.exports = app => {
 	});
 	app.get('/api/current_user', async (req, res) => {
 		if (req.session.userId) {
-			const { role, favourites } = await User.findById(req.session.userId);
+			const { role, favourites } = await User.findById(req.session.userId)
+				.populate('favourites', '-id -__v -_user')
+				.exec();
 			res.send({ role, favourites });
 		} else {
 			res.send(false);

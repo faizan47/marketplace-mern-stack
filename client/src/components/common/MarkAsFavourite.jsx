@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addToFavourites, removeFromFavourites, fetchFavourites } from '../../actions';
+import { addToFavourites, removeFromFavourites, fetchUser } from '../../actions';
 
 class MarkAsFavourite extends Component {
 	isFavourite = () => {
@@ -27,6 +27,6 @@ class MarkAsFavourite extends Component {
 		);
 	}
 }
-const mapStateToProps = state => ({ favourites: state.myFavourites });
+const mapStateToProps = ({ user: { favourites } }) => ({ favourites });
 
-export default connect(mapStateToProps, { addToFavourites, removeFromFavourites, fetchFavourites })(MarkAsFavourite);
+export default connect(mapStateToProps, { addToFavourites, removeFromFavourites })(MarkAsFavourite);

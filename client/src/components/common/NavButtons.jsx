@@ -36,5 +36,5 @@ class NavButtons extends Component {
 	}
 }
 
-const mapStateToProps = state => ({ auth: state.auth });
-export default connect(mapStateToProps, { signOut })(withRouter(NavButtons));
+// const mapStateToProps = ({ user }) => ({ user });
+export default connect(null, { signOut })(withRouter(NavButtons));

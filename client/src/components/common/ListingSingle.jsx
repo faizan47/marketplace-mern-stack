@@ -4,6 +4,7 @@ import { Component } from 'react';
 import { fetchListingById } from '../../actions';
 import ContentLoader from 'react-content-loader';
 import time_ago_in_words from 'time_ago_in_words';
+import MarkAsFavourite from './MarkAsFavourite';
 
 class ListingSingle extends Component {
 	state = { mainImage: '' };
@@ -37,7 +38,6 @@ class ListingSingle extends Component {
 		} else {
 			return (
 				<Fragment>
-					{' '}
 					<div className="columns">
 						<div className="column is-two-thirds">
 							<div className="card">
@@ -122,9 +122,7 @@ class ListingSingle extends Component {
 											</span>
 											<span>Send a quote</span>
 										</button>
-										<span className="cursor icon has-text-danger mt-2 is-large">
-											<i className="far fa-heart fa-lg" />
-										</span>
+										<MarkAsFavourite listingId={this.props.history.location.state.listingId} />
 									</div>
 								</div>
 							</div>

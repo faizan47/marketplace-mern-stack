@@ -11,15 +11,15 @@ class Header extends Component {
 	}
 
 	renderMenu = () => {
-		switch (this.props.auth) {
-			case null:
+		switch (this.props.user) {
+			case '':
 				return '';
 			case false:
 				return (
 					<NavButtons cta={{ link: 'signup', text: 'Sign Up' }} lightBtn={{ text: 'Sign In' }} hideSignOut />
 				);
 			default:
-				return this.props.auth.role === 'retailer' ? (
+				return this.props.user.role === 'retailer' ? (
 					<Fragment>
 						<Link to="/myListings" className="navbar-item">
 							My Listings
@@ -85,7 +85,6 @@ class Header extends Component {
 		);
 	}
 }
-const mapStateToProps = state => {
-	return { auth: state.auth };
-};
+const mapStateToProps = ({ user }) => ({ user });
+
 export default connect(mapStateToProps, { fetchUser })(Header);

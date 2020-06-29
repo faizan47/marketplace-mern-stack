@@ -35,5 +35,5 @@ class Listings extends Component {
 	}
 }
 
-const mapStateToProps = state => ({ listings: state.listings });
+const mapStateToProps = ({ listings }) => ({ listings });
 export default connect(mapStateToProps, { fetchListings })(Listings);

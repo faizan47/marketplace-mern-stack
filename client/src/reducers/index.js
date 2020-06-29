@@ -1,14 +1,12 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
-import authReducer from './authReducer';
+import userReducer from './userReducer';
 import listingReducer from './listingReducer';
 import myListingsReducer from './myListingsReducer';
-import favouritesReducer from './favouritesReducer';
 
 export default combineReducers({
-	auth: authReducer,
+	user: userReducer,
 	form: formReducer,
 	listings: listingReducer,
-	myListings: myListingsReducer,
-	myFavourites: favouritesReducer
+	myListings: myListingsReducer
 });
