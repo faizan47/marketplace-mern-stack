@@ -4,7 +4,7 @@ const { hashPassword, comparePassword } = require('../services/bcrypt');
 
 module.exports = app => {
 	app.post('/api/signup', async (req, res) => {
-		const { name, company, email, password } = req.body;
+		const { name, company, email, password, role } = req.body;
 		const hashedPassword = await hashPassword(password);
 		const isExistingUser = await User.findOne({ email });
 		if (!isExistingUser) {
@@ -12,6 +12,7 @@ module.exports = app => {
 				name,
 				company,
 				email,
+				role,
 				password: hashedPassword,
 				joinDate: new Date()
 			}).save();

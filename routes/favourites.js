@@ -3,12 +3,6 @@ const User = mongoose.model('User');
 const requireLogin = require('../middlewares/requireLogin');
 
 module.exports = app => {
-	// app.get('/api/favourites/', requireLogin, async (req, res) => {
-	// 	const userId = req.session.userId;
-	// 	const { favourites } = await User.findById(userId).select('favourites').populate({ path: 'favourites' }).exec();
-	// 	console.log(favourites, 'ALL');
-	// 	res.send(favourites);
-	// });
 	app.post('/api/favourites/', requireLogin, async (req, res) => {
 		const userId = req.session.userId;
 		const { listingId } = req.body;
@@ -20,8 +14,6 @@ module.exports = app => {
 		)
 			.populate({ path: 'favourites' })
 			.exec();
-		console.log(favourites, 'ADD_RESPONSE');
-
 		res.send(favourites);
 	});
 	app.delete('/api/favourites/:listingId', requireLogin, async (req, res) => {
@@ -34,9 +26,7 @@ module.exports = app => {
 		)
 			.populate({ path: 'favourites' })
 			.exec();
-		console.log(favourites, 'DELETE_RESPONSE');
 
 		res.send(favourites);
 	});
 };
-// .sort({ datePosted: -1 })

@@ -33,12 +33,14 @@ export const signUpInputs = [
 		placeholder: 'mySecretPassword',
 		type: 'password',
 		iconClass: 'fa-lock'
+	},
+	{
+		name: 'role',
+		type: 'radio',
+		helperText: 'Choose account type',
+		radioValues: [
+			{ radioValue: 'Retailer', message: 'A retailer can post listings on our platform' },
+			{ radioValue: 'Distributor', message: 'A distributor can bid on listings on our platform' }
+		]
 	}
-	// {
-	// 	name: 'role',
-	// 	type: 'switch',
-	// 	switchOptions: { left: 'Retailer', right: 'Distributor' },
-	// 	label: 'Sign up as',
-	// 	switchValues: { left: 'retailer', right: 'distributor' }
-	// }
 ];

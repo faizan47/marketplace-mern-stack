@@ -7,12 +7,12 @@ import Select from '../formComponents/Select';
 import ImageUpload from '../formComponents/ImageUpload';
 import Textarea from '../formComponents/Textarea';
 import Input from '../formComponents/Input';
-import Switch from './Switch';
+import Radio from './Radio';
 
 class FormTemplate extends React.Component {
 	renderInputs = () => {
 		return this.props.inputs.map(
-			({ name, type, label, placeholder, iconClass, selectOptions, switchOptions, switchValues }) => {
+			({ name, type, label, placeholder, iconClass, selectOptions, radioValues, helperText }) => {
 				switch (type) {
 					case 'number':
 						return (
@@ -38,16 +38,15 @@ class FormTemplate extends React.Component {
 								iconClass={iconClass}
 							/>
 						);
-					case 'switch':
+					case 'radio':
+						const radioMarkup = radioValues.map(({ radioValue, message }) => (
+							<Field name={name} component={Radio} {...{ name, radioValue, message }} />
+						));
 						return (
-							<Field
-								key={name}
-								name={name}
-								component={Switch}
-								{...{ name, label, switchOptions }}
-								type="checkbox"
-								// format={val => (val === 'false' ? 'distributor' : 'retailer')}
-							/>
+							<div className="field my-4">
+								<label className="label">{helperText}</label>
+								<div className="control columns"> {radioMarkup}</div>
+							</div>
 						);
 
 					case 'textarea':
@@ -90,8 +89,6 @@ class FormTemplate extends React.Component {
 		);
 	};
 	onSubmit = values => {
-		// console.log(values, 'VALUES');
-
 		this.props.onSubmit(values, this.props.history);
 	};
 	render() {
