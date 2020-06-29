@@ -42,6 +42,9 @@ class ListingSingle extends Component {
 						<div className="column is-two-thirds">
 							<div className="card">
 								<div className="card-image">
+									<div className="over-image-fav-button">
+										<MarkAsFavourite listingId={this.props.history.location.state.listingId} />
+									</div>
 									<figure className="image is-3by2">
 										<img
 											className="object-fit-cover"
@@ -95,6 +98,9 @@ class ListingSingle extends Component {
 						<div className="column">
 							<div className="card">
 								<div className="card-content">
+									<div className="single-listing-favourites-button">
+										<MarkAsFavourite listingId={this.props.history.location.state.listingId} />
+									</div>
 									<span className="has-text-grey-dark mb-1">Retailer Information</span>
 									<div className="media mt-2">
 										<div className="media-left">
@@ -122,7 +128,6 @@ class ListingSingle extends Component {
 											</span>
 											<span>Send a quote</span>
 										</button>
-										<MarkAsFavourite listingId={this.props.history.location.state.listingId} />
 									</div>
 								</div>
 							</div>

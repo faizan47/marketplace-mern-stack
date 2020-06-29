@@ -22,3 +22,19 @@
 .object-fit-cover {
 	object-fit: cover;
 }
+.single-listing-favourites-button {
+	position: absolute;
+	right: 20px;
+	top: 20px;
+	font-size: 30px;
+}
+
+/* Inline #6 | http://localhost:9000/listing/quidem-vel-quia-faci */
+
+.over-image-fav-button {
+	position: absolute;
+	top: 30px;
+	right: 30px;
+	z-index: 99;
+	font-size: 2.5rem;
+}
