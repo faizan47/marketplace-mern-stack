@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const UserSchema = new Schema({
 	name: String,
-	companyName: String,
+	company: String,
 	email: String,
 	password: String,
 	role: { type: String, default: 'retailer' },

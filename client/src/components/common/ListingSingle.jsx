@@ -114,7 +114,7 @@ class ListingSingle extends Component {
 											</figure>
 										</div>
 										<div className="media-content">
-											<p className="title is-4">{this.props.currentListing._user.name}</p>
+											<p className="title is-4">{this.props.currentListing._user.company}</p>
 											<p className="subtitle is-6 has-text-grey">
 												Member since{' '}
 												{time_ago_in_words(new Date(this.props.currentListing._user.joinDate))}

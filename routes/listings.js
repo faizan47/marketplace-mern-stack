@@ -20,7 +20,7 @@ module.exports = app => {
 	app.get('/api/listings/self', requireLogin, async (req, res) => {
 		const userId = req.session.userId;
 		const listingsByUserId = await Listing.find({ _user: userId })
-			.populate({ path: '_user', select: 'name joinDate' })
+			.populate({ path: '_user', select: 'company joinDate' })
 			.sort({ datePosted: -1 })
 			.exec();
 		res.send(listingsByUserId);
@@ -38,7 +38,7 @@ module.exports = app => {
 	});
 	app.get('/api/listings/:listingId', async (req, res) => {
 		const listing = await (await Listing.findById(req.params.listingId))
-			.populate({ path: '_user', select: 'name joinDate' })
+			.populate({ path: '_user', select: 'company joinDate' })
 			.execPopulate();
 
 		res.send([ listing ]);
