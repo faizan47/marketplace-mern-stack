@@ -46,7 +46,7 @@ class Header extends Component {
 						<div className="navbar-item">
 							<div className="tags has-addons are-medium">
 								<span className="tag">Credits</span>
-								<span className="tag is-info">40</span>
+								<span className="tag is-info">{this.props.user.credits}</span>
 							</div>
 						</div>
 						<NavButtons cta={{ link: 'AddCredits', text: 'Add Credits' }} lightBtn={{ text: 'Sign Out' }} />

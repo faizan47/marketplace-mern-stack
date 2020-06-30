@@ -29,8 +29,8 @@ module.exports = app => {
 		if (isVerified) {
 			req.session.userId = user._id;
 			await user.populate('favourites', '-id -__v -_user').execPopulate();
-			const { role, favourites } = user;
-			res.send({ role, favourites });
+			const { role, favourites, credits } = user;
+			res.send({ role, favourites, credits });
 		} else {
 			res.status(401).send('Invalid email or password.');
 		}
@@ -41,10 +41,10 @@ module.exports = app => {
 	});
 	app.get('/api/current_user', async (req, res) => {
 		if (req.session.userId) {
-			const { role, favourites } = await User.findById(req.session.userId)
+			const { role, favourites, credits } = await User.findById(req.session.userId)
 				.populate('favourites', '-id -__v -_user')
 				.exec();
-			res.send({ role, favourites });
+			res.send({ role, favourites, credits });
 		} else {
 			res.send(false);
 		}

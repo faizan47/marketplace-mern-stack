@@ -7,6 +7,7 @@ const UserSchema = new Schema({
 	email: String,
 	password: String,
 	role: { type: String, default: 'retailer' },
+	credits: { type: Number, default: 0 },
 	favourites: [ { type: Schema.Types.ObjectId, ref: 'Listing', default: [] } ],
 	joinDate: Date
 });

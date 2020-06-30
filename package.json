@@ -18,6 +18,7 @@
     "cookie-session": "^1.4.0",
     "express": "^4.17.1",
     "mongoose": "^5.9.18",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "stripe": "^8.67.0"
   }
 }
