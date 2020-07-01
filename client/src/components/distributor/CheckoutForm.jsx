@@ -1,89 +1,62 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 
-import { loadStripe } from '@stripe/stripe-js';
-import { Elements } from '@stripe/react-stripe-js';
-import { BrowserRouter } from 'react-router-dom';
-import './CheckoutForm.css';
-
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
-
-const useOptions = () => {
-	const options = useMemo(() => ({
-		style: {
-			base: {
-				color: '#424770',
-				letterSpacing: '0.025em',
-				fontFamily: 'Source Code Pro, monospace',
-				'::placeholder': {
-					color: '#aab7c4'
-				}
-			},
-			invalid: {
-				color: '#9e2146'
-			}
-		},
-		hidePostalCode: true
-	}));
-
-	return options;
-};
-
-const CardForm = () => {
+import CardSection from './CardSectionStyles';
+import { connect } from 'react-redux';
+import { makePayment } from '../../actions';
+import axios from 'axios';
+const CheckoutForm = props => {
 	const stripe = useStripe();
 	const elements = useElements();
-	const options = useOptions();
 
 	const handleSubmit = async event => {
+		// We don't want to let default form submission happen here,
+		// which would refresh the page.
 		event.preventDefault();
 
 		if (!stripe || !elements) {
-			// Stripe.js has not loaded yet. Make sure to disable
-			// form submission until Stripe.js has loaded.
+			// Stripe.js has not yet loaded.
+			// Make sure to disable form submission until Stripe.js has loaded.
 			return;
 		}
+		const response = await axios.get('/api/payment');
+		const { client_secret } = response.data;
 
-		const payload = await stripe.createPaymentMethod({
-			type: 'card',
-			card: elements.getElement(CardElement)
+		const result = await stripe.confirmCardPayment(client_secret, {
+			payment_method: {
+				card: elements.getElement(CardElement),
+				billing_details: {
+					name: 'Jenny Rosen'
+				}
+			}
 		});
 
-		console.log('[PaymentMethod]', payload);
+		if (result.error) {
+			// Show error to your customer (e.g., insufficient funds)
+			console.log(result.error.message);
+		} else {
+			// The payment has been processed!
+			if (result.paymentIntent.status === 'succeeded') {
+				console.log(result);
+
+				// Show a success message to your customer
+				// There's a risk of the customer closing the window before callback
+				// execution. Set up a webhook or plugin to listen for the
+				// payment_intent.succeeded event that handles any business critical
+				// post-payment actions.
+			}
+		}
 	};
+	console.log(props);
 
 	return (
 		<form onSubmit={handleSubmit}>
-			<label>
-				Card details
-				<CardElement
-					options={options}
-					onReady={() => {
-						console.log('CardElement [ready]');
-					}}
-					onChange={event => {
-						console.log('CardElement [change]', event);
-					}}
-					onBlur={() => {
-						console.log('CardElement [blur]');
-					}}
-					onFocus={() => {
-						console.log('CardElement [focus]');
-					}}
-				/>
-			</label>
-			<button type="submit" disabled={!stripe}>
-				Pay
+			<CardSection />
+			<button className="button is-primary mt-2" disabled={!stripe}>
+				Confirm order
 			</button>
 		</form>
 	);
 };
 
-export default () => {
-	return (
-		<BrowserRouter>
-			<Elements stripe={stripePromise}>
-				<CardForm />
-			</Elements>
-		</BrowserRouter>
-	);
-};
+export default connect(null, { makePayment })(CheckoutForm);

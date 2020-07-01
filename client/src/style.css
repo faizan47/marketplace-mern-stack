@@ -38,3 +38,21 @@
 	z-index: 99;
 	font-size: 2.5rem;
 }
+
+.pricing-block .is-info .panel-heading {
+	background-color: #eef6fc;
+	color: #1d72aa;
+}
+
+.pricing-block .panel-block {
+	justify-content: center;
+}
+
+/* Element | http://localhost:9000/AddCredits */
+.popular-badge {
+	position: absolute;
+	top: 28px;
+	right: 15px;
+	transform: rotate(35deg);
+	width: 86px;
+}

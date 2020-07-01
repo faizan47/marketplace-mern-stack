@@ -1,4 +1,12 @@
-import { SIGN_IN, SIGN_OUT, SIGN_UP, FETCH_USER, ADD_TO_FAVOURITES, REMOVE_FROM_FAVOURITES } from '../actions/types';
+import {
+	SIGN_IN,
+	SIGN_OUT,
+	SIGN_UP,
+	FETCH_USER,
+	ADD_TO_FAVOURITES,
+	REMOVE_FROM_FAVOURITES,
+	MAKE_PAYMENT
+} from '../actions/types';
 
 const userReducer = (state = '', action) => {
 	switch (action.type) {
@@ -9,6 +17,8 @@ const userReducer = (state = '', action) => {
 		case SIGN_OUT:
 			return action.payload;
 		case FETCH_USER:
+			return action.payload;
+		case MAKE_PAYMENT:
 			return action.payload;
 		case ADD_TO_FAVOURITES:
 			return { ...state, favourites: action.payload };

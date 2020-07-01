@@ -17,6 +17,7 @@ require('./services/mongoose')();
 require('./routes/auth')(app);
 require('./routes/listings')(app);
 require('./routes/favourites')(app);
+require('./routes/payment')(app);
 
 app.use(express.static('client/build'));
 app.get('*', (req, res) => res.sendFile(path.resolve('client', 'build', 'index.html')));
