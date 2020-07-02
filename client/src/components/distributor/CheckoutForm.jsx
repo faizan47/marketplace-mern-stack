@@ -3,31 +3,24 @@ import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 
 import CardSection from './CardSectionStyles';
 import { connect } from 'react-redux';
-import { makePayment } from '../../actions';
-import axios from 'axios';
-const CheckoutForm = props => {
+import { updateCredits, getClientSecret } from '../../actions';
+
+const CheckoutForm = ({ amount, updateCredits }) => {
 	const stripe = useStripe();
 	const elements = useElements();
-
 	const handleSubmit = async event => {
 		// We don't want to let default form submission happen here,
 		// which would refresh the page.
 		event.preventDefault();
-
 		if (!stripe || !elements) {
 			// Stripe.js has not yet loaded.
 			// Make sure to disable form submission until Stripe.js has loaded.
 			return;
 		}
-		const response = await axios.get('/api/payment');
-		const { client_secret } = response.data;
 
-		const result = await stripe.confirmCardPayment(client_secret, {
+		const result = await stripe.confirmCardPayment(await getClientSecret(amount * 100), {
 			payment_method: {
-				card: elements.getElement(CardElement),
-				billing_details: {
-					name: 'Jenny Rosen'
-				}
+				card: elements.getElement(CardElement)
 			}
 		});
 
@@ -37,8 +30,7 @@ const CheckoutForm = props => {
 		} else {
 			// The payment has been processed!
 			if (result.paymentIntent.status === 'succeeded') {
-				console.log(result);
-
+				updateCredits(result.paymentIntent.id);
 				// Show a success message to your customer
 				// There's a risk of the customer closing the window before callback
 				// execution. Set up a webhook or plugin to listen for the
@@ -47,7 +39,6 @@ const CheckoutForm = props => {
 			}
 		}
 	};
-	console.log(props);
 
 	return (
 		<form onSubmit={handleSubmit}>
@@ -59,4 +50,4 @@ const CheckoutForm = props => {
 	);
 };
 
-export default connect(null, { makePayment })(CheckoutForm);
+export default connect(null, { updateCredits })(CheckoutForm);

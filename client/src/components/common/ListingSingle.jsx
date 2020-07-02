@@ -106,7 +106,7 @@ class ListingSingle extends Component {
 												<img
 													className="is-rounded"
 													src={`https://ui-avatars.com/api/?name=${this.props.currentListing
-														._user.name}&background=3298dc&color=fff&format=svg`}
+														._user.company}&background=3298dc&color=fff&format=svg`}
 													alt="retailer image"
 												/>
 											</figure>

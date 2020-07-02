@@ -6,7 +6,6 @@ module.exports = app => {
 	app.post('/api/favourites/', requireLogin, async (req, res) => {
 		const userId = req.session.userId;
 		const { listingId } = req.body;
-		console.log(listingId, 'ADD');
 		const { favourites } = await User.findByIdAndUpdate(
 			{ _id: userId },
 			{ $addToSet: { favourites: listingId } },

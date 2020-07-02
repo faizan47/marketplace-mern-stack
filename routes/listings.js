@@ -46,12 +46,13 @@ module.exports = app => {
 	app.patch('/api/listings/:listingId', requireLogin, async (req, res) => {
 		const userId = req.session.userId;
 		const { title, description, category, quantity, images } = req.body;
-		const listing = await Listing.findByIdAndUpdate(
+		const listing = await Listing.findOneAndUpdate(
 			{
 				_user: userId,
 				_id: req.params.listingId
 			},
-			{ title, description, category, quantity, images }
+			{ title, description, category, quantity, images },
+			{ new: true }
 		);
 
 		res.send([ listing ]);

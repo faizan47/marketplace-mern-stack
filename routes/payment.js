@@ -1,25 +1,43 @@
 const { stripeSecretKey } = require('../config/keys');
 const requireLogin = require('../middlewares/requireLogin');
 const stripe = require('stripe')(stripeSecretKey);
+const mongoose = require('mongoose');
+const User = mongoose.model('User');
+const Payment = mongoose.model('Payment');
 
 module.exports = app => {
-	app.get('/api/payment', requireLogin, async (req, res) => {
-		// const { client_secret } = req.body;
-		const intent = await stripe.paymentIntents.create({
-			amount: 500,
+	app.post('/api/stripeSecret', requireLogin, async (req, res) => {
+		const { amount } = req.body;
+		const { userId } = req.session;
+		const { email } = await User.findById(userId);
+
+		const { client_secret } = await stripe.paymentIntents.create({
+			amount,
 			currency: 'usd',
-			// source: req.body.id,
-			description: '5 email credits for $5'
+			description: 'Credits for contacting retailers',
+			receipt_email: email,
+			metadata: { userId, creditsAdded: false, amount }
 		});
-		res.json({ client_secret: intent.client_secret });
-		// console.log(data);
 
-		// res.json({ client_secret: intent.client_secret });
-		// console.log(client_secret, 'client_secret');
+		res.send(client_secret);
+	});
 
-		// const { role, favourites, credits } = await User.findById(req.session.userId)
-		// 	.populate('favourites', '-id -__v -_user')
-		// 	.exec();
-		// res.send({ role, favourites, credits });
+	app.post('/api/updateCredits', requireLogin, async (req, res) => {
+		const { userId } = req.session;
+		const { metadata } = await stripe.paymentIntents.retrieve(req.body.paymentId);
+		if (metadata.userId === userId && metadata.creditsAdded === 'false') {
+			const { role, favourites, credits } = await User.findByIdAndUpdate(
+				{ _id: userId },
+				{
+					$inc: { credits: metadata.amount / 100 }
+				},
+				{ new: true }
+			);
+			await stripe.paymentIntents.update(req.body.paymentId, {
+				metadata: { creditsAdded: true }
+			});
+			return res.send({ role, favourites, credits });
+		}
+		return res.status(409).send({ message: 'The request is invalid, or the request is already consumed.' });
 	});
 };

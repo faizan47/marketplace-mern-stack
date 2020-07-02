@@ -1,4 +1,4 @@
-import { SIGN_UP, SIGN_IN, SIGN_OUT, FETCH_USER, MAKE_PAYMENT } from './types';
+import { SIGN_UP, SIGN_IN, SIGN_OUT, FETCH_USER, UPDATE_CREDITS } from './types';
 import axios from 'axios';
 
 export const fetchUser = () => async dispatch => {
@@ -21,10 +21,11 @@ export const signOut = history => async dispatch => {
 	dispatch({ type: SIGN_OUT, payload: false });
 	history.push('/');
 };
-
-export const makePayment = stripeToken => async dispatch => {
-	console.log(stripeToken);
-
-	const response = await axios.post('/api/payment', stripeToken);
-	dispatch({ type: MAKE_PAYMENT, payload: response.data });
+export const getClientSecret = async amount => {
+	const { data } = await axios.post('/api/stripeSecret', { amount });
+	return data;
+};
+export const updateCredits = paymentId => async dispatch => {
+	const response = await axios.post('/api/updateCredits', { paymentId });
+	dispatch({ type: UPDATE_CREDITS, payload: response.data });
 };
