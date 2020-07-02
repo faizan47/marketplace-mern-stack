@@ -5,18 +5,10 @@ class ImageUpload extends Component {
 	state = { pictures: [] };
 
 	onDrop = (pictureFiles, pictureDataURLs) => {
-		// https://stackoverflow.com/questions/40811451/remove-duplicates-from-a-array-of-objects
-		const uniqueFiles = pictureFiles.filter(function(a) {
-			return !this[a.name] && (this[a.name] = true);
-		}, Object.create(null));
-		this.setState({
-			pictures: this.state.pictures.concat(pictureFiles)
-		});
-
 		const { input: { onChange } } = this.props;
 		const URLs = pictureDataURLs.filter(url => url.includes('res.cloudinary'));
 
-		onChange([ ...uniqueFiles, ...URLs ]);
+		onChange([ ...pictureFiles, ...URLs ]);
 	};
 	render() {
 		return (
