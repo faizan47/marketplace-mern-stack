@@ -8,8 +8,8 @@ const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 class AddCredits extends Component {
 	state = { showPaymentForm: false, amount: null };
-	handlePlanData = amount => {
-		this.setState({ showPaymentForm: true, amount });
+	handlePlanData = (amount, planName) => {
+		this.setState({ showPaymentForm: true, amount, planName });
 	};
 	render() {
 		return (
@@ -43,7 +43,7 @@ class AddCredits extends Component {
 				</div>
 				{this.state.showPaymentForm ? (
 					<Elements stripe={stripePromise}>
-						<CheckoutForm amount={this.state.amount} />
+						<CheckoutForm amount={this.state.amount} planName={this.state.planName} />
 					</Elements>
 				) : null}
 			</div>
