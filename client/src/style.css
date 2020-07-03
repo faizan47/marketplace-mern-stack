@@ -51,8 +51,8 @@
 /* Element | http://localhost:9000/AddCredits */
 .popular-badge {
 	position: absolute;
-	top: 28px;
-	right: 15px;
+	top: 6px;
+	right: -7px;
+	width: 64px;
 	transform: rotate(35deg);
-	width: 86px;
 }

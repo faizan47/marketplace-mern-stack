@@ -1,15 +1,15 @@
 import React from 'react';
 import { Component } from 'react';
-import PricingBlock from './PricingBlock';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import PricingBlock from './PricingBlock';
 import CheckoutForm from './CheckoutForm';
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
-class AddCredits extends Component {
-	state = { showPaymentForm: false, amount: null };
+class PricingTable extends Component {
+	state = { showCheckoutForm: false, amount: null };
 	handlePlanData = (amount, planName) => {
-		this.setState({ showPaymentForm: true, amount, planName });
+		this.setState({ showCheckoutForm: true, amount, planName, showModal: false });
 	};
 	render() {
 		return (
@@ -41,7 +41,7 @@ class AddCredits extends Component {
 						buttonClass="is-info is-light"
 					/>
 				</div>
-				{this.state.showPaymentForm ? (
+				{this.state.showCheckoutForm ? (
 					<Elements stripe={stripePromise}>
 						<CheckoutForm amount={this.state.amount} planName={this.state.planName} />
 					</Elements>
@@ -51,4 +51,4 @@ class AddCredits extends Component {
 	}
 }
 
-export default AddCredits;
+export default PricingTable;

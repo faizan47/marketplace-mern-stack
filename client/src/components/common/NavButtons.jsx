@@ -2,17 +2,42 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signOut } from '../../actions';
+import Modal from './Modal';
+import PricingTable from '../distributor/PricingTable';
 
 class NavButtons extends Component {
+	state = { showModal: false };
 	onSignOut = () => {
 		this.props.signOut(this.props.history);
 	};
-
-	renderCta = () => (
-		<Link to={this.props.cta.link} className="button is-primary">
-			<strong>{this.props.cta.text}</strong>
-		</Link>
-	);
+	showModal = () => {
+		if (this.state.showModal)
+			return (
+				<Modal onExit={() => this.setState({ showModal: false })} title="Add Credits">
+					<PricingTable />
+				</Modal>
+			);
+	};
+	renderCta = () => {
+		if (this.props.isModal) {
+			return (
+				<button
+					onClick={() => {
+						this.setState({ showModal: true });
+					}}
+					className="button is-primary"
+				>
+					<strong>{this.props.cta.text}</strong>
+				</button>
+			);
+		} else {
+			return (
+				<Link to={this.props.cta.link} className="button is-primary">
+					<strong>{this.props.cta.text}</strong>
+				</Link>
+			);
+		}
+	};
 	renderLightButton = () =>
 		this.props.hideSignOut ? (
 			<Link to="/signin" className="button is-light">
@@ -30,11 +55,11 @@ class NavButtons extends Component {
 				<div className="buttons">
 					{this.renderCta()}
 					{this.renderLightButton()}
+					{this.showModal()}
 				</div>
 			</div>
 		);
 	}
 }
 
-// const mapStateToProps = ({ user }) => ({ user });
 export default connect(null, { signOut })(withRouter(NavButtons));

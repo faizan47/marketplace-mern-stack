@@ -49,7 +49,7 @@ class Header extends Component {
 								<span className="tag is-info">{this.props.user.credits}</span>
 							</div>
 						</div>
-						<NavButtons cta={{ link: 'AddCredits', text: 'Add Credits' }} lightBtn={{ text: 'Sign Out' }} />
+						<NavButtons isModal cta={{ text: 'Add Credits' }} lightBtn={{ text: 'Sign Out' }} />
 					</Fragment>
 				);
 		}
