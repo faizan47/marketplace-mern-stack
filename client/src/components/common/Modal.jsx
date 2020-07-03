@@ -2,6 +2,25 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 class Modal extends Component {
+	renderAction = () => {
+		if (this.props.action) {
+			console.log(this.props.action);
+
+			return (
+				<footer className="modal-card-foot">
+					<button
+						onClick={this.props.action.onConfirm}
+						className={`button ${this.props.action.type === 'danger' ? 'is-danger' : 'is-success'}`}
+					>
+						{this.props.action.buttonText}
+					</button>
+					<button onClick={this.props.onExit} className="button">
+						Cancel
+					</button>
+				</footer>
+			);
+		}
+	};
 	renderModal = () => (
 		<div onClick={this.props.onExit}>
 			<div className={`modal is-active`}>
@@ -12,10 +31,7 @@ class Modal extends Component {
 						<button onClick={this.props.onExit} className="delete" aria-label="close" />
 					</header>
 					<section className="modal-card-body">{this.props.children}</section>
-					{/* <footer className="modal-card-foot">
-					<button className="button is-success">Save changes</button>
-					<button className="button">Cancel</button>
-				</footer> */}
+					{this.renderAction()}
 				</div>
 			</div>
 		</div>

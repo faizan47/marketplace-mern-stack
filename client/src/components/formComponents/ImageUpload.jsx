@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ImageUploader from 'react-images-upload';
 
 class ImageUpload extends Component {
-	state = { pictures: [] };
+	// state = { pictures: [] };
 
 	onDrop = (pictureFiles, pictureDataURLs) => {
 		const { input: { onChange } } = this.props;

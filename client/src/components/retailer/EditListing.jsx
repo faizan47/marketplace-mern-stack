@@ -38,6 +38,8 @@ class EditListing extends Component {
 		}
 	}
 }
-const mapStateToProps = state => ({ currentListing: state.myListings[0] });
+const mapStateToProps = (state, ownProps) => ({
+	currentListing: state.myListings.find(({ _id }) => _id === ownProps.match.params.listingId)
+});
 
 export default connect(mapStateToProps, { fetchListingById, updateListing })(EditListing);
