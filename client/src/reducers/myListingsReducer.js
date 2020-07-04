@@ -7,7 +7,7 @@ const myListingsReducer = (state = [], action) => {
 		case UPDATE_LISTING:
 			return action.payload;
 		case FETCH_LISTING_BY_ID:
-			return action.payload;
+			return state.some(({ _id }) => _id == action.payload[0]._id) ? state : action.payload;
 		case DELETE_LISTING:
 			return state.filter(({ _id }) => _id !== action.payload);
 		default:
