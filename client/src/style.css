@@ -60,3 +60,10 @@
 	max-width: 100px;
 	margin: 0 auto;
 }
+
+/* Inline #8 | http://localhost:9000/listing/5f005b5ddc0b45027eed8fd0 */
+
+.react-sharing-button__text:hover,
+.react-sharing-button__link:hover {
+	color: white;
+}
