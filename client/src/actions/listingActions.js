@@ -11,21 +11,28 @@ import uploadToCloudinary from '../utils/uploadToCloudinary';
 import { toast } from 'react-toastify';
 
 export const createListing = (createListingFormData, history) => async dispatch => {
-	let { images } = createListingFormData;
-
-	const imageURLs = await uploadToCloudinary(images);
-	const response = await axios.post('/api/listings', { ...createListingFormData, images: imageURLs });
-	dispatch({ type: CREATE_LISTING, payload: response.data });
-	history.push('/myListings');
-	toast.info('Listing added successfully!');
+	try {
+		const { images } = createListingFormData;
+		const imageURLs = await uploadToCloudinary(images);
+		const response = await axios.post('/api/listings', { ...createListingFormData, images: imageURLs });
+		dispatch({ type: CREATE_LISTING, payload: response.data });
+		history.push('/myListings');
+		toast.info('Listing added successfully!');
+	} catch (error) {
+		toast.error(error.response.data.message);
+	}
 };
 export const updateListing = (updateListingFormData, history) => async dispatch => {
-	let { images, _id } = updateListingFormData;
-	const imageURLs = await uploadToCloudinary(images);
-	const response = await axios.patch(`/api/listings/${_id}`, { ...updateListingFormData, images: imageURLs });
-	dispatch({ type: UPDATE_LISTING, payload: response.data });
-	history.push('/myListings');
-	toast.info('Listing updated successfully!');
+	try {
+		const { images, _id } = updateListingFormData;
+		const imageURLs = await uploadToCloudinary(images);
+		const response = await axios.patch(`/api/listings/${_id}`, { ...updateListingFormData, images: imageURLs });
+		dispatch({ type: UPDATE_LISTING, payload: response.data });
+		history.push('/myListings');
+		toast.info('Listing updated successfully!');
+	} catch (error) {
+		toast.error(error.response.data.message);
+	}
 };
 export const fetchListings = () => async dispatch => {
 	const response = await axios.get('/api/listings');
@@ -33,14 +40,22 @@ export const fetchListings = () => async dispatch => {
 };
 
 export const fetchMyListings = () => async dispatch => {
-	const response = await axios.get('/api/listings/self');
-	dispatch({ type: FETCH_MY_LISTINGS, payload: response.data });
+	try {
+		const response = await axios.get('/api/listings/self');
+		dispatch({ type: FETCH_MY_LISTINGS, payload: response.data });
+	} catch (error) {
+		toast.error(error.response.data.message);
+	}
 };
 
 export const deleteListing = listingId => async dispatch => {
-	const response = await axios.delete(`/api/listings/delete/${listingId}`);
-	dispatch({ type: DELETE_LISTING, payload: response.data });
-	toast.info('Listing deleted successfully!');
+	try {
+		const response = await axios.delete(`/api/listings/delete/${listingId}`);
+		dispatch({ type: DELETE_LISTING, payload: response.data });
+		toast.info('Listing deleted successfully!');
+	} catch (error) {
+		toast.error(error.response.data.message);
+	}
 };
 
 export const fetchListingById = listingId => async dispatch => {

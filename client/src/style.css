@@ -67,3 +67,32 @@
 .react-sharing-button__link:hover {
 	color: white;
 }
+
+.Toastify__close-button > svg {
+	background: rgba(10, 10, 10, .2);
+	border-radius: 100px;
+	height: 20px;
+	width: 20px;
+	padding: 4px 3px 4px 4px;
+}
+
+.Toastify__toast {
+	border-left: solid 4px #363636;
+}
+.Toastify__toast--info {
+	background: #eef6fc;
+	border-color: #3298dc;
+	color: #1d72aa;
+}
+
+.Toastify__toast--success {
+	background: #effaf3;
+	color: #257942;
+	border-color: #48c774;
+}
+
+.Toastify__toast--error {
+	background: #feecf0;
+	border-color: #f14668;
+	color: #cc0f35;
+}

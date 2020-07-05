@@ -17,15 +17,17 @@ module.exports = app => {
 	});
 	app.delete('/api/favourites/:listingId', requireLogin, async (req, res) => {
 		const userId = req.session.userId;
-		const { listingId } = req.params;
-		const { favourites } = await User.findByIdAndUpdate(
-			{ _id: userId },
-			{ $pull: { favourites: listingId } },
-			{ new: true, select: 'favourites' }
-		)
-			.populate({ path: 'favourites' })
-			.exec();
+		if (userId) {
+			const { listingId } = req.params;
+			const { favourites } = await User.findByIdAndUpdate(
+				{ _id: userId },
+				{ $pull: { favourites: listingId } },
+				{ new: true, select: 'favourites' }
+			)
+				.populate({ path: 'favourites' })
+				.exec();
 
-		res.send(favourites);
+			return res.send(favourites);
+		}
 	});
 };

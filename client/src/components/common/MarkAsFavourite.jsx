@@ -4,14 +4,13 @@ import { addToFavourites, removeFromFavourites } from '../../actions';
 
 class MarkAsFavourite extends Component {
 	isFavourite = () => {
-		return this.props.favourites.find(({ _id }) => _id === this.props.listingId);
+		if (this.props.favourites) return this.props.favourites.find(({ _id }) => _id === this.props.listingId);
 	};
 	renderIconClass = () => {
 		if (!this.props.favourites) return 'far';
 		return this.isFavourite() ? 'fas' : 'far';
 	};
 	toggleFavourite = () => {
-		if (!this.props.favourites) return;
 		if (!this.isFavourite()) {
 			return this.props.addToFavourites(this.props.listingId);
 		}
