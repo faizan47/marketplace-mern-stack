@@ -8,6 +8,7 @@ import {
 } from './types';
 import axios from 'axios';
 import uploadToCloudinary from '../utils/uploadToCloudinary';
+import { toast } from 'react-toastify';
 
 export const createListing = (createListingFormData, history) => async dispatch => {
 	let { images } = createListingFormData;
@@ -16,6 +17,7 @@ export const createListing = (createListingFormData, history) => async dispatch 
 	const response = await axios.post('/api/listings', { ...createListingFormData, images: imageURLs });
 	dispatch({ type: CREATE_LISTING, payload: response.data });
 	history.push('/myListings');
+	toast.info('Listing added successfully!');
 };
 export const updateListing = (updateListingFormData, history) => async dispatch => {
 	let { images, _id } = updateListingFormData;
@@ -23,6 +25,7 @@ export const updateListing = (updateListingFormData, history) => async dispatch 
 	const response = await axios.patch(`/api/listings/${_id}`, { ...updateListingFormData, images: imageURLs });
 	dispatch({ type: UPDATE_LISTING, payload: response.data });
 	history.push('/myListings');
+	toast.info('Listing updated successfully!');
 };
 export const fetchListings = () => async dispatch => {
 	const response = await axios.get('/api/listings');
@@ -37,6 +40,7 @@ export const fetchMyListings = () => async dispatch => {
 export const deleteListing = listingId => async dispatch => {
 	const response = await axios.delete(`/api/listings/delete/${listingId}`);
 	dispatch({ type: DELETE_LISTING, payload: response.data });
+	toast.info('Listing deleted successfully!');
 };
 
 export const fetchListingById = listingId => async dispatch => {

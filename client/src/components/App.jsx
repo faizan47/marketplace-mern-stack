@@ -6,12 +6,14 @@ import commonRoutes from '../routes/commonRoutes';
 import Header from './common/Header';
 import Footer from './common/Footer';
 import ScrollToTop from './common/ScrollToTop';
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export default class App extends Component {
 	render() {
 		return (
 			<BrowserRouter>
 				<ScrollToTop>
+					<ToastContainer hideProgressBar position="bottom-right" autoClose={1800} />
 					<div className="container">
 						<Route path="/">
 							<Header />
@@ -22,6 +24,7 @@ export default class App extends Component {
 							{retailerRoutes()}
 						</section>
 					</div>
+
 					<Route path="/">
 						<Footer />
 					</Route>

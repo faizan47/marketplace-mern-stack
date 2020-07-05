@@ -24,15 +24,16 @@ module.exports = app => {
 	app.post('/api/signin', async (req, res) => {
 		const { email, password } = req.body;
 		const user = await User.findOne({ email });
-		if (!user) res.status(401).send('User not found');
+		if (!user) return res.status(401).send({ message: 'User not found' });
+
 		const isVerified = await comparePassword(user.password, password);
 		if (isVerified) {
 			req.session.userId = user._id;
 			await user.populate('favourites', '-id -__v -_user').execPopulate();
 			const { role, favourites, credits } = user;
-			res.send({ role, favourites, credits });
+			return res.send({ role, favourites, credits });
 		} else {
-			res.status(401).send('Invalid email or password.');
+			res.status(401).send({ message: 'Invalid password.' });
 		}
 	});
 	app.get('/api/signout', (req, res) => {

@@ -5,7 +5,8 @@ import {
 	FETCH_USER,
 	ADD_TO_FAVOURITES,
 	REMOVE_FROM_FAVOURITES,
-	UPDATE_CREDITS
+	ADD_CREDITS,
+	CREATE_BID
 } from '../actions/types';
 
 const userReducer = (state = '', action) => {
@@ -18,7 +19,9 @@ const userReducer = (state = '', action) => {
 			return action.payload;
 		case FETCH_USER:
 			return action.payload;
-		case UPDATE_CREDITS:
+		case ADD_CREDITS:
+			return action.payload;
+		case CREATE_BID:
 			return action.payload;
 		case ADD_TO_FAVOURITES:
 			return { ...state, favourites: action.payload };

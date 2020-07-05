@@ -9,6 +9,7 @@ class SignInForm extends React.Component {
 	onSubmit = values => {
 		this.props.signIn(values, this.props.history);
 	};
+
 	render() {
 		return (
 			<Fragment>

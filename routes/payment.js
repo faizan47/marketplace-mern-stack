@@ -3,7 +3,6 @@ const requireLogin = require('../middlewares/requireLogin');
 const stripe = require('stripe')(stripeSecretKey);
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
-const Payment = mongoose.model('Payment');
 
 module.exports = app => {
 	app.post('/api/stripeSecret', requireLogin, async (req, res) => {
