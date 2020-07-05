@@ -61,6 +61,12 @@
 	margin: 0 auto;
 }
 
+/* Element | http://localhost:9000/signup */
+
+div.radio-box-container:nth-child(2) > p:nth-child(2) {
+	display: none;
+}
+
 /* Inline #8 | http://localhost:9000/listing/5f005b5ddc0b45027eed8fd0 */
 
 .react-sharing-button__text:hover,

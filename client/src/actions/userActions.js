@@ -8,9 +8,13 @@ export const fetchUser = () => async dispatch => {
 };
 
 export const signUp = (values, history) => async dispatch => {
-	const response = await axios.post('/api/signup', values);
-	dispatch({ type: SIGN_UP, payload: response.data });
-	history.push('/');
+	try {
+		const response = await axios.post('/api/signup', values);
+		dispatch({ type: SIGN_UP, payload: response.data });
+		history.push('/');
+	} catch (error) {
+		toast.error(error.response.data.message);
+	}
 };
 export const signIn = (values, history) => async dispatch => {
 	try {
