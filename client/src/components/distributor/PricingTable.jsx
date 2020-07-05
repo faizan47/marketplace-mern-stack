@@ -43,7 +43,11 @@ class PricingTable extends Component {
 				</div>
 				{this.state.showCheckoutForm ? (
 					<Elements stripe={stripePromise}>
-						<CheckoutForm amount={this.state.amount} planName={this.state.planName} />
+						<CheckoutForm
+							onModalExit={this.props.onModalExit}
+							amount={this.state.amount}
+							planName={this.state.planName}
+						/>
 					</Elements>
 				) : null}
 			</div>

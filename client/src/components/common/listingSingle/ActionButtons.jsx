@@ -7,13 +7,13 @@ import 'react-sharingbuttons/dist/main.css';
 class ActionButtons extends Component {
 	state = { displayModal: null };
 
-	onExit = () => this.setState({ displayModal: false });
+	onModalExit = () => this.setState({ displayModal: false });
 
 	renderModal = () => {
 		const URL = window.location.href;
 		if (this.state.displayModal)
 			return (
-				<Modal onExit={this.onExit} title="Share this listing">
+				<Modal onModalExit={this.onModalExit} title="Share this listing">
 					<Email subject={`Check this out - ${this.props.title}`} url={URL} /> <Facebook url={URL} />
 					<Twitter shareText={this.props.description} url={URL} />
 				</Modal>

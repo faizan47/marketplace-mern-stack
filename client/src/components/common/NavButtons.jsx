@@ -10,11 +10,12 @@ class NavButtons extends Component {
 	onSignOut = () => {
 		this.props.signOut(this.props.history);
 	};
+	onModalExit = () => this.setState({ showModal: false });
 	showModal = () => {
 		if (this.state.showModal)
 			return (
-				<Modal onExit={() => this.setState({ showModal: false })} title="Add Credits">
-					<PricingTable />
+				<Modal onModalExit={this.onModalExit} title="Add Credits">
+					<PricingTable onModalExit={this.onModalExit} />
 				</Modal>
 			);
 	};

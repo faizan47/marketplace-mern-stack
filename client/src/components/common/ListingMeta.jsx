@@ -16,7 +16,7 @@ class ListingMeta extends Component {
 						type: 'danger',
 						buttonText: 'Delete'
 					}}
-					onExit={() => this.setState({ showModal: false })}
+					onModalExit={() => this.setState({ showModal: false })}
 					title="Delete this listing?"
 				>
 					<p className="content">Are your sure you want this delete this listing?</p>

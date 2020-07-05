@@ -1,11 +1,11 @@
 import React from 'react';
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
-
 import PaymentForm from './PaymentForm';
 import { connect } from 'react-redux';
 import { updateCredits, getClientSecret } from '../../actions';
+import { toast } from 'react-toastify';
 
-const CheckoutForm = ({ amount, updateCredits, planName }) => {
+const CheckoutForm = ({ amount, updateCredits, planName, onModalExit }) => {
 	const stripe = useStripe();
 	const elements = useElements();
 	const handleSubmit = async event => {
@@ -21,12 +21,11 @@ const CheckoutForm = ({ amount, updateCredits, planName }) => {
 		});
 
 		if (result.error) {
-			// Show error to your customer (e.g., insufficient funds)
-			console.log(result.error.message);
+			toast.error(result.error.message);
 		} else {
-			// The payment has been processed!
 			if (result.paymentIntent.status === 'succeeded') {
 				updateCredits(result.paymentIntent.id);
+				onModalExit();
 			}
 		}
 	};

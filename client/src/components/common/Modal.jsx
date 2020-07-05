@@ -14,7 +14,7 @@ class Modal extends Component {
 					>
 						{this.props.action.buttonText}
 					</button>
-					<button onClick={this.props.onExit} className="button">
+					<button onClick={this.props.onModalExit} className="button">
 						Cancel
 					</button>
 				</footer>
@@ -22,13 +22,13 @@ class Modal extends Component {
 		}
 	};
 	renderModal = () => (
-		<div onClick={this.props.onExit}>
+		<div onClick={this.props.onModalExit}>
 			<div className={`modal is-active`}>
 				<div className="modal-background" />
 				<div onClick={e => e.stopPropagation()} className="modal-card">
 					<header className="modal-card-head">
 						<p className="modal-card-title">{this.props.title}</p>
-						<button onClick={this.props.onExit} className="delete" aria-label="close" />
+						<button onClick={this.props.onModalExit} className="delete" aria-label="close" />
 					</header>
 					<section className="modal-card-body">{this.props.children}</section>
 					{this.renderAction()}
