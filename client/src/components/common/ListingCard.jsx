@@ -3,19 +3,15 @@ import ListingMeta from './ListingMeta';
 import { Link } from 'react-router-dom';
 import time_ago_in_words from 'time_ago_in_words';
 
-const ListingCard = ({ images, title, category, datePosted, role, listingId, listingSlug }) => {
+const ListingCard = ({ images, title, category, datePosted, role, listingId }) => {
 	const renderImage = (images = []) => {
 		return images.length ? images[0] : 'https://bulma.io/images/placeholders/128x128.png';
 	};
-	const newTo = {
-		// param1: listingId,
-		pathname: `/listing/${listingSlug}`,
-		state: { listingId: listingId }
-	};
+
 	return (
 		<div className="box">
 			<article className="media is-relative">
-				<Link to={newTo}>
+				<Link to={`/listing/${listingId}`}>
 					<figure className="media-left">
 						<p className="image is-128x128">
 							<img alt="listing cover" src={renderImage(images)} />
@@ -23,7 +19,7 @@ const ListingCard = ({ images, title, category, datePosted, role, listingId, lis
 					</figure>
 				</Link>
 				<div className="media-content">
-					<Link to={newTo}>
+					<Link to={`/listing/${listingId}`}>
 						<div className="content">
 							<h3 className="title">{title}</h3>
 							<div className="level-left">

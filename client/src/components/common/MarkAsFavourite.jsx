@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addToFavourites, removeFromFavourites, fetchUser } from '../../actions';
+import { addToFavourites, removeFromFavourites } from '../../actions';
 
 class MarkAsFavourite extends Component {
 	isFavourite = () => {
@@ -21,7 +21,7 @@ class MarkAsFavourite extends Component {
 		return (
 			<span className="level-item">
 				<span onClick={this.toggleFavourite} className="cursor icon has-text-danger">
-					<i className={`${this.renderIconClass()} fa-heart fa-lg `} />
+					<i className={`${this.renderIconClass()} fa-heart fa-2x`} />
 				</span>
 			</span>
 		);

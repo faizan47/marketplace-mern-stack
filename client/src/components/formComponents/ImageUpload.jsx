@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ImageUploader from 'react-images-upload';
 
 const ImageUpload = ({ input, name, label, defaultImages, input: { onChange } }) => {

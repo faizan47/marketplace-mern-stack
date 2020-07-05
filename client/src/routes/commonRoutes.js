@@ -11,7 +11,7 @@ export default () => (
 		<Route path="/signup" component={SignUp} />
 		<Route path="/listings" component={Listings} />
 		<Route path="/signin" component={SignIn} />
-		<Route path="/listing/:listingSlug" component={ListingSingle} />
+		<Route path="/listing/:listingId" component={ListingSingle} />
 		<Route path="/favourites" component={Favourites} />
 	</Fragment>
 );

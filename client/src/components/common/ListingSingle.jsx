@@ -2,15 +2,33 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Component } from 'react';
 import { fetchListingById } from '../../actions';
-import ContentLoader from 'react-content-loader';
-import time_ago_in_words from 'time_ago_in_words';
+import Modal from './Modal';
 import MarkAsFavourite from './MarkAsFavourite';
+import ImageSlider from './listingSingle/ImageSlider';
+
+import time_ago_in_words from 'time_ago_in_words';
+import ContentLoader from 'react-content-loader';
+import { Facebook, Twitter, Email } from 'react-sharingbuttons';
+import 'react-sharingbuttons/dist/main.css';
+import ListingContent from './listingSingle/ListingContent';
 
 class ListingSingle extends Component {
-	state = { mainImage: '' };
+	state = { mainImage: '', displayModal: false };
+	renderModal = () => {
+		const URL = window.location.href;
+		const { title, description } = this.props.currentListing;
+		if (this.state.displayModal)
+			return (
+				<Modal onExit={this.onExit} title="Share this listing">
+					<Email subject={`Check this out - ${title}`} url={URL} /> <Facebook url={URL} />
+					<Twitter shareText={description} url={URL} />
+				</Modal>
+			);
+	};
+	onExit = () => this.setState({ displayModal: false });
+
 	async componentDidMount() {
-		const { listingId } = this.props.history.location.state;
-		await this.props.fetchListingById(listingId);
+		await this.props.fetchListingById(this.props.match.params.listingId);
 		this.setState({
 			mainImage: this.props.currentListing.images[0] || 'https://bulma.io/images/placeholders/480x320.png'
 		});
@@ -20,7 +38,7 @@ class ListingSingle extends Component {
 	};
 	renderThumbnail = (image, i) => (
 		<figure key={i} onClick={() => this.setMainImage(image)} className="image is-96x96 is-inline-block mr-1">
-			<img src={image} alt="listing sample" />
+			<img src={image} alt={`listing ${i}`} />
 		</figure>
 	);
 	renderImages = () => {
@@ -41,62 +59,26 @@ class ListingSingle extends Component {
 					<div className="columns">
 						<div className="column is-two-thirds">
 							<div className="card">
-								<div className="card-image">
-									<figure className="image is-3by2">
-										<img
-											className="object-fit-cover"
-											src={this.state.mainImage}
-											alt="main listing image"
-										/>
-									</figure>
-								</div>
+								<ImageSlider mainImage={this.state.mainImage} />
 								<div className="card-content">
 									<div className="media-left">{this.renderImages()}</div>
-									<div className="content">
-										<h1 className="title is-2">{this.props.currentListing.title}</h1>
-										<div className="level">
-											<div className="level-left field is-grouped is-grouped-multiline">
-												<div className="control">
-													<span className="tags has-addons level-item">
-														<span className="tag">Category</span>
-														<span className="tag is-info is-light">
-															{this.props.currentListing.category}
-														</span>
-													</span>
-												</div>
-												<div className="control">
-													<span className="tags has-addons level-item">
-														<span className="tag">Quantity</span>
-														<span className="tag is-info is-light">
-															{this.props.currentListing.quantity}
-														</span>
-													</span>
-												</div>
-											</div>
-											<div className="level-right">
-												<span className="level-item tags has-addons level-item">
-													<span className="tag icon">
-														<i className="fas fa-clock" />
-													</span>
-													<span className="tag is-light">
-														{time_ago_in_words(
-															new Date(this.props.currentListing.datePosted)
-														)}
-													</span>
-												</span>
-											</div>
-										</div>
-										<hr /> <h2 className="title description is-4">Description </h2>
-										<p>{this.props.currentListing.description}</p>
-									</div>
+									<ListingContent currentListing={this.props.currentListing} />
 								</div>
 							</div>
 						</div>
 						<div className="column">
 							<div className="card">
 								<div className="card-content">
-									<div className="has-text-centered">
-										<MarkAsFavourite listingId={this.props.history.location.state.listingId} />
+									<div className="level single-listing-buttons-container">
+										<span className="level-item">
+											<span
+												onClick={() => this.setState({ displayModal: true })}
+												className="cursor icon"
+											>
+												<i className="fas fa-share-alt fa-2x" />
+											</span>
+										</span>
+										<MarkAsFavourite listingId={this.props.match.paramslistingId} />
 									</div>
 									<hr />
 									<span className="has-text-grey-dark mb-1">Retailer Information</span>
@@ -107,7 +89,7 @@ class ListingSingle extends Component {
 													className="is-rounded"
 													src={`https://ui-avatars.com/api/?name=${this.props.currentListing
 														._user.company}&background=3298dc&color=fff&format=svg`}
-													alt="retailer image"
+													alt="retailer"
 												/>
 											</figure>
 										</div>
@@ -124,21 +106,22 @@ class ListingSingle extends Component {
 											<span className="icon is-small">
 												<i className="far fa-envelope" />
 											</span>
-											<span>Send a quote</span>
+											<span>Send a quyote</span>
 										</button>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
+					{this.renderModal()}
 				</Fragment>
 			);
 		}
 	}
 }
 
-const mapStateToProps = state => {
-	return { currentListing: state.myListings[0] };
-};
+const mapStateToProps = (state, ownProps) => ({
+	currentListing: state.myListings.find(({ _id }) => _id === ownProps.match.params.listingId)
+});
 
 export default connect(mapStateToProps, { fetchListingById })(ListingSingle);

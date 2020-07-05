@@ -27,25 +27,20 @@ class ListingMeta extends Component {
 		const { role, listingId } = this.props;
 		return role === 'retailer' ? (
 			<div className="level-left">
-				<span className="level-item">
+				<span className="level-item mr-4">
 					<Link to={`edit/${listingId}`} className="cursor icon has-text-info">
-						<i className="far fa-edit fa-lg" />
+						<i className="far fa-edit fa-2x" />
 					</Link>
 				</span>
 				<span onClick={() => this.setState({ showModal: true })} className="level-item">
 					<span className="cursor icon has-text-danger">
-						<i className="far fa-trash-alt fa-lg" />
+						<i className="far fa-trash-alt fa-2x" />
 					</span>
 				</span>
 				{this.renderModal()}
 			</div>
 		) : (
 			<div className="level-left">
-				{/* <span className="level-item">
-				<span className="cursor icon has-text-info">
-					<i className="far fa-envelope fa-lg" />
-				</span>
-			</span> */}
 				<MarkAsFavourite listingId={listingId} />
 			</div>
 		);
