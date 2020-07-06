@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import time_ago_in_words from 'time_ago_in_words';
+import SendQuote from '../../distributor/SendQuote';
 
 export default ({ user: { company, joinDate } }) => {
 	return (
@@ -20,14 +21,7 @@ export default ({ user: { company, joinDate } }) => {
 					<p className="subtitle is-6 has-text-grey">Member since {time_ago_in_words(new Date(joinDate))}</p>
 				</div>
 			</div>
-			<div className="content">
-				<button className="button is-primary is-normal is-fullwidth">
-					<span className="icon is-small">
-						<i className="far fa-envelope" />
-					</span>
-					<span>Send a quote</span>
-				</button>
-			</div>
+			<SendQuote />
 		</Fragment>
 	);
 };

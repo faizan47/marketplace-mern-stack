@@ -32,10 +32,7 @@ export const signOut = history => async dispatch => {
 	history.push('/');
 	toast.info('Your are now signed out!');
 };
-export const getClientSecret = async amount => {
-	const { data } = await axios.post('/api/stripeSecret', { amount });
-	return data;
-};
+
 export const updateCredits = paymentId => async dispatch => {
 	const response = await axios.post('/api/updateCredits', { paymentId });
 	dispatch({ type: ADD_CREDITS, payload: response.data });

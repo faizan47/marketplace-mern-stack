@@ -2,7 +2,8 @@ import React from 'react';
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 import PaymentForm from './PaymentForm';
 import { connect } from 'react-redux';
-import { updateCredits, getClientSecret } from '../../actions';
+import { updateCredits } from '../../actions';
+import getStripeSecret from '../../utils/getStripeSecret';
 import { toast } from 'react-toastify';
 
 const CheckoutForm = ({ amount, updateCredits, planName, onModalExit }) => {
@@ -14,7 +15,7 @@ const CheckoutForm = ({ amount, updateCredits, planName, onModalExit }) => {
 			return;
 		}
 
-		const result = await stripe.confirmCardPayment(await getClientSecret(amount * 100), {
+		const result = await stripe.confirmCardPayment(await getStripeSecret(amount * 100), {
 			payment_method: {
 				card: elements.getElement(CardElement)
 			}

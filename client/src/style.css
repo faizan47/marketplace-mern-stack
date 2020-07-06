@@ -102,3 +102,9 @@ div.radio-box-container:nth-child(2) > p:nth-child(2) {
 	border-color: #f14668;
 	color: #cc0f35;
 }
+
+.Toastify__toast--warning {
+	background: #fffbeb;
+	border-color: #ffdd57;
+	color: #947600;
+}
