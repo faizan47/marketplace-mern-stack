@@ -100,9 +100,22 @@ class FormTemplate extends React.Component {
 						<button className="button is-link">{this.props.SubmitBtnText}</button>
 					</div>
 					<div className="control">
-						<Link to={this.props.cancelBtnLink} className="button is-link is-light">
-							Cancel
-						</Link>
+						{this.props.onCancel ? (
+							<button
+								onClick={() => (this.props.onCancel ? this.props.onCancel() : null)}
+								className="button is-link is-light"
+							>
+								Cancel
+							</button>
+						) : (
+							<Link
+								onClick={() => (this.props.onCancel ? this.props.onCancel() : null)}
+								to={this.props.cancelBtnLink}
+								className="button is-link is-light"
+							>
+								Cancel
+							</Link>
+						)}
 					</div>
 				</div>
 			</form>

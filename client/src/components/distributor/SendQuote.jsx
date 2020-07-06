@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import { Component } from 'react';
 import Modal from '../common/Modal';
+import FormTemplate from '../formComponents/FormTemplate';
+import sendQuoteInputs from '../../formInputs/distributor/sendQuoteInputs';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 
@@ -18,11 +20,18 @@ class SendQuote extends Component {
 				: toast.warn('Insufficient credits. Please add credits in your account to contact this retailer.');
 		}
 	};
+	onSubmit = values => console.log(values);
 	renderModal = () => {
 		if (this.state.displayModal)
 			return (
-				<Modal onModalExit={this.onModalExit} title="Share this listing">
-					"IT WORLKS"
+				<Modal onModalExit={this.onModalExit} title="Contact retailer">
+					<FormTemplate
+						inputs={sendQuoteInputs}
+						onSubmit={this.onSubmit}
+						form="sendQuote"
+						SubmitBtnText="Send"
+						onCancel={this.onModalExit}
+					/>
 				</Modal>
 			);
 	};
