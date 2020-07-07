@@ -36,7 +36,10 @@ class ListingSingle extends Component {
 										description={this.props.currentListing.description}
 									/>
 									<hr />
-									<RetailerInformation user={this.props.currentListing._user} />
+									<RetailerInformation
+										listingId={this.props.match.params.listingId}
+										user={this.props.currentListing._user}
+									/>
 								</div>
 							</div>
 						</div>

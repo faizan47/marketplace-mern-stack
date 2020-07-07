@@ -1,4 +1,4 @@
-import { SIGN_UP, SIGN_IN, SIGN_OUT, FETCH_USER, ADD_CREDITS, CREATE_BID } from './types';
+import { SIGN_UP, SIGN_IN, SIGN_OUT, FETCH_USER, ADD_CREDITS } from './types';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
@@ -37,9 +37,4 @@ export const updateCredits = paymentId => async dispatch => {
 	const response = await axios.post('/api/updateCredits', { paymentId });
 	dispatch({ type: ADD_CREDITS, payload: response.data });
 	toast.success('Credits added successfuly!');
-};
-
-export const createBid = () => async dispatch => {
-	const response = await axios.post('/api/updateCredits', {});
-	dispatch({ type: CREATE_BID, payload: response.data });
 };

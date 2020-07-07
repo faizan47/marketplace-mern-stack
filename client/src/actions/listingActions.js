@@ -62,3 +62,8 @@ export const fetchListingById = listingId => async dispatch => {
 	const response = await axios.get(`/api/listings/${listingId}`);
 	dispatch({ type: FETCH_LISTING_BY_ID, payload: response.data });
 };
+
+export const contactRetailer = message => async dispatch => {
+	const response = await axios.post(`/api/conversation/`);
+	dispatch({ type: FETCH_LISTING_BY_ID, payload: response.data });
+};

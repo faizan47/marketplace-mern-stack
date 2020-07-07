@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import time_ago_in_words from 'time_ago_in_words';
 import SendQuote from '../../distributor/SendQuote';
 
-export default ({ user: { company, joinDate } }) => {
+export default ({ user: { company, joinDate }, listingId }) => {
 	return (
 		<Fragment>
 			<span className="has-text-grey-dark mb-1">Retailer Information</span>
@@ -21,7 +21,7 @@ export default ({ user: { company, joinDate } }) => {
 					<p className="subtitle is-6 has-text-grey">Member since {time_ago_in_words(new Date(joinDate))}</p>
 				</div>
 			</div>
-			<SendQuote />
+			<SendQuote listingId={listingId} />
 		</Fragment>
 	);
 };

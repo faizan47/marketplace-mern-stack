@@ -5,6 +5,7 @@ import FormTemplate from '../formComponents/FormTemplate';
 import sendQuoteInputs from '../../formInputs/distributor/sendQuoteInputs';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
+import { createConversation } from '../../actions';
 
 class SendQuote extends Component {
 	state = { displayModal: null };
@@ -20,7 +21,9 @@ class SendQuote extends Component {
 				: toast.warn('Insufficient credits. Please add credits in your account to contact this retailer.');
 		}
 	};
-	onSubmit = values => console.log(values);
+	onSubmit = values => {
+		this.props.createConversation({ listingId: this.props.listingId, ...values });
+	};
 	renderModal = () => {
 		if (this.state.displayModal)
 			return (
@@ -50,4 +53,4 @@ class SendQuote extends Component {
 	}
 }
 const mapStateToProps = ({ user }) => ({ user });
-export default connect(mapStateToProps, {})(SendQuote);
+export default connect(mapStateToProps, { createConversation })(SendQuote);

@@ -1,15 +1,15 @@
 export default [
 	{
-		name: 'title',
-		label: 'What is this about?',
-		placeholder: 'Need 500 N95 masks',
+		name: 'subject',
+		label: 'Subject',
+		placeholder: 'Need more details',
 		type: 'text',
 		iconClass: 'fa-info'
 	},
 	{
-		name: 'description',
-		label: 'Information about your requirement',
-		placeholder: 'We need 500 N95 masks as soon as possible. They need to be ISI & ISO certified.',
+		name: 'message',
+		label: 'Message',
+		placeholder: 'A detailed message.',
 		type: 'textarea'
 	}
 ];
