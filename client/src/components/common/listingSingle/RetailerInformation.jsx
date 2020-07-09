@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import time_ago_in_words from 'time_ago_in_words';
-import SendQuote from '../../distributor/SendQuote';
+import SendMessage from '../../distributor/SendMessage';
 
 export default ({ user: { company, joinDate }, listingId }) => {
 	return (
@@ -21,7 +21,7 @@ export default ({ user: { company, joinDate }, listingId }) => {
 					<p className="subtitle is-6 has-text-grey">Member since {time_ago_in_words(new Date(joinDate))}</p>
 				</div>
 			</div>
-			<SendQuote listingId={listingId} />
+			<SendMessage listingId={listingId} />
 		</Fragment>
 	);
 };

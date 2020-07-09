@@ -32,4 +32,20 @@ module.exports = app => {
 
 		return res.send({ role, favourites, credits });
 	});
+
+	app.get('/api/conversation', requireLogin, async (req, res) => {
+		try {
+			const { userId } = req.session;
+			const { role } = await User.findById(userId);
+			const getSender = role === 'distributor' ? 'from' : 'to';
+			const getRecipient = role === 'distributor' ? 'to' : 'from';
+			const conversation = await Conversation.find({ [getSender]: userId })
+				.populate(getRecipient, 'company')
+				.populate('_listing', 'title images')
+				.exec();
+			res.send(conversation);
+		} catch (error) {
+			res.send({ message: 'Something went wrong!' });
+		}
+	});
 };

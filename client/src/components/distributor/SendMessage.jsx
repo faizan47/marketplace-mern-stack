@@ -2,12 +2,12 @@ import React, { Fragment } from 'react';
 import { Component } from 'react';
 import Modal from '../common/Modal';
 import FormTemplate from '../formComponents/FormTemplate';
-import sendQuoteInputs from '../../formInputs/distributor/sendQuoteInputs';
+import sendMessageInputs from '../../formInputs/distributor/sendMessageInputs';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
-import { createConversation } from '../../actions';
+import { createMessage } from '../../actions';
 
-class SendQuote extends Component {
+class sendMessage extends Component {
 	state = { displayModal: null };
 	onModalExit = () => this.setState({ displayModal: false });
 	modalLogic = () => {
@@ -22,16 +22,16 @@ class SendQuote extends Component {
 		}
 	};
 	onSubmit = values => {
-		this.props.createConversation({ listingId: this.props.listingId, ...values });
+		this.props.createMessage({ listingId: this.props.listingId, ...values });
 	};
 	renderModal = () => {
 		if (this.state.displayModal)
 			return (
 				<Modal onModalExit={this.onModalExit} title="Contact retailer">
 					<FormTemplate
-						inputs={sendQuoteInputs}
+						inputs={sendMessageInputs}
 						onSubmit={this.onSubmit}
-						form="sendQuote"
+						form="sendMessage"
 						SubmitBtnText="Send"
 						onCancel={this.onModalExit}
 					/>
@@ -53,4 +53,4 @@ class SendQuote extends Component {
 	}
 }
 const mapStateToProps = ({ user }) => ({ user });
-export default connect(mapStateToProps, { createConversation })(SendQuote);
+export default connect(mapStateToProps, { createMessage })(sendMessage);

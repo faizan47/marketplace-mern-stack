@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import ListingCard from '../common/ListingCard';
 import ContentLoader from 'react-content-loader';
-import Message from './Message';
+import Notice from './Notice';
 
 class Favourites extends Component {
 	renderFavouriteListings = () => {
@@ -21,7 +21,7 @@ class Favourites extends Component {
 				);
 			})
 		) : (
-			<Message
+			<Notice
 				title="No favourites found!"
 				message="Why not add some favourites?"
 				link="/listings"

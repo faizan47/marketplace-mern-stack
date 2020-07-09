@@ -37,8 +37,8 @@ class Header extends Component {
 					</Fragment>
 				) : (
 					<Fragment>
-						<Link to="/myProposals" className="navbar-item">
-							My Proposals
+						<Link to="/messages" className="navbar-item">
+							Messages
 						</Link>
 						<Link to="/favourites" className="navbar-item">
 							Favourites

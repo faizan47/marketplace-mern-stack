@@ -1,11 +1,4 @@
 import React, { Fragment } from 'react';
-import { Route } from 'react-router-dom';
-import Proposals from '../components/distributor/Proposals';
+// import { Route } from 'react-router-dom';
 
-export default () => (
-	<Fragment>
-		<Route path="/myProposals">
-			<Proposals />
-		</Route>
-	</Fragment>
-);
+export default () => <Fragment />;

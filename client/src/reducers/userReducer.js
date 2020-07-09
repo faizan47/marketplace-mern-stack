@@ -6,7 +6,7 @@ import {
 	ADD_TO_FAVOURITES,
 	REMOVE_FROM_FAVOURITES,
 	ADD_CREDITS,
-	CREATE_CONVERSATION
+	CREATE_MESSAGE
 } from '../actions/types';
 
 const userReducer = (state = '', action) => {
@@ -21,7 +21,7 @@ const userReducer = (state = '', action) => {
 			return action.payload;
 		case ADD_CREDITS:
 			return action.payload;
-		case CREATE_CONVERSATION:
+		case CREATE_MESSAGE:
 			return action.payload;
 		case ADD_TO_FAVOURITES:
 			return { ...state, favourites: action.payload };
