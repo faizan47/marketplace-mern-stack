@@ -1,6 +1,6 @@
+const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
 const requireCredits = require('../middlewares/requireCredits');
-const mongoose = require('mongoose');
 const Listing = mongoose.model('Listing');
 const Conversation = mongoose.model('Conversation');
 const User = mongoose.model('User');
@@ -43,9 +43,34 @@ module.exports = app => {
 				.populate(getRecipient, 'company')
 				.populate('_listing', 'title images')
 				.exec();
+			console.log(conversation);
+
 			res.send(conversation);
 		} catch (error) {
-			res.send({ message: 'Something went wrong!' });
+			res.status(401).send({ message: 'Something went wrong!' });
+		}
+	});
+
+	app.get('/api/conversation/:conversationId', requireLogin, async (req, res) => {
+		try {
+			const { userId } = req.session;
+			const { role } = await User.findById(userId);
+			const getSender = role === 'distributor' ? 'from' : 'to';
+			const getRecipient = role === 'distributor' ? 'to' : 'from';
+			console.log(req.params.conversationId);
+
+			const conversation = await Conversation.findOne({ [getSender]: userId, _id: req.params.conversationId })
+				.populate(getRecipient, 'company role')
+				.populate('_listing', 'title images messages')
+				// .populate('messages', 'title images messages')
+				.exec();
+			console.log(conversation);
+
+			res.send(conversation);
+		} catch (error) {
+			console.log(error);
+
+			res.status(401).send({ message: 'Something went wrong!' });
 		}
 	});
 };

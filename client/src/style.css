@@ -108,3 +108,10 @@ div.radio-box-container:nth-child(2) > p:nth-child(2) {
 	border-color: #ffdd57;
 	color: #947600;
 }
+.chat-bubble {
+	max-width: max-content;
+	border-radius: 20px;
+}
+.bubble-left {
+	margin-left: auto;
+}

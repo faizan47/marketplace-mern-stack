@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom';
 // 	},
 // 	started: '2020-07-08T21:51:21.505Z'
 // };
-const Message = ({ message: { from, to, _listing: { _id, title, images }, subject, started } }) => {
+const Message = ({ message: { _id, from, to, _listing: { title, images }, subject, started } }) => {
 	return (
 		<div>
 			<article className="media py-2">

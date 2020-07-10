@@ -9,8 +9,8 @@ class MessageList extends Component {
 		this.props.getMessages();
 	}
 	renderMessages = () => {
-		return this.props.messages.map(({ from, to, _listing, subject, started }) => {
-			return <Message message={{ from, to, _listing, subject, started }} />;
+		return this.props.messages.map(({ _id, from, to, _listing, subject, started }) => {
+			return <Message message={{ _id, from, to, _listing, subject, started }} />;
 		});
 	};
 	render() {
