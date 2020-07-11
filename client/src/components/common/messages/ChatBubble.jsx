@@ -6,8 +6,8 @@ export default ({ message, time, isDistributor }) => {
 		: 'bubble-right has-text-white has-background-primary';
 
 	return (
-		<div>
-			<div className={`chat-bubble my-2 pr-2 px-2 ${chatBubbleClass}`}>{message}</div>
+		<div className={`${chatBubbleClass} chat-bubble my-2 py-2 px-5`}>
+			<span>{message}</span>
 			<small className="has-text-grey-light is-size-7">{time_ago_in_words(time)}</small>
 		</div>
 	);

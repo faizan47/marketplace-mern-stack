@@ -43,7 +43,6 @@ module.exports = app => {
 				.populate(getRecipient, 'company')
 				.populate('_listing', 'title images')
 				.exec();
-			console.log(conversation);
 
 			res.send(conversation);
 		} catch (error) {
@@ -61,7 +60,7 @@ module.exports = app => {
 
 			const conversation = await Conversation.findOne({ [getSender]: userId, _id: req.params.conversationId })
 				.populate(getRecipient, 'company role')
-				.populate('_listing', 'title images messages')
+				.populate('_listing', 'title images')
 				// .populate('messages', 'title images messages')
 				.exec();
 			console.log(conversation);

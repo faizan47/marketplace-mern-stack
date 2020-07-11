@@ -108,10 +108,28 @@ div.radio-box-container:nth-child(2) > p:nth-child(2) {
 	border-color: #ffdd57;
 	color: #947600;
 }
+
 .chat-bubble {
-	max-width: max-content;
+	position: relative;
 	border-radius: 20px;
+	min-width: min-content;
+	max-width: 35%;
+	margin-bottom: 21px !important;
 }
 .bubble-left {
+	margin-right: auto;
+}
+.bubble-right {
 	margin-left: auto;
+}
+.bubble-left small,
+.bubble-right small {
+	position: absolute;
+	bottom: -18px;
+}
+.bubble-right small {
+	right: 5px;
+}
+.bubble-left small {
+	left: 5px;
 }
