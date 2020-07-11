@@ -3,11 +3,20 @@ import { connect } from 'react-redux';
 import ContentLoader from 'react-content-loader';
 import { getConversation } from '../../../actions';
 import ChatBubble from './ChatBubble';
-// const Conversation = props => {
-// 	return <h1 className="title is-1">Chat with XYZ</h1>;
-// };
+import { subscribeToTimer } from '../../../utils/socket';
 
 class Conversation extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			timestamp: 'no timestamp yet'
+		};
+		subscribeToTimer((err, timestamp) =>
+			this.setState({
+				timestamp
+			})
+		);
+	}
 	componentDidMount() {
 		this.props.getConversation(this.props.match.params.messageId);
 	}
@@ -21,6 +30,7 @@ class Conversation extends Component {
 		return this.props.conversation ? (
 			<nav className="panel">
 				<p className="panel-heading">
+					{`FROM SOCKET: ${this.state.timestamp}`}
 					{this.props.conversation.from.company || this.props.conversation.to.company}
 				</p>
 				<div className="chat-container px-3">{this.renderChats()}</div>
