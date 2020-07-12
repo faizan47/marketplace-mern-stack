@@ -169,3 +169,8 @@ div.radio-box-container:nth-child(2) > p:nth-child(2) {
 	margin: 0 auto;
 	margin-top: -2.5em;
 }
+#navMenu .tag.is-danger.ml-1.is-small {
+	font-size: 9px;
+	margin-top: 3px;
+	border-radius: 20px;
+}

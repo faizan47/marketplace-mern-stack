@@ -79,7 +79,7 @@ class Header extends Component {
 						<span aria-hidden="true" />
 					</span>
 				</div>
-				<div id="navbarBasicExample" className="navbar-menu">
+				<div id="navMenu" className="navbar-menu">
 					<div className="navbar-start">
 						<Link to="/listings" className="navbar-item">
 							Browse Listings
