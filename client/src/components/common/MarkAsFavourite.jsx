@@ -4,8 +4,6 @@ import { addToFavourites, removeFromFavourites } from '../../actions';
 
 class MarkAsFavourite extends Component {
 	isFavourite = () => {
-		console.log(this.props.favourites);
-
 		if (this.props.favourites) return this.props.favourites.find(({ _id }) => _id === this.props.listingId);
 	};
 	renderIconClass = () => {

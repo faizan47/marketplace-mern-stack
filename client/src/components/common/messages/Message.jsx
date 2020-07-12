@@ -4,28 +4,29 @@ import { Link } from 'react-router-dom';
 
 const Message = ({
 	role,
-
-	message: { _id, from, to, _listing: { title, images }, subject, started, unreadByDistributor, unreadByRetailer }
+	lastMessage: { message, time },
+	conversationData: { _id, from, to, _listing: { title }, unreadByDistributor, unreadByRetailer }
 }) => {
+	let isBold = 'has-text-weight-normal has-text-grey-dark';
 	const renderMyUnread = role => {
-		if (role === 'retailer' && unreadByRetailer) {
+		if (role === 'retailer' && unreadByRetailer === 'true') {
+			isBold = 'has-text-weight-semibold has-text-black-ter';
 			return <span className="tag is-danger is-normal">Unread</span>;
 		}
-		if (role === 'distributor' && unreadByDistributor) {
+		if (role === 'distributor' && unreadByDistributor === 'true') {
+			isBold = 'has-text-weight-semibold';
 			return <span className="tag is-danger is-normal">Unread</span>;
 		}
 	};
 	const renderSentUnread = () => {
-		if (role === 'distributor' && !unreadByRetailer) {
+		if (role === 'distributor' && unreadByRetailer === 'false') {
 			return (
 				<span title="Read" className="icon has-text-success">
 					<i className="fas fa-lg fa-check-square" />
 				</span>
 			);
 		}
-		if (role === 'retailer' && !unreadByDistributor) {
-			console.log('shold do somethinf');
-
+		if (role === 'retailer' && unreadByDistributor === 'false') {
 			return (
 				<span title="Read" className="icon has-text-success">
 					<i className="fas fa-lg fa-check-square" />
@@ -50,26 +51,17 @@ const Message = ({
 					<div className="content">
 						<Link to={`/messages/${_id}`}>
 							<p className="has-text-black">
-								<strong>{to.company || from.company}</strong>
-								<small className="mx-2">{time_ago_in_words(started)}</small>
+								<span className="is-size-6 has-text-grey">{to.company || from.company}</span>
+								<small className="mx-2 has-text-grey">{time_ago_in_words(time)}</small>
 								<small>{renderMyUnread(role)}</small>
 								<br />
-								<small className="has-greyed-text is-block is-size-6">{title}</small>
-								<small className="has-greyed-text is-size-7">{subject}</small>
+								<small className={`is-block is-size-5 ${isBold}`}>{message}</small>
+								<small className="has-text-grey-light is-size-7">About: {title}</small>
 							</p>
 						</Link>
 					</div>
 				</div>
-				<div className="media-right">
-					{/* <figure className="image is-64x64">
-						<img
-							className="is-rounded"
-							src={images[0] || 'https://bulma.io/images/placeholders/128x128.png'}
-							alt="user avatar"
-						/>
-					</figure> */}
-					{renderSentUnread()}
-				</div>
+				<div className="media-right">{renderSentUnread()}</div>
 			</article>
 			<hr className="dropdown-divider" />
 		</div>

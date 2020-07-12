@@ -9,8 +9,8 @@ const ConversationSchema = new Schema({
 	messages: [ MessageSchema ],
 	_listing: { type: Schema.Types.ObjectId, ref: 'Listing' },
 	started: { type: Date, default: Date.now },
-	unreadByDistributor: { type: Boolean, default: false },
-	unreadByRetailer: { type: Boolean, default: true }
+	unreadByDistributor: { type: 'String', default: 'initialized' },
+	unreadByRetailer: { type: 'String', default: true }
 });
 
 module.exports = mongoose.model('Conversation', ConversationSchema);

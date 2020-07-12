@@ -40,13 +40,16 @@ module.exports = app => {
 			const { role } = await User.findById(userId);
 			const getSender = role === 'distributor' ? 'from' : 'to';
 			const getRecipient = role === 'distributor' ? 'to' : 'from';
-			const conversation = await Conversation.find({ [getSender]: userId })
+			const conversation = await Conversation.find({ [getSender]: userId }, { messages: { $slice: -1 } })
+				.sort([ [ 'messages.time', -1 ] ])
+				// .populate('messages._user', 'role')
 				.populate(getRecipient, 'company')
 				.populate('_listing', 'title images')
 				.exec();
-
 			res.send(conversation);
 		} catch (error) {
+			console.log(error);
+
 			res.status(401).send({ message: 'Something went wrong!' });
 		}
 	});

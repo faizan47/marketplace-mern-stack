@@ -18,6 +18,8 @@ export const getMessages = () => async dispatch => {
 		const response = await axios.get('/api/conversation');
 		dispatch({ type: GET_MESSAGES, payload: response.data });
 	} catch (error) {
-		toast.error(error.response.data.message);
+		console.log(error);
+
+		// toast.error(error.response.data.message);
 	}
 };

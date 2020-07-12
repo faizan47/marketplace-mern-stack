@@ -127,6 +127,7 @@ div.radio-box-container:nth-child(2) > p:nth-child(2) {
 .bubble-right small {
 	position: absolute;
 	bottom: -18px;
+	width: 110px;
 }
 .bubble-right small {
 	right: 5px;

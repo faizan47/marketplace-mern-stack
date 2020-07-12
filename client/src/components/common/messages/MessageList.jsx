@@ -10,11 +10,19 @@ class MessageList extends Component {
 	}
 	renderMessages = () => {
 		return this.props.messages.map(
-			({ _id, from, to, _listing, subject, started, unreadByDistributor, unreadByRetailer }) => {
+			({ _id, from, to, _listing, unreadByDistributor, unreadByRetailer, messages }) => {
 				return (
 					<Message
 						role={this.props.role}
-						message={{ _id, from, to, _listing, subject, started, unreadByDistributor, unreadByRetailer }}
+						conversationData={{
+							_id,
+							from,
+							to,
+							_listing,
+							unreadByDistributor,
+							unreadByRetailer
+						}}
+						lastMessage={messages[0]}
 					/>
 				);
 			}
