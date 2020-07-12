@@ -26,6 +26,9 @@ class Header extends Component {
 						</Link>
 						<Link to="/messages" className="navbar-item">
 							Messages
+							{this.props.user.unreadCount ? (
+								<span className="tag is-danger ml-1 is-small">{this.props.user.unreadCount}</span>
+							) : null}
 						</Link>
 						<Link to="/favourites" className="navbar-item">
 							Favourites
@@ -39,6 +42,9 @@ class Header extends Component {
 					<Fragment>
 						<Link to="/messages" className="navbar-item">
 							Messages
+							{this.props.user.unreadCount ? (
+								<span className="tag is-danger ml-1 is-small">{this.props.user.unreadCount}</span>
+							) : null}
 						</Link>
 						<Link to="/favourites" className="navbar-item">
 							Favourites
@@ -85,6 +91,6 @@ class Header extends Component {
 		);
 	}
 }
-const mapStateToProps = ({ user }) => ({ user });
+const mapStateToProps = ({ user, unreadCount }) => ({ user, unreadCount });
 
 export default connect(mapStateToProps, { fetchUser })(Header);

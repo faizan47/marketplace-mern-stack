@@ -42,7 +42,6 @@ module.exports = app => {
 			const getRecipient = role === 'distributor' ? 'to' : 'from';
 			const conversation = await Conversation.find({ [getSender]: userId }, { messages: { $slice: -1 } })
 				.sort([ [ 'messages.time', -1 ] ])
-				// .populate('messages._user', 'role')
 				.populate(getRecipient, 'company')
 				.populate('_listing', 'title images')
 				.exec();

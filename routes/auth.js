@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const Conversation = mongoose.model('Conversation');
 const { hashPassword, comparePassword } = require('../services/bcrypt');
 
 module.exports = app => {
@@ -45,7 +46,18 @@ module.exports = app => {
 			const { role, favourites, credits } = await User.findById(req.session.userId)
 				.populate('favourites', '-id -__v -_user')
 				.exec();
-			res.send({ role, favourites, credits });
+			const getSender = role === 'distributor' ? 'from' : 'to';
+			let unreadCount = 0;
+			const conversations = await Conversation.find({ [getSender]: req.session.userId });
+			conversations.forEach(({ unreadByDistributor, unreadByRetailer }) => {
+				if (role === 'distributor' && unreadByDistributor === 'true') {
+					unreadCount++;
+				}
+				if (role === 'retailer' && unreadByRetailer === 'true') {
+					unreadCount++;
+				}
+			});
+			res.send({ role, favourites, credits, unreadCount });
 		} else {
 			res.send(false);
 		}
