@@ -56,19 +56,39 @@ module.exports = app => {
 			const { role } = await User.findById(userId);
 			const getSender = role === 'distributor' ? 'from' : 'to';
 			const getRecipient = role === 'distributor' ? 'to' : 'from';
-			console.log(req.params.conversationId);
-
 			const conversation = await Conversation.findOne({ [getSender]: userId, _id: req.params.conversationId })
 				.populate(getRecipient, 'company role')
+				.populate('messages._user', 'role')
 				.populate('_listing', 'title images')
-				// .populate('messages', 'title images messages')
 				.exec();
-			console.log(conversation);
 
 			res.send(conversation);
 		} catch (error) {
-			console.log(error);
+			res.status(401).send({ message: 'Something went wrong!' });
+		}
+	});
+	app.post('/api/conversation/:conversationId', requireLogin, async (req, res) => {
+		try {
+			const { userId } = req.session;
+			const { message } = req.body.values;
+			const { role } = await User.findById(userId);
+			const data = { _user: userId, message };
+			const getSender = role === 'distributor' ? 'from' : 'to';
+			const conversation = await Conversation.findOneAndUpdate(
+				{
+					_id: req.params.conversationId,
+					[getSender]: userId
+				},
+				{
+					$push: { messages: data }
+				},
+				{ new: true }
+			)
+				.populate('messages._user', 'role')
+				.exec();
 
+			res.send(conversation);
+		} catch (error) {
 			res.status(401).send({ message: 'Something went wrong!' });
 		}
 	});

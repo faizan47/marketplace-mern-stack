@@ -90,6 +90,27 @@ class FormTemplate extends React.Component {
 	};
 	onSubmit = values => {
 		this.props.onSubmit(values, this.props.history);
+		if (this.props.resetOnSubmit) this.props.reset();
+	};
+	renderCancel = () => {
+		if (this.props.hideCancel) return;
+
+		return this.props.onCancel ? (
+			<button
+				onClick={() => (this.props.onCancel ? this.props.onCancel() : null)}
+				className="button is-link is-light"
+			>
+				Cancel
+			</button>
+		) : (
+			<Link
+				onClick={() => (this.props.onCancel ? this.props.onCancel() : null)}
+				to={this.props.cancelBtnLink}
+				className="button is-link is-light"
+			>
+				Cancel
+			</Link>
+		);
 	};
 	render() {
 		return (
@@ -99,24 +120,7 @@ class FormTemplate extends React.Component {
 					<div className="control">
 						<button className="button is-link">{this.props.SubmitBtnText}</button>
 					</div>
-					<div className="control">
-						{this.props.onCancel ? (
-							<button
-								onClick={() => (this.props.onCancel ? this.props.onCancel() : null)}
-								className="button is-link is-light"
-							>
-								Cancel
-							</button>
-						) : (
-							<Link
-								onClick={() => (this.props.onCancel ? this.props.onCancel() : null)}
-								to={this.props.cancelBtnLink}
-								className="button is-link is-light"
-							>
-								Cancel
-							</Link>
-						)}
-					</div>
+					<div className="control">{this.renderCancel()}</div>
 				</div>
 			</form>
 		);

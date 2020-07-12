@@ -4,8 +4,6 @@ import ReactDOM from 'react-dom';
 class Modal extends Component {
 	renderAction = () => {
 		if (this.props.action) {
-			console.log(this.props.action);
-
 			return (
 				<footer className="modal-card-foot">
 					<button
@@ -37,8 +35,6 @@ class Modal extends Component {
 		</div>
 	);
 	render() {
-		// console.log(this.props);
-
 		return ReactDOM.createPortal(this.renderModal(), document.getElementById('modal'));
 	}
 }

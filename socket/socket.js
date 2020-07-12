@@ -8,7 +8,6 @@ io.on('connection', client => {
 		}, interval);
 	});
 });
-console.log('IS !');
 const port = process.env.PORT || 8000;
 io.listen(port);
 console.log('listening on port ', port);

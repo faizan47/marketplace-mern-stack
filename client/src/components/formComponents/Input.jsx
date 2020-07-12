@@ -1,10 +1,12 @@
 import React, { Fragment } from 'react';
 
-export default ({ placeholder, iconClass, label, input, type, meta: { touched, error } }) => {
+export default ({ placeholder, iconClass, label, input, type, meta }) => {
+	// console.log(meta);
+	const { touched, error } = meta;
 	return (
 		<Fragment>
 			<div className="field">
-				<label className="label">{label}</label>
+				{label ? <label className="label">{label}</label> : null}
 				<div className="control has-icons-left">
 					<input {...input} className="input" type={type} placeholder={placeholder} />
 					<span className="icon is-small is-left">

@@ -14,3 +14,4 @@ export const ADD_CREDITS = 'ADD_CREDITS';
 export const CREATE_MESSAGE = 'CREATE_MESSAGE';
 export const GET_MESSAGES = 'GET_MESSAGES';
 export const GET_CONVERSATION = 'GET_CONVERSATION';
+export const SEND_MESSAGE = 'SEND_MESSAGE';

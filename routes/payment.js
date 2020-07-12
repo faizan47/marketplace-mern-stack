@@ -9,7 +9,6 @@ module.exports = app => {
 		const { amount } = req.body;
 		const { userId } = req.session;
 		const { email } = await User.findById(userId);
-
 		const { client_secret } = await stripe.paymentIntents.create({
 			amount,
 			currency: 'usd',

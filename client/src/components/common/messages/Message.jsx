@@ -1,20 +1,7 @@
 import React from 'react';
 import time_ago_in_words from 'time_ago_in_words';
 import { Link } from 'react-router-dom';
-// const a = {
-// 	from: '5efe4f29f65a912c04b285eb',
-// 	to: {
-// 		_id: '5efa5824341e4203e1b829a2',
-// 		company: 'Hayes Ray LLC'
-// 	},
-// 	subject: 'Molestiae fuga Dolo',
-// 	_listing: {
-// 		images: [],
-// 		_id: '5f023e7d3899f83ffd9034e8',
-// 		title: 'Tenetur consequuntur'
-// 	},
-// 	started: '2020-07-08T21:51:21.505Z'
-// };
+
 const Message = ({ message: { _id, from, to, _listing: { title, images }, subject, started } }) => {
 	return (
 		<div>

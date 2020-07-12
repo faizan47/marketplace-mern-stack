@@ -133,3 +133,37 @@ div.radio-box-container:nth-child(2) > p:nth-child(2) {
 .bubble-left small {
 	left: 5px;
 }
+#chatForm .column.is-half {
+	width: 100%;
+}
+
+/* Inline #7 | http://localhost:9000/messages/5f09a4c598a9c8033996728d */
+
+#chatForm .column.is-half {
+	display: flex;
+	justify-content: space-between;
+}
+
+#chatForm .field.is-grouped .control {
+	margin-right: 0;
+}
+
+#chatForm form div:first-of-type {
+	width: 100%;
+	margin-right: 15px;
+}
+#chatForm .help.is-danger {
+	display: none;
+}
+
+.chat-container {
+	max-height: 60vh;
+	overflow-y: scroll;
+}
+
+.listing-header.level.box {
+	padding: 0;
+}
+.chat-panel {
+	margin-top: -2.5em;
+}
