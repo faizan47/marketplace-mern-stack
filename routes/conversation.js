@@ -6,6 +6,7 @@ const Conversation = mongoose.model('Conversation');
 const User = mongoose.model('User');
 
 module.exports = app => {
+	// create first conversation
 	app.post('/api/conversation', requireLogin, requireCredits, async (req, res) => {
 		const { subject, message, listingId } = req.body;
 		const { userId } = req.session;
@@ -32,7 +33,7 @@ module.exports = app => {
 
 		return res.send({ role, favourites, credits });
 	});
-
+	//get conversation list
 	app.get('/api/conversation', requireLogin, async (req, res) => {
 		try {
 			const { userId } = req.session;
@@ -49,7 +50,7 @@ module.exports = app => {
 			res.status(401).send({ message: 'Something went wrong!' });
 		}
 	});
-
+	//get single conversation
 	app.get('/api/conversation/:conversationId', requireLogin, async (req, res) => {
 		try {
 			const { userId } = req.session;
@@ -74,6 +75,7 @@ module.exports = app => {
 			res.status(401).send({ message: 'Something went wrong!' });
 		}
 	});
+	// reply to a conversation
 	app.post('/api/conversation/:conversationId', requireLogin, async (req, res) => {
 		try {
 			const { userId } = req.session;

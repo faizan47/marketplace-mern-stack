@@ -7,12 +7,30 @@ const Message = ({
 
 	message: { _id, from, to, _listing: { title, images }, subject, started, unreadByDistributor, unreadByRetailer }
 }) => {
-	const renderUnread = role => {
+	const renderMyUnread = role => {
 		if (role === 'retailer' && unreadByRetailer) {
 			return <span className="tag is-danger is-normal">Unread</span>;
 		}
 		if (role === 'distributor' && unreadByDistributor) {
 			return <span className="tag is-danger is-normal">Unread</span>;
+		}
+	};
+	const renderSentUnread = () => {
+		if (role === 'distributor' && !unreadByRetailer) {
+			return (
+				<span title="Read" className="icon has-text-success">
+					<i className="fas fa-lg fa-check-square" />
+				</span>
+			);
+		}
+		if (role === 'retailer' && !unreadByDistributor) {
+			console.log('shold do somethinf');
+
+			return (
+				<span title="Read" className="icon has-text-success">
+					<i className="fas fa-lg fa-check-square" />
+				</span>
+			);
 		}
 	};
 	return (
@@ -34,7 +52,7 @@ const Message = ({
 							<p className="has-text-black">
 								<strong>{to.company || from.company}</strong>
 								<small className="mx-2">{time_ago_in_words(started)}</small>
-								<small>{renderUnread(role)}</small>
+								<small>{renderMyUnread(role)}</small>
 								<br />
 								<small className="has-greyed-text is-block is-size-6">{title}</small>
 								<small className="has-greyed-text is-size-7">{subject}</small>
@@ -43,13 +61,14 @@ const Message = ({
 					</div>
 				</div>
 				<div className="media-right">
-					<figure className="image is-64x64">
+					{/* <figure className="image is-64x64">
 						<img
 							className="is-rounded"
 							src={images[0] || 'https://bulma.io/images/placeholders/128x128.png'}
 							alt="user avatar"
 						/>
-					</figure>
+					</figure> */}
+					{renderSentUnread()}
 				</div>
 			</article>
 			<hr className="dropdown-divider" />
