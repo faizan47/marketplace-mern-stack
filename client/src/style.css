@@ -113,7 +113,8 @@ div.radio-box-container:nth-child(2) > p:nth-child(2) {
 	position: relative;
 	border-radius: 20px;
 	min-width: min-content;
-	max-width: 35%;
+	width: max-content;
+	max-width: 60%;
 	margin-bottom: 21px !important;
 }
 .bubble-left {
@@ -137,8 +138,6 @@ div.radio-box-container:nth-child(2) > p:nth-child(2) {
 	width: 100%;
 }
 
-/* Inline #7 | http://localhost:9000/messages/5f09a4c598a9c8033996728d */
-
 #chatForm .column.is-half {
 	display: flex;
 	justify-content: space-between;
@@ -158,12 +157,14 @@ div.radio-box-container:nth-child(2) > p:nth-child(2) {
 
 .chat-container {
 	max-height: 60vh;
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 
 .listing-header.level.box {
 	padding: 0;
 }
 .chat-panel {
+	max-width: 800px;
+	margin: 0 auto;
 	margin-top: -2.5em;
 }

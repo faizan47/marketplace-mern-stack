@@ -9,7 +9,6 @@ import { createMessage } from '../../actions';
 
 class sendMessage extends Component {
 	state = { displayModal: null };
-	onModalExit = () => this.setState({ displayModal: false });
 	modalLogic = () => {
 		if (!this.props.user) {
 			return toast.warn('Only authorised users can perform that action!');
@@ -21,13 +20,13 @@ class sendMessage extends Component {
 				: toast.warn('Insufficient credits. Please add credits in your account to contact this retailer.');
 		}
 	};
-	onSubmit = values => {
-		this.props.createMessage({ listingId: this.props.listingId, ...values });
+	onSubmit = (values, history) => {
+		this.props.createMessage({ listingId: this.props.listingId, ...values }, history);
 	};
 	renderModal = () => {
 		if (this.state.displayModal)
 			return (
-				<Modal onModalExit={this.onModalExit} title="Contact retailer">
+				<Modal onModalExit={() => this.setState({ displayModal: false })} title="Contact retailer">
 					<FormTemplate
 						inputs={sendMessageInputs}
 						onSubmit={this.onSubmit}
@@ -46,7 +45,7 @@ class sendMessage extends Component {
 					<span className="icon is-small">
 						<i className="far fa-envelope" />
 					</span>
-					<span>Send a quote</span>
+					<span>Contact Retailer</span>
 				</button>
 			</Fragment>
 		);

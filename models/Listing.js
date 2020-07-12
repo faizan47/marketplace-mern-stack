@@ -8,8 +8,7 @@ const ListingSchema = new Schema({
 	category: String,
 	images: { type: [ String ] },
 	_user: { type: Schema.Types.ObjectId, ref: 'User' },
-	datePosted: Date,
-	_conversations: [ { type: Schema.Types.ObjectId, ref: 'Conversation', default: [] } ]
+	datePosted: Date
 });
 
 module.exports = mongoose.model('Listing', ListingSchema);

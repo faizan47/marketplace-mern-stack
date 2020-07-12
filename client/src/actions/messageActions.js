@@ -2,10 +2,11 @@ import { CREATE_MESSAGE, GET_MESSAGES } from './types';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-export const createMessage = message => async dispatch => {
+export const createMessage = (message, history) => async dispatch => {
 	try {
 		const response = await axios.post('/api/conversation', message);
 		dispatch({ type: CREATE_MESSAGE, payload: response.data });
+		history.push('/messages/');
 		toast.success('Message sent successfully!');
 	} catch (error) {
 		toast.error(error.response.data.message);

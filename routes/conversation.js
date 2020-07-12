@@ -56,12 +56,19 @@ module.exports = app => {
 			const { role } = await User.findById(userId);
 			const getSender = role === 'distributor' ? 'from' : 'to';
 			const getRecipient = role === 'distributor' ? 'to' : 'from';
-			const conversation = await Conversation.findOne({ [getSender]: userId, _id: req.params.conversationId })
+			const isUnreadFlag = role === 'distributor' ? 'unreadByDistributor' : 'unreadByRetailer';
+			const conversation = await Conversation.findOneAndUpdate(
+				{
+					[getSender]: userId,
+					_id: req.params.conversationId
+				},
+				{ [isUnreadFlag]: false },
+				{ new: true }
+			)
 				.populate(getRecipient, 'company role')
 				.populate('messages._user', 'role')
 				.populate('_listing', 'title images')
 				.exec();
-
 			res.send(conversation);
 		} catch (error) {
 			res.status(401).send({ message: 'Something went wrong!' });
@@ -73,6 +80,7 @@ module.exports = app => {
 			const { message } = req.body.values;
 			const { role } = await User.findById(userId);
 			const data = { _user: userId, message };
+			const isUnreadFlag = role === 'retailer' ? 'unreadByDistributor' : 'unreadByRetailer';
 			const getSender = role === 'distributor' ? 'from' : 'to';
 			const conversation = await Conversation.findOneAndUpdate(
 				{
@@ -80,13 +88,14 @@ module.exports = app => {
 					[getSender]: userId
 				},
 				{
-					$push: { messages: data }
+					$push: { messages: data },
+					[isUnreadFlag]: true
 				},
 				{ new: true }
 			)
+				.populate('_listing', 'title images')
 				.populate('messages._user', 'role')
 				.exec();
-
 			res.send(conversation);
 		} catch (error) {
 			res.status(401).send({ message: 'Something went wrong!' });

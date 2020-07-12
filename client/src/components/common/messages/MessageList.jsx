@@ -9,9 +9,16 @@ class MessageList extends Component {
 		this.props.getMessages();
 	}
 	renderMessages = () => {
-		return this.props.messages.map(({ _id, from, to, _listing, subject, started }) => {
-			return <Message message={{ _id, from, to, _listing, subject, started }} />;
-		});
+		return this.props.messages.map(
+			({ _id, from, to, _listing, subject, started, unreadByDistributor, unreadByRetailer }) => {
+				return (
+					<Message
+						role={this.props.role}
+						message={{ _id, from, to, _listing, subject, started, unreadByDistributor, unreadByRetailer }}
+					/>
+				);
+			}
+		);
 	};
 	render() {
 		return (
@@ -31,5 +38,5 @@ class MessageList extends Component {
 		);
 	}
 }
-const mapStateToProps = ({ messages }) => ({ messages });
+const mapStateToProps = ({ messages, user: { role } }) => ({ messages, role });
 export default connect(mapStateToProps, { getMessages })(MessageList);

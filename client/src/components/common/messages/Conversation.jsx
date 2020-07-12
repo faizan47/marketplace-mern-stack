@@ -4,22 +4,13 @@ import ContentLoader from 'react-content-loader';
 import { getConversation, sendMessage } from '../../../actions';
 import FormTemplate from '../../formComponents/FormTemplate';
 import ChatBubble from './ChatBubble';
-// import { subscribeToTimer } from '../../../utils/socket';
 import { conversationInputs } from './conversationInputs';
 import { Link } from 'react-router-dom';
 
 class Conversation extends Component {
-	// constructor(props) {
-	// 	super(props);
-	// 	this.state = {
-	// 		timestamp: 'no timestamp yet'
-	// 	};
-	// 	subscribeToTimer((err, timestamp) =>
-	// 		this.setState({
-	// 			timestamp
-	// 		})
-	// 	);
-	// }
+	componentDidMount() {
+		this.props.getConversation(this.props.match.params.messageId);
+	}
 	renderListingHeader = () => {
 		return (
 			<div className="listing-header box level">
@@ -44,34 +35,34 @@ class Conversation extends Component {
 			</div>
 		);
 	};
-
-	onSend = values => {
-		this.props.sendMessage(values, this.props.match.params.messageId);
-	};
-	componentDidMount() {
-		this.props.getConversation(this.props.match.params.messageId);
-	}
 	renderChats = () => {
 		return this.props.conversation.messages.map(({ message, time, _user: { role } }) => (
 			<ChatBubble isSentByMe={role === this.props.role} time={time} message={message} />
 		));
 	};
-	renderHeader = () =>
-		this.props.role === 'distributor' ? this.props.conversation.to.company : this.props.conversation.from.company;
-
 	render() {
 		return this.props.conversation ? (
 			<nav className="panel chat-panel">
-				<p className="panel-heading">{this.renderHeader()}</p>
+				<div className="panel-heading">
+					<div className="level">
+						<div className="level-left">
+							{this.props.role === 'distributor' ? (
+								this.props.conversation.to.company
+							) : (
+								this.props.conversation.from.company
+							)}
+						</div>
+						<div className="level-right is-size-7">{this.props.conversation.subject}</div>
+					</div>
+				</div>
 				{this.renderListingHeader()}
-
 				<div className="chat-container px-3">{this.renderChats()}</div>
 				<div className="panel-block" id="chatForm">
 					<p className="control has-icons-left">
 						<FormTemplate
 							resetOnSubmit
 							form="chatForm"
-							onSubmit={this.onSend}
+							onSubmit={values => this.props.sendMessage(values, this.props.match.params.messageId)}
 							inputs={conversationInputs}
 							SubmitBtnText="Send"
 							hideCancel
@@ -84,6 +75,7 @@ class Conversation extends Component {
 		);
 	}
 }
+
 const mapStateToProps = ({ conversation, user: { role } }) => ({ conversation, role });
 
 export default connect(mapStateToProps, { getConversation, sendMessage })(Conversation);

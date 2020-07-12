@@ -15,6 +15,8 @@ export const sendMessage = (values, id) => async dispatch => {
 		const response = await axios.post(`/api/conversation/${id}`, { values });
 		dispatch({ type: SEND_MESSAGE, payload: response.data });
 	} catch (error) {
-		toast.error(error.response.data.message);
+		console.log({ ...error });
+
+		toast.error('SOMETHING WENT WRONG');
 	}
 };
