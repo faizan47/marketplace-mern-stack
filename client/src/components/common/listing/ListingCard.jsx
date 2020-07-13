@@ -1,5 +1,5 @@
 import React from 'react';
-import ListingMeta from './ListingMeta';
+import ListingMeta from '../listing/ListingMeta';
 import { Link } from 'react-router-dom';
 import time_ago_in_words from 'time_ago_in_words';
 

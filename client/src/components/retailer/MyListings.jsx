@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import ListingCard from '../common/ListingCard';
+import ListingCard from '../common/listing/ListingCard';
 import { connect } from 'react-redux';
 import { fetchMyListings } from '../../actions';
 

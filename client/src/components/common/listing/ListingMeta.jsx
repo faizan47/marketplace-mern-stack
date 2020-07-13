@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { deleteListing } from '../../actions';
+import { deleteListing } from '../../../actions';
 import { Link } from 'react-router-dom';
-import MarkAsFavourite from './MarkAsFavourite';
-import Modal from '../common/Modal';
+import MarkAsFavourite from '../MarkAsFavourite';
+import Modal from '../../common/Modal';
 
 class ListingMeta extends Component {
 	state = { showModal: false };

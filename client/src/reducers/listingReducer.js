@@ -1,6 +1,6 @@
 import { FETCH_LISTINGS, CREATE_LISTING, SEARCH_LISTINGS } from '../actions/types';
 
-const listingReducer = (state = [], action) => {
+const listingReducer = (state = null, action) => {
 	switch (action.type) {
 		case FETCH_LISTINGS:
 			return action.payload;

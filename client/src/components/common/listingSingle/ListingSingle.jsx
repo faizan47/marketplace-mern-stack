@@ -1,12 +1,12 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Component } from 'react';
-import { fetchListingById } from '../../actions';
+import { fetchListingById } from '../../../actions';
 import ContentLoader from 'react-content-loader';
-import ImageSlider from './listingSingle/ImageSlider';
-import RetailerInformation from './listingSingle/RetailerInformation';
-import ListingContent from './listingSingle/ListingContent';
-import ActionButtons from './listingSingle/ActionButtons';
+import ImageSlider from './ImageSlider';
+import RetailerInformation from './RetailerInformation';
+import ListingContent from './ListingContent';
+import ActionButtons from './ActionButtons';
 
 class ListingSingle extends Component {
 	componentDidMount() {

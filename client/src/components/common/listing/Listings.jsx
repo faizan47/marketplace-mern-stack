@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { fetchListings } from '../../actions';
+import { fetchListings } from '../../../actions';
 import ListingCard from './ListingCard';
 import ContentLoader from 'react-content-loader';
 import ListingSearch from './ListingSearch';
@@ -11,19 +11,25 @@ class Listings extends Component {
 	}
 
 	renderListings = () => {
-		return this.props.listings.map(({ _id, title, category, datePosted, images }) => {
-			return (
-				<ListingCard
-					key={_id}
-					title={title}
-					category={category}
-					datePosted={datePosted}
-					images={images}
-					listingId={_id}
-					listingSlug={title.split(' ').join('-').toLowerCase()}
-				/>
-			);
-		});
+		return this.props.listings.length ? (
+			this.props.listings.map(({ _id, title, category, datePosted, images }) => {
+				return (
+					<ListingCard
+						key={_id}
+						title={title}
+						category={category}
+						datePosted={datePosted}
+						images={images}
+						listingId={_id}
+						listingSlug={title.split(' ').join('-').toLowerCase()}
+					/>
+				);
+			})
+		) : (
+			<article class="message is-warning">
+				<div class="message-body">No listings found! </div>
+			</article>
+		);
 	};
 
 	render() {
@@ -35,7 +41,7 @@ class Listings extends Component {
 						<ListingSearch />
 					</div>
 					<div className="column">
-						{this.props.listings.length ? this.renderListings() : <ContentLoader />}
+						{this.props.listings !== null ? this.renderListings() : <ContentLoader />}
 					</div>
 				</div>
 			</Fragment>

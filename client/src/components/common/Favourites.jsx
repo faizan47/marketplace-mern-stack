@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import ListingCard from '../common/ListingCard';
+import ListingCard from '../common/listing/ListingCard';
 import ContentLoader from 'react-content-loader';
 import Notice from './Notice';
 
