@@ -5,7 +5,7 @@ import FormTemplate from '../formComponents/FormTemplate';
 import sendMessageInputs from '../../formInputs/distributor/sendMessageInputs';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
-import { createMessage } from '../../actions';
+import { initializeConversation } from '../../actions';
 
 class sendMessage extends Component {
 	state = { displayModal: null };
@@ -21,7 +21,7 @@ class sendMessage extends Component {
 		}
 	};
 	onSubmit = (values, history) => {
-		this.props.createMessage({ listingId: this.props.listingId, ...values }, history);
+		this.props.initializeConversation({ listingId: this.props.listingId, ...values }, history);
 	};
 	renderModal = () => {
 		if (this.state.displayModal)
@@ -52,4 +52,4 @@ class sendMessage extends Component {
 	}
 }
 const mapStateToProps = ({ user }) => ({ user });
-export default connect(mapStateToProps, { createMessage })(sendMessage);
+export default connect(mapStateToProps, { initializeConversation })(sendMessage);

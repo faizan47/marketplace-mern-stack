@@ -8,7 +8,7 @@ const Message = ({
 	conversationData: { _id, from, to, _listing: { title }, unreadByDistributor, unreadByRetailer }
 }) => {
 	let isBold = 'has-text-weight-normal has-text-grey-dark';
-	const renderMyUnread = role => {
+	const renderUnreadTag = role => {
 		if (role === 'retailer' && unreadByRetailer === 'true') {
 			isBold = 'has-text-weight-semibold has-text-black-ter';
 			return <span className="tag is-danger is-normal">Unread</span>;
@@ -18,7 +18,7 @@ const Message = ({
 			return <span className="tag is-danger is-normal">Unread</span>;
 		}
 	};
-	const renderSentUnread = () => {
+	const renderReadStatus = () => {
 		if (role === 'distributor' && unreadByRetailer === 'false') {
 			return (
 				<span title="Read" className="icon has-text-success">
@@ -49,11 +49,11 @@ const Message = ({
 				</div>
 				<div className="media-content">
 					<div className="content">
-						<Link to={`/messages/${_id}`}>
+						<Link to={`/inbox/${_id}`}>
 							<p className="has-text-black">
 								<span className="is-size-6 has-text-grey">{to.company || from.company}</span>
 								<small className="mx-2 has-text-grey">{time_ago_in_words(time)}</small>
-								<small>{renderMyUnread(role)}</small>
+								<small>{renderUnreadTag(role)}</small>
 								<br />
 								<small className={`is-block is-size-5 ${isBold}`}>{message}</small>
 								<small className="has-text-grey-light is-size-7">About: {title}</small>
@@ -61,7 +61,7 @@ const Message = ({
 						</Link>
 					</div>
 				</div>
-				<div className="media-right">{renderSentUnread()}</div>
+				<div className="media-right">{renderReadStatus()}</div>
 			</article>
 			<hr className="dropdown-divider" />
 		</div>

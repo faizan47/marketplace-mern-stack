@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ContentLoader from 'react-content-loader';
-import { getConversation, sendMessage } from '../../../actions';
+import { getChatById, fetchUser, sendMessage } from '../../../actions';
 import FormTemplate from '../../formComponents/FormTemplate';
 import ChatBubble from './ChatBubble';
 import { conversationInputs } from './conversationInputs';
@@ -9,7 +9,8 @@ import { Link } from 'react-router-dom';
 
 class Conversation extends Component {
 	componentDidMount() {
-		this.props.getConversation(this.props.match.params.messageId);
+		this.props.getChatById(this.props.match.params.inboxId);
+		this.props.fetchUser()
 	}
 	renderListingHeader = () => {
 		return (
@@ -36,9 +37,12 @@ class Conversation extends Component {
 		);
 	};
 	renderChats = () => {
-		return this.props.conversation.messages.map(({ message, time, _user: { role } }) => (
-			<ChatBubble isSentByMe={role === this.props.role} time={time} message={message} />
+		return this.props.conversation.messages.map(({ _id, message, time, _user: { role } }) => (
+			<ChatBubble key={_id} isSentByMe={role === this.props.role} time={time} message={message} />
 		));
+	};
+	sendMessage = values => {
+		this.props.sendMessage(values, this.props.match.params.inboxId);
 	};
 	render() {
 		return this.props.conversation ? (
@@ -58,16 +62,16 @@ class Conversation extends Component {
 				{this.renderListingHeader()}
 				<div className="chat-container px-3">{this.renderChats()}</div>
 				<div className="panel-block" id="chatForm">
-					<p className="control has-icons-left">
+					<div className="control has-icons-left">
 						<FormTemplate
 							resetOnSubmit
 							form="chatForm"
-							onSubmit={values => this.props.sendMessage(values, this.props.match.params.messageId)}
+							onSubmit={values => this.sendMessage(values)}
 							inputs={conversationInputs}
 							SubmitBtnText="Send"
 							hideCancel
 						/>
-					</p>
+					</div>
 				</div>
 			</nav>
 		) : (
@@ -78,4 +82,4 @@ class Conversation extends Component {
 
 const mapStateToProps = ({ conversation, user: { role } }) => ({ conversation, role });
 
-export default connect(mapStateToProps, { getConversation, sendMessage })(Conversation);
+export default connect(mapStateToProps, { getChatById, fetchUser, sendMessage })(Conversation);

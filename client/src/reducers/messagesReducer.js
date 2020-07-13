@@ -1,8 +1,8 @@
-import { GET_MESSAGES } from '../actions/types';
+import { GET_INBOX } from '../actions/types';
 
 const messagesReducer = (state = [], action) => {
 	switch (action.type) {
-		case GET_MESSAGES:
+		case GET_INBOX:
 			return action.payload;
 		default:
 			return state;

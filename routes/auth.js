@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
-const Conversation = mongoose.model('Conversation');
 const { hashPassword, comparePassword } = require('../services/bcrypt');
-
+const getUnreadCount = require('../utils/getUnreadCount');
 module.exports = app => {
 	app.post('/api/signup', async (req, res) => {
 		const { name, company, email, password, role } = req.body;
@@ -32,7 +31,8 @@ module.exports = app => {
 			req.session.userId = user._id;
 			await user.populate('favourites', '-id -__v -_user').execPopulate();
 			const { role, favourites, credits } = user;
-			return res.send({ role, favourites, credits });
+			const unreadCount = await getUnreadCount(role, req.session.userId);
+			return res.send({ role, favourites, credits, unreadCount });
 		} else {
 			res.status(401).send({ message: 'Invalid password.' });
 		}
@@ -42,21 +42,12 @@ module.exports = app => {
 		res.redirect('/');
 	});
 	app.get('/api/current_user', async (req, res) => {
-		if (req.session.userId) {
-			const { role, favourites, credits } = await User.findById(req.session.userId)
+		const { userId } = req.session;
+		if (userId) {
+			const { role, favourites, credits } = await User.findById(userId)
 				.populate('favourites', '-id -__v -_user')
 				.exec();
-			const getSender = role === 'distributor' ? 'from' : 'to';
-			let unreadCount = 0;
-			const conversations = await Conversation.find({ [getSender]: req.session.userId });
-			conversations.forEach(({ unreadByDistributor, unreadByRetailer }) => {
-				if (role === 'distributor' && unreadByDistributor === 'true') {
-					unreadCount++;
-				}
-				if (role === 'retailer' && unreadByRetailer === 'true') {
-					unreadCount++;
-				}
-			});
+			const unreadCount = await getUnreadCount(role, userId);
 			res.send({ role, favourites, credits, unreadCount });
 		} else {
 			res.send(false);

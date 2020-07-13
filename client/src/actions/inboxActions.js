@@ -1,11 +1,11 @@
-import { CREATE_MESSAGE, GET_MESSAGES } from './types';
+import { INITIALIZE_CONVERSATION, GET_INBOX } from './types';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-export const createMessage = (message, history) => async dispatch => {
+export const initializeConversation = (message, history) => async dispatch => {
 	try {
 		const response = await axios.post('/api/conversation', message);
-		dispatch({ type: CREATE_MESSAGE, payload: response.data });
+		dispatch({ type: INITIALIZE_CONVERSATION, payload: response.data });
 		history.push('/messages/');
 		toast.success('Message sent successfully!');
 	} catch (error) {
@@ -13,13 +13,11 @@ export const createMessage = (message, history) => async dispatch => {
 	}
 };
 
-export const getMessages = () => async dispatch => {
+export const getInbox = () => async dispatch => {
 	try {
 		const response = await axios.get('/api/conversation');
-		dispatch({ type: GET_MESSAGES, payload: response.data });
+		dispatch({ type: GET_INBOX, payload: response.data });
 	} catch (error) {
-		console.log(error);
-
-		// toast.error(error.response.data.message);
+		toast.error(error.response.data.message);
 	}
 };

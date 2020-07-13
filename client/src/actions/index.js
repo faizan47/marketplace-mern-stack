@@ -1,5 +1,5 @@
 export * from './userActions';
 export * from './listingActions';
 export * from './favouriteActions';
-export * from './messageActions';
-export * from './conversationActions';
+export * from './inboxActions';
+export * from './chatActions';

@@ -1,8 +1,8 @@
-import { GET_CONVERSATION, SEND_MESSAGE } from '../actions/types';
+import { GET_CHAT_BY_ID, SEND_MESSAGE } from '../actions/types';
 
 const messagesReducer = (state = null, action) => {
 	switch (action.type) {
-		case GET_CONVERSATION:
+		case GET_CHAT_BY_ID:
 			return action.payload;
 		case SEND_MESSAGE:
 			return action.payload;

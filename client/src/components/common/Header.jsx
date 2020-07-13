@@ -24,8 +24,8 @@ class Header extends Component {
 						<Link to="/myListings" className="navbar-item">
 							My Listings
 						</Link>
-						<Link to="/messages" className="navbar-item">
-							Messages
+						<Link to="/inbox" className="navbar-item">
+							Inbox
 							{this.props.user.unreadCount ? (
 								<span className="tag is-danger ml-1 is-small">{this.props.user.unreadCount}</span>
 							) : null}
@@ -40,8 +40,8 @@ class Header extends Component {
 					</Fragment>
 				) : (
 					<Fragment>
-						<Link to="/messages" className="navbar-item">
-							Messages
+						<Link to="/inbox" className="navbar-item">
+							Inbox
 							{this.props.user.unreadCount ? (
 								<span className="tag is-danger ml-1 is-small">{this.props.user.unreadCount}</span>
 							) : null}

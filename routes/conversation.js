@@ -65,7 +65,7 @@ module.exports = app => {
 					[getSender]: userId,
 					_id: req.params.conversationId
 				},
-				{ [isUnreadFlag]: false },
+				{ [isUnreadFlag]: 'false' },
 				{ new: true }
 			)
 				.populate(getRecipient, 'company role')
@@ -93,7 +93,7 @@ module.exports = app => {
 				},
 				{
 					$push: { messages: data },
-					[isUnreadFlag]: true
+					[isUnreadFlag]: 'true'
 				},
 				{ new: true }
 			)

@@ -5,8 +5,8 @@ import SignUp from '../components/common/SignUp';
 import Listings from '../components/common/Listings';
 import ListingSingle from '../components/common/ListingSingle';
 import Favourites from '../components/common/Favourites';
-import MessageList from '../components/common/messages/MessageList';
-import Conversation from '../components/common/messages/Conversation';
+import Inbox from '../components/common/messages/Inbox';
+import Chat from '../components/common/messages/Chat';
 
 export default () => (
 	<Fragment>
@@ -15,7 +15,7 @@ export default () => (
 		<Route path="/signin" component={SignIn} />
 		<Route path="/listing/:listingId" component={ListingSingle} />
 		<Route path="/favourites" component={Favourites} />
-		<Route path="/messages/:messageId" component={Conversation} />
-		<Route exact path="/messages" component={MessageList} />
+		<Route path="/inbox/:inboxId" component={Chat} />
+		<Route exact path="/inbox" component={Inbox} />
 	</Fragment>
 );

@@ -30,6 +30,7 @@ class Favourites extends Component {
 		);
 	};
 	render() {
+		console.log(this.props.favourites);
 		return (
 			<Fragment>
 				<h1 className="title is-1">Favourites</h1>
