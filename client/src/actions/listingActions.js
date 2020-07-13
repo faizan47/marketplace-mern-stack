@@ -4,7 +4,8 @@ import {
 	FETCH_MY_LISTINGS,
 	DELETE_LISTING,
 	FETCH_LISTING_BY_ID,
-	UPDATE_LISTING
+	UPDATE_LISTING,
+	SEARCH_LISTINGS
 } from './types';
 import axios from 'axios';
 import uploadToCloudinary from '../utils/uploadToCloudinary';
@@ -62,8 +63,7 @@ export const fetchListingById = listingId => async dispatch => {
 	const response = await axios.get(`/api/listings/${listingId}`);
 	dispatch({ type: FETCH_LISTING_BY_ID, payload: response.data });
 };
-
-export const contactRetailer = message => async dispatch => {
-	const response = await axios.post(`/api/conversation/`);
-	dispatch({ type: FETCH_LISTING_BY_ID, payload: response.data });
+export const searchListings = values => async dispatch => {
+	const response = await axios.post('/api/listings/search', values);
+	dispatch({ type: SEARCH_LISTINGS, payload: response.data });
 };

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchListings } from '../../actions';
 import ListingCard from './ListingCard';
 import ContentLoader from 'react-content-loader';
+import ListingSearch from './ListingSearch';
 
 class Listings extends Component {
 	componentDidMount() {
@@ -29,7 +30,14 @@ class Listings extends Component {
 		return (
 			<Fragment>
 				<h1 className="title is-1">Listings</h1>
-				{this.props.listings.length ? this.renderListings() : <ContentLoader />}
+				<div className="columns">
+					<div className="column is-one-third">
+						<ListingSearch />
+					</div>
+					<div className="column">
+						{this.props.listings.length ? this.renderListings() : <ContentLoader />}
+					</div>
+				</div>
 			</Fragment>
 		);
 	}

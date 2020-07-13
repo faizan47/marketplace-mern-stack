@@ -10,5 +10,5 @@ const ListingSchema = new Schema({
 	_user: { type: Schema.Types.ObjectId, ref: 'User' },
 	datePosted: Date
 });
-
+ListingSchema.index({ title: 'text', description: 'text' });
 module.exports = mongoose.model('Listing', ListingSchema);

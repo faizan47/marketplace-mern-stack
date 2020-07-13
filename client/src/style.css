@@ -174,3 +174,7 @@ div.radio-box-container:nth-child(2) > p:nth-child(2) {
 	margin-top: 3px;
 	border-radius: 20px;
 }
+
+#filter-form .column.is-half {
+	width: 100%;
+}

@@ -4,13 +4,13 @@ import ContentLoader from 'react-content-loader';
 import { getChatById, fetchUser, sendMessage } from '../../../actions';
 import FormTemplate from '../../formComponents/FormTemplate';
 import ChatBubble from './ChatBubble';
-import { conversationInputs } from './conversationInputs';
+import { conversationInputs } from '../../../formInputs/common/conversationInputs';
 import { Link } from 'react-router-dom';
 
 class Conversation extends Component {
 	componentDidMount() {
 		this.props.getChatById(this.props.match.params.inboxId);
-		this.props.fetchUser()
+		this.props.fetchUser();
 	}
 	renderListingHeader = () => {
 		return (

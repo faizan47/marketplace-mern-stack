@@ -6,7 +6,7 @@ export const initializeConversation = (message, history) => async dispatch => {
 	try {
 		const response = await axios.post('/api/conversation', message);
 		dispatch({ type: INITIALIZE_CONVERSATION, payload: response.data });
-		history.push('/messages/');
+		history.push('/inbox');
 		toast.success('Message sent successfully!');
 	} catch (error) {
 		toast.error(error.response.data.message);

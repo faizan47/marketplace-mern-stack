@@ -57,4 +57,17 @@ module.exports = app => {
 
 		res.send([ listing ]);
 	});
+
+	app.post('/api/listings/search', async (req, res) => {
+		const { search, category } = req.body;
+		const listings = await Listing.find({
+			$text: {
+				$search: search
+			},
+			category
+		})
+			.select('-_user -quantity')
+			.sort({ datePosted: -1 });
+		res.send(listings);
+	});
 };
