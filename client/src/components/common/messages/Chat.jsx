@@ -6,6 +6,7 @@ import FormTemplate from '../../formComponents/FormTemplate';
 import ChatBubble from './ChatBubble';
 import { chatInputs } from '../../../formInputs/common/chatInputs';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 class Chat extends Component {
 	componentDidMount() {
@@ -42,7 +43,7 @@ class Chat extends Component {
 		));
 	};
 	sendMessage = values => {
-		if (!values.message) return console.log('empty');
+		if (!values.message) return toast.warn("Can't send empty message");
 		return this.props.sendMessage(values, this.props.match.params.inboxId);
 	};
 	render() {
