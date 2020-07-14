@@ -33,9 +33,8 @@ module.exports = app => {
 			const { role, favourites, credits } = user;
 			const unreadCount = await getUnreadCount(role, req.session.userId);
 			return res.send({ role, favourites, credits, unreadCount });
-		} else {
-			res.status(401).send({ message: 'Invalid password.' });
 		}
+		return res.status(401).send({ message: 'Invalid password.' });
 	});
 	app.get('/api/signout', (req, res) => {
 		req.session = null;
@@ -48,9 +47,8 @@ module.exports = app => {
 				.populate('favourites', '-id -__v -_user')
 				.exec();
 			const unreadCount = await getUnreadCount(role, userId);
-			res.send({ role, favourites, credits, unreadCount });
-		} else {
-			res.send(false);
+			return res.send({ role, favourites, credits, unreadCount });
 		}
+		return res.send(false);
 	});
 };

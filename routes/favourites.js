@@ -13,7 +13,7 @@ module.exports = app => {
 		)
 			.populate({ path: 'favourites' })
 			.exec();
-		res.send(favourites);
+		return res.send(favourites);
 	});
 	app.delete('/api/favourites/:listingId', requireLogin, async (req, res) => {
 		const userId = req.session.userId;
@@ -29,5 +29,6 @@ module.exports = app => {
 
 			return res.send(favourites);
 		}
+		return res.send({ message: 'Only authorized users can perform that action.' });
 	});
 };

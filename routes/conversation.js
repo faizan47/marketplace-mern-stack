@@ -45,11 +45,9 @@ module.exports = app => {
 				.populate(getRecipient, 'company')
 				.populate('_listing', 'title images')
 				.exec();
-			res.send(conversation);
+			return res.send(conversation);
 		} catch (error) {
-			console.log(error);
-
-			res.status(401).send({ message: 'Something went wrong!' });
+			return res.status(401).send({ message: 'Something went wrong!' });
 		}
 	});
 	//get single conversation
@@ -72,9 +70,9 @@ module.exports = app => {
 				.populate('messages._user', 'role')
 				.populate('_listing', 'title images')
 				.exec();
-			res.send(conversation);
+			return res.send(conversation);
 		} catch (error) {
-			res.status(401).send({ message: 'Something went wrong!' });
+			return res.status(401).send({ message: 'Something went wrong!' });
 		}
 	});
 	// reply to a conversation
@@ -100,9 +98,9 @@ module.exports = app => {
 				.populate('_listing', 'title images')
 				.populate('messages._user', 'role')
 				.exec();
-			res.send(conversation);
+			return res.send(conversation);
 		} catch (error) {
-			res.status(401).send({ message: 'Something went wrong!' });
+			return res.status(401).send({ message: 'Something went wrong!' });
 		}
 	});
 };

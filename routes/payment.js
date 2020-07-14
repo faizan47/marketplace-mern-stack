@@ -8,16 +8,19 @@ module.exports = app => {
 	app.post('/api/stripeSecret', requireLogin, async (req, res) => {
 		const { amount } = req.body;
 		const { userId } = req.session;
-		const { email } = await User.findById(userId);
-		const { client_secret } = await stripe.paymentIntents.create({
-			amount,
-			currency: 'usd',
-			description: 'Credits for contacting retailers',
-			receipt_email: email,
-			metadata: { userId, creditsAdded: false, amount }
-		});
+		const { email, role } = await User.findById(userId);
+		if (role === 'distributor') {
+			const { client_secret } = await stripe.paymentIntents.create({
+				amount,
+				currency: 'usd',
+				description: 'Credits for contacting retailers',
+				receipt_email: email,
+				metadata: { userId, creditsAdded: false, amount }
+			});
 
-		res.send(client_secret);
+			return res.send(client_secret);
+		}
+		return res.status(401).send({ message: 'Only distributors can perform that action.' });
 	});
 
 	app.post('/api/updateCredits', requireLogin, async (req, res) => {
