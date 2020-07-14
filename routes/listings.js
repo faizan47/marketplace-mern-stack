@@ -60,11 +60,19 @@ module.exports = app => {
 
 	app.post('/api/listings/search', async (req, res) => {
 		const { search, category } = req.body;
+		if (search) {
+			const listings = await Listing.find({
+				$text: {
+					$search: search
+				},
+				category: category ? category : { $exists: true }
+			})
+				.select('-_user -quantity')
+				.sort({ datePosted: -1 });
+			return res.send(listings);
+		}
 		const listings = await Listing.find({
-			$text: {
-				$search: search
-			},
-			category
+			category: category ? category : { $exists: true }
 		})
 			.select('-_user -quantity')
 			.sort({ datePosted: -1 });

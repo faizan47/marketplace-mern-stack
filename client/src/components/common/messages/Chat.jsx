@@ -4,10 +4,10 @@ import ContentLoader from 'react-content-loader';
 import { getChatById, fetchUser, sendMessage } from '../../../actions';
 import FormTemplate from '../../formComponents/FormTemplate';
 import ChatBubble from './ChatBubble';
-import { conversationInputs } from '../../../formInputs/common/conversationInputs';
+import { chatInputs } from '../../../formInputs/common/chatInputs';
 import { Link } from 'react-router-dom';
 
-class Conversation extends Component {
+class Chat extends Component {
 	componentDidMount() {
 		this.props.getChatById(this.props.match.params.inboxId);
 		this.props.fetchUser();
@@ -42,7 +42,8 @@ class Conversation extends Component {
 		));
 	};
 	sendMessage = values => {
-		this.props.sendMessage(values, this.props.match.params.inboxId);
+		if (!values.message) return console.log('empty');
+		return this.props.sendMessage(values, this.props.match.params.inboxId);
 	};
 	render() {
 		return this.props.conversation ? (
@@ -67,7 +68,7 @@ class Conversation extends Component {
 							resetOnSubmit
 							form="chatForm"
 							onSubmit={values => this.sendMessage(values)}
-							inputs={conversationInputs}
+							inputs={chatInputs}
 							SubmitBtnText="Send"
 							hideCancel
 						/>
@@ -82,4 +83,4 @@ class Conversation extends Component {
 
 const mapStateToProps = ({ conversation, user: { role } }) => ({ conversation, role });
 
-export default connect(mapStateToProps, { getChatById, fetchUser, sendMessage })(Conversation);
+export default connect(mapStateToProps, { getChatById, fetchUser, sendMessage })(Chat);

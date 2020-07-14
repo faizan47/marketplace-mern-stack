@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import { searchListings } from '../../../actions';
 
 class ListingSidebar extends Component {
-	onSubmit = values => {
-		this.props.searchListings(values);
+	onSubmit = ({ search, category }) => {
+		this.props.searchListings(category === 'defaultSelect' ? { search } : { search, category });
 	};
 	render() {
 		return (
