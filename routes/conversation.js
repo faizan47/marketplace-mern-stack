@@ -4,6 +4,7 @@ const requireCredits = require('../middlewares/requireCredits');
 const Listing = mongoose.model('Listing');
 const Conversation = mongoose.model('Conversation');
 const User = mongoose.model('User');
+const getUnreadCount = require('../utils/getUnreadCount');
 
 module.exports = app => {
 	// create first conversation
@@ -30,8 +31,8 @@ module.exports = app => {
 		)
 			.populate('favourites', '-id -__v -_user')
 			.exec();
-
-		return res.send({ role, favourites, credits });
+		const unreadCount = await getUnreadCount(role, userId);
+		return res.send({ role, favourites, credits, unreadCount });
 	});
 	//get conversation list
 	app.get('/api/conversation', requireLogin, async (req, res) => {

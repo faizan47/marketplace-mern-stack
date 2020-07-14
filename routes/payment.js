@@ -3,6 +3,7 @@ const requireLogin = require('../middlewares/requireLogin');
 const stripe = require('stripe')(stripeSecretKey);
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const getUnreadCount = require('../utils/getUnreadCount');
 
 module.exports = app => {
 	app.post('/api/stripeSecret', requireLogin, async (req, res) => {
@@ -17,7 +18,6 @@ module.exports = app => {
 				receipt_email: email,
 				metadata: { userId, creditsAdded: false, amount }
 			});
-
 			return res.send(client_secret);
 		}
 		return res.status(401).send({ message: 'Only distributors can perform that action.' });
@@ -37,7 +37,8 @@ module.exports = app => {
 			await stripe.paymentIntents.update(req.body.paymentId, {
 				metadata: { creditsAdded: true }
 			});
-			return res.send({ role, favourites, credits });
+			const unreadCount = await getUnreadCount(role, userId);
+			return res.send({ role, favourites, credits, unreadCount });
 		}
 		return res.status(409).send({ message: 'The request is invalid, or the request is already consumed.' });
 	});

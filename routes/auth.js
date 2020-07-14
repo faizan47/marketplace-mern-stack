@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const { hashPassword, comparePassword } = require('../services/bcrypt');
 const getUnreadCount = require('../utils/getUnreadCount');
+
 module.exports = app => {
 	app.post('/api/signup', async (req, res) => {
 		const { name, company, email, password, role } = req.body;
