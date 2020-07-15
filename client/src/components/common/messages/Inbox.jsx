@@ -10,7 +10,7 @@ class Inbox extends Component {
 		this.props.fetchUser();
 	}
 	renderInbox = () => {
-		return this.props.messages.lenght ? (
+		return this.props.messages.length ? (
 			this.props.messages.map(({ _id, from, to, _listing, unreadByDistributor, unreadByRetailer, messages }) => {
 				return (
 					<InboxItem
@@ -36,7 +36,6 @@ class Inbox extends Component {
 	};
 
 	render() {
-		console.log(this.props.messages);
 		return (
 			<Fragment>
 				<h1 className="title is-1">Inbox</h1>
