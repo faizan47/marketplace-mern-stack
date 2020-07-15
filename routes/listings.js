@@ -13,7 +13,9 @@ module.exports = app => {
 	});
 
 	app.get('/api/listings', async (req, res) => {
-		const listings = await Listing.find({}).select('-_user -quantity').sort({ datePosted: -1 });
+		const listings = await Listing.find({ status: 'published' })
+			.select('-_user -quantity')
+			.sort({ datePosted: -1 });
 		return res.send(listings);
 	});
 
@@ -26,7 +28,7 @@ module.exports = app => {
 		return res.send(listingsByUserId);
 	});
 
-	app.delete('/api/listings/delete/:listingId', requireLogin, async (req, res) => {
+	app.delete('/api/listings/:listingId', requireLogin, async (req, res) => {
 		const userId = req.session.userId;
 
 		const listing = await Listing.findOneAndDelete({
@@ -36,12 +38,14 @@ module.exports = app => {
 
 		return res.send(listing._id);
 	});
+
 	app.get('/api/listings/:listingId', async (req, res) => {
-		const listing = await (await Listing.findById(req.params.listingId))
+		const listing = await (await Listing.findOne({ _id: req.params.listingId }))
 			.populate({ path: '_user', select: 'company joinDate' })
 			.execPopulate();
-
-		return res.send([ listing ]);
+		return listing.status === 'published' || listing._user.id === req.session.userId
+			? res.send([ listing ])
+			: res.status(404).send({ message: 'Listing no longer publicly visible.' });
 	});
 	app.patch('/api/listings/:listingId', requireLogin, async (req, res) => {
 		const userId = req.session.userId;
@@ -57,7 +61,18 @@ module.exports = app => {
 
 		return res.send([ listing ]);
 	});
-
+	app.patch('/api/listings/complete/:listingId', requireLogin, async (req, res) => {
+		const userId = req.session.userId;
+		const listing = await Listing.findOneAndUpdate(
+			{
+				_user: userId,
+				_id: req.params.listingId
+			},
+			{ status: 'complete' },
+			{ new: true }
+		);
+		return res.send(listing);
+	});
 	app.post('/api/listings/search', async (req, res) => {
 		const { search, category } = req.body;
 		if (search) {

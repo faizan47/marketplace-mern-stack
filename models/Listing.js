@@ -8,7 +8,8 @@ const ListingSchema = new Schema({
 	category: String,
 	images: { type: [ String ] },
 	_user: { type: Schema.Types.ObjectId, ref: 'User' },
-	datePosted: Date
+	datePosted: Date,
+	status: { type: String, default: 'published' }
 });
 ListingSchema.index({ title: 'text', description: 'text' });
 module.exports = mongoose.model('Listing', ListingSchema);

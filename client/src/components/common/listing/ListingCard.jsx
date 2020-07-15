@@ -3,7 +3,7 @@ import ListingMeta from '../listing/ListingMeta';
 import { Link } from 'react-router-dom';
 import time_ago_in_words from 'time_ago_in_words';
 
-const ListingCard = ({ images, title, category, datePosted, role, listingId }) => {
+const ListingCard = ({ images, title, category, datePosted, role, listingId, status }) => {
 	const renderImage = (images = []) => {
 		return images.length ? images[0] : 'https://bulma.io/images/placeholders/128x128.png';
 	};
@@ -29,7 +29,7 @@ const ListingCard = ({ images, title, category, datePosted, role, listingId }) =
 					</Link>
 				</div>
 				<div className="media-right">
-					<ListingMeta role={role} listingId={listingId} />
+					<ListingMeta role={role} listingId={listingId} status={status} />
 					<div className="level-left bottom-absolute right-absolute">
 						<span className="tag is-light">{time_ago_in_words(new Date(datePosted))}</span>
 					</div>

@@ -3,6 +3,7 @@ import {
 	FETCH_LISTINGS,
 	FETCH_MY_LISTINGS,
 	DELETE_LISTING,
+	MARK_LISTING_AS_COMPLETE,
 	FETCH_LISTING_BY_ID,
 	UPDATE_LISTING,
 	SEARCH_LISTINGS
@@ -36,8 +37,12 @@ export const updateListing = (updateListingFormData, history) => async dispatch 
 	}
 };
 export const fetchListings = () => async dispatch => {
-	const response = await axios.get('/api/listings');
-	dispatch({ type: FETCH_LISTINGS, payload: response.data });
+	try {
+		const response = await axios.get('/api/listings');
+		dispatch({ type: FETCH_LISTINGS, payload: response.data });
+	} catch (error) {
+		toast.error(error.response.data.message);
+	}
 };
 
 export const fetchMyListings = () => async dispatch => {
@@ -51,7 +56,7 @@ export const fetchMyListings = () => async dispatch => {
 
 export const deleteListing = listingId => async dispatch => {
 	try {
-		const response = await axios.delete(`/api/listings/delete/${listingId}`);
+		const response = await axios.delete(`/api/listings/${listingId}`);
 		dispatch({ type: DELETE_LISTING, payload: response.data });
 		toast.info('Listing deleted successfully!');
 	} catch (error) {
@@ -59,10 +64,21 @@ export const deleteListing = listingId => async dispatch => {
 	}
 };
 
-export const fetchListingById = listingId => async dispatch => {
-	const response = await axios.get(`/api/listings/${listingId}`);
-	dispatch({ type: FETCH_LISTING_BY_ID, payload: response.data });
+export const fetchListingById = (listingId, history) => async dispatch => {
+	try {
+		const response = await axios.get(`/api/listings/${listingId}`);
+		dispatch({ type: FETCH_LISTING_BY_ID, payload: response.data });
+	} catch (error) {
+		history.push('/listings');
+		toast.error(error.response.data.message);
+	}
 };
+
+export const markListingAsComplete = listingId => async dispatch => {
+	const response = await axios.patch(`/api/listings/complete/${listingId}`);
+	dispatch({ type: MARK_LISTING_AS_COMPLETE, payload: response.data });
+};
+
 export const searchListings = values => async dispatch => {
 	const response = await axios.post('/api/listings/search', values);
 	dispatch({ type: SEARCH_LISTINGS, payload: response.data });

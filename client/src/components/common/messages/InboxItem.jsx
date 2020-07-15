@@ -2,7 +2,7 @@ import React from 'react';
 import time_ago_in_words from 'time_ago_in_words';
 import { Link } from 'react-router-dom';
 
-const Message = ({
+const InboxItem = ({
 	role,
 	lastMessage: { message, time },
 	conversationData: { _id, from, to, _listing: { title }, unreadByDistributor, unreadByRetailer }
@@ -68,4 +68,4 @@ const Message = ({
 	);
 };
 
-export default Message;
+export default InboxItem;

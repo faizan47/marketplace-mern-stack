@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { getInbox, fetchUser } from '../../../actions';
 import ContentLoader from 'react-content-loader';
 
-class MessageList extends Component {
+class Inbox extends Component {
 	componentDidMount() {
 		this.props.getInbox();
 		this.props.fetchUser();
@@ -17,7 +17,7 @@ class MessageList extends Component {
 							<InboxItem
 								key={_id}
 								role={this.props.role}
-								conversationData={{
+								conversationData={{	
 									_id,
 									from,
 									to,
@@ -44,4 +44,4 @@ class MessageList extends Component {
 	}
 }
 const mapStateToProps = ({ messages, user: { role } }) => ({ messages, role });
-export default connect(mapStateToProps, { getInbox, fetchUser })(MessageList);
+export default connect(mapStateToProps, { getInbox, fetchUser })(Inbox);

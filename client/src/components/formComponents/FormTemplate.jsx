@@ -130,7 +130,7 @@ const validate = (values, { inputs }) => {
 	const errors = {};
 
 	inputs.map(({ name, type, optional }) => {
-		if (optional) return;
+		if (optional) return false;
 		if ((!values[name] && type !== 'file') || values[name] === 'defaultSelect') {
 			return (errors[name] = `${capitalizeFirstLetter(name)} is required.`);
 		} else if (type === 'email' && !isEmailValid(values[name])) {

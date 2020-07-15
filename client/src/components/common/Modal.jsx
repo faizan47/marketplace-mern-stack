@@ -8,7 +8,7 @@ class Modal extends Component {
 				<footer className="modal-card-foot">
 					<button
 						onClick={this.props.action.onConfirm}
-						className={`button ${this.props.action.type === 'danger' ? 'is-danger' : 'is-success'}`}
+						className={`button ${this.props.action.type === 'danger' ? 'is-danger' : 'is-warning'}`}
 					>
 						{this.props.action.buttonText}
 					</button>

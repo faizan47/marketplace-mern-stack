@@ -7,10 +7,11 @@ import ImageSlider from './ImageSlider';
 import RetailerInformation from './RetailerInformation';
 import ListingContent from './ListingContent';
 import ActionButtons from './ActionButtons';
+import { withRouter } from 'react-router-dom';
 
 class ListingSingle extends Component {
 	componentDidMount() {
-		this.props.fetchListingById(this.props.match.params.listingId);
+		this.props.fetchListingById(this.props.match.params.listingId, this.props.history);
 	}
 	render() {
 		if (!this.props.currentListing) {
@@ -54,4 +55,4 @@ const mapStateToProps = (state, ownProps) => ({
 	currentListing: state.myListings.find(({ _id }) => _id === ownProps.match.params.listingId)
 });
 
-export default connect(mapStateToProps, { fetchListingById })(ListingSingle);
+export default connect(mapStateToProps, { fetchListingById })(withRouter(ListingSingle));

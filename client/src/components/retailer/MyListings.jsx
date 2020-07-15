@@ -8,7 +8,7 @@ class MyListings extends Component {
 		this.props.fetchMyListings();
 	}
 	renderListings = () =>
-		this.props.myListings.map(({ _id, title, category, datePosted, images }) => (
+		this.props.myListings.map(({ _id, title, category, datePosted, images, status }) => (
 			<ListingCard
 				key={_id}
 				listingId={_id}
@@ -17,7 +17,7 @@ class MyListings extends Component {
 				datePosted={datePosted}
 				images={images}
 				role="retailer"
-				listingSlug={title.split(' ').join('-').toLowerCase()}
+				status={status}
 			/>
 		));
 	render() {
