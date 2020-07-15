@@ -18,6 +18,7 @@ export const getInbox = () => async dispatch => {
 		const response = await axios.get('/api/conversation');
 		dispatch({ type: GET_INBOX, payload: response.data });
 	} catch (error) {
+		console.log(error);
 		toast.error(error.response.data.message);
 	}
 };

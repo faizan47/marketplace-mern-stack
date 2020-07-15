@@ -10,18 +10,19 @@ class Inbox extends Component {
 		this.props.fetchUser();
 	}
 	renderInbox = () => {
-		return this.props.messages.length
+		return this.props.messages !== null
 			? this.props.messages.map(
 					({ _id, from, to, _listing, unreadByDistributor, unreadByRetailer, messages }) => {
+						console.log(_listing);
 						return (
 							<InboxItem
 								key={_id}
 								role={this.props.role}
-								conversationData={{	
+								conversationData={{
 									_id,
 									from,
 									to,
-									_listing,
+									_listing: _listing || {},
 									unreadByDistributor,
 									unreadByRetailer
 								}}
