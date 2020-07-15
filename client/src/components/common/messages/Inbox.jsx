@@ -10,28 +10,29 @@ class Inbox extends Component {
 		this.props.fetchUser();
 	}
 	renderInbox = () => {
-		return this.props.messages !== null
-			? this.props.messages.map(
-					({ _id, from, to, _listing, unreadByDistributor, unreadByRetailer, messages }) => {
-						console.log(_listing);
-						return (
-							<InboxItem
-								key={_id}
-								role={this.props.role}
-								conversationData={{
-									_id,
-									from,
-									to,
-									_listing: _listing || {},
-									unreadByDistributor,
-									unreadByRetailer
-								}}
-								lastMessage={messages[0]}
-							/>
-						);
-					}
-				)
-			: 'NO Messages found';
+		return this.props.messages.lenght ? (
+			this.props.messages.map(({ _id, from, to, _listing, unreadByDistributor, unreadByRetailer, messages }) => {
+				return (
+					<InboxItem
+						key={_id}
+						role={this.props.role}
+						conversationData={{
+							_id,
+							from,
+							to,
+							_listing: _listing || {},
+							unreadByDistributor,
+							unreadByRetailer
+						}}
+						lastMessage={messages[0]}
+					/>
+				);
+			})
+		) : (
+			<article class="message is-warning">
+				<div class="message-body">No messages found! </div>
+			</article>
+		);
 	};
 
 	render() {
@@ -39,7 +40,7 @@ class Inbox extends Component {
 		return (
 			<Fragment>
 				<h1 className="title is-1">Inbox</h1>
-				{this.props.messages.length ? this.renderInbox() : <ContentLoader />}
+				{this.props.messages !== null ? this.renderInbox() : <ContentLoader />}
 			</Fragment>
 		);
 	}
