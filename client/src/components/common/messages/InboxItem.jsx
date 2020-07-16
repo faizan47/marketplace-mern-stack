@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 const InboxItem = ({
 	role,
 	lastMessage: { message, time },
-	conversationData: { _id, from, to, _listing: { title }, unreadByDistributor, unreadByRetailer }
+	conversationData: { _id, from, to, _listing: { title }, unreadByDistributor, unreadByRetailer },
+	active
 }) => {
 	let isBold = 'has-text-weight-normal has-text-grey-dark';
 	const renderUnreadTag = role => {
@@ -49,7 +50,7 @@ const InboxItem = ({
 				</div>
 				<div className="media-content">
 					<div className="content">
-						<Link to={`/inbox/${_id}`}>
+						<Link to={active ? `/inbox/${_id}` : '#'}>
 							<p className="has-text-black">
 								<span className="is-size-6 has-text-grey">{to.company || from.company}</span>
 								<small className="mx-2 has-text-grey">{time_ago_in_words(time)}</small>
@@ -61,7 +62,10 @@ const InboxItem = ({
 						</Link>
 					</div>
 				</div>
-				<div className="media-right">{renderReadStatus()}</div>
+				<div className="media-right">
+					{!active ? <span className="tag is-danger is-normal">Listing no longer active.</span> : null}
+					{renderReadStatus()}
+				</div>
 			</article>
 			<hr className="dropdown-divider" />
 		</div>

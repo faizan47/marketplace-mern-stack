@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Listing = mongoose.model('Listing');
+const Conversation = mongoose.model('Conversation');
 const requireLogin = require('../middlewares/requireLogin');
 
 module.exports = app => {
@@ -34,7 +35,7 @@ module.exports = app => {
 			_user: userId,
 			_id: req.params.listingId
 		});
-
+		await Conversation.findOneAndUpdate({ _listing: req.params.listingId }, { active: false });
 		return res.send(listing._id);
 	});
 
@@ -71,6 +72,7 @@ module.exports = app => {
 			{ status: 'complete' },
 			{ new: true }
 		);
+		await Conversation.findOneAndUpdate({ _listing: req.params.listingId }, { active: false });
 		return res.send(listing);
 	});
 	app.post('/api/listings/search', async (req, res) => {
@@ -80,14 +82,16 @@ module.exports = app => {
 				$text: {
 					$search: search
 				},
-				category: category ? category : { $exists: true }
+				category: category ? category : { $exists: true },
+				status: 'published'
 			})
 				.select('-_user -quantity')
 				.sort({ datePosted: -1 });
 			return res.send(listings);
 		}
 		const listings = await Listing.find({
-			category: category ? category : { $exists: true }
+			category: category ? category : { $exists: true },
+			status: 'published'
 		})
 			.select('-_user -quantity')
 			.sort({ datePosted: -1 });

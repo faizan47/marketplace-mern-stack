@@ -7,27 +7,31 @@ import ContentLoader from 'react-content-loader';
 class Inbox extends Component {
 	componentDidMount() {
 		this.props.getInbox();
-		this.props.fetchUser();
+		if (this.props.user) this.props.fetchUser();
 	}
 	renderInbox = () => {
 		return this.props.messages.length ? (
-			this.props.messages.map(({ _id, from, to, _listing, unreadByDistributor, unreadByRetailer, messages }) => {
-				return (
-					<InboxItem
-						key={_id}
-						role={this.props.role}
-						conversationData={{
-							_id,
-							from,
-							to,
-							_listing: _listing || {},
-							unreadByDistributor,
-							unreadByRetailer
-						}}
-						lastMessage={messages[0]}
-					/>
-				);
-			})
+			this.props.messages.map(
+				({ _id, from, to, _listing, unreadByDistributor, unreadByRetailer, messages, active }) => {
+					console.log(active);
+					return (
+						<InboxItem
+							key={_id}
+							role={this.props.role}
+							conversationData={{
+								_id,
+								from,
+								to,
+								_listing: _listing || {},
+								unreadByDistributor,
+								unreadByRetailer
+							}}
+							active={active}
+							lastMessage={messages[0]}
+						/>
+					);
+				}
+			)
 		) : (
 			<article class="message is-warning">
 				<div class="message-body">No messages found! </div>

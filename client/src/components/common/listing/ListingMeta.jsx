@@ -46,7 +46,7 @@ class ListingMeta extends Component {
 				) : (
 					<span className="tag is-success is-light is-medium mr-4">Listing Complete</span>
 				)}
-				<span onClick={() => this.props({ showModal: true })} className="level-item">
+				<span onClick={() => this.setState({ showModal: true })} className="level-item">
 					<span className="cursor icon has-text-danger">
 						<i className="far fa-trash-alt fa-2x" />
 					</span>

@@ -1,6 +1,6 @@
 import { GET_CHAT_BY_ID, SEND_MESSAGE } from '../actions/types';
 
-const messagesReducer = (state = null, action) => {
+const messagesReducer = (state = [], action) => {
 	switch (action.type) {
 		case GET_CHAT_BY_ID:
 			return action.payload;

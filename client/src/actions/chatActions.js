@@ -7,6 +7,7 @@ export const getChatById = id => async dispatch => {
 		const response = await axios.get(`/api/conversation/${id}`);
 		dispatch({ type: GET_CHAT_BY_ID, payload: response.data });
 	} catch (error) {
+		console.log(error);
 		toast.error(error.response.data.message);
 	}
 };
@@ -15,6 +16,6 @@ export const sendMessage = (values, id) => async dispatch => {
 		const response = await axios.post(`/api/conversation/${id}`, { values });
 		dispatch({ type: SEND_MESSAGE, payload: response.data });
 	} catch (error) {
-		toast.error('SOMETHING WENT WRONG');
+		toast.error('Something went wrong!');
 	}
 };
