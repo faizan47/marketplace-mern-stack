@@ -39,7 +39,7 @@ class Inbox extends Component {
 		return (
 			<Fragment>
 				<h1 className="title is-1">Inbox</h1>
-				{this.props.messages !== null ? this.renderInbox() : <ContentLoader />}
+				{this.props.messages === null ? <ContentLoader /> : this.renderInbox()}
 			</Fragment>
 		);
 	}

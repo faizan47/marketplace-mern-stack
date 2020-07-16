@@ -5,6 +5,7 @@ const Listing = mongoose.model('Listing');
 const Conversation = mongoose.model('Conversation');
 const User = mongoose.model('User');
 const getUnreadCount = require('../utils/getUnreadCount');
+const { findOneAndUpdate } = require('../models/Listing');
 
 module.exports = app => {
 	// create first conversation
@@ -19,20 +20,19 @@ module.exports = app => {
 			_listing: listingId,
 			messages: [ { _user: userId, message } ]
 		}).save();
-
-		const { role, favourites, credits } = await User.findOneAndUpdate(
+		await Listing.findOneAndUpdate({ _id: listingId }, { $addToSet: { _connects: userId } }, { new: true });
+		const { role, favourites, credits, connectedListings } = await User.findOneAndUpdate(
 			{ _id: userId },
 			{
-				$inc: {
-					credits: -1
-				}
+				$inc: { credits: -1 },
+				$addToSet: { connectedListings: listingId }
 			},
 			{ new: true }
 		)
 			.populate('favourites', '-id -__v -_user')
 			.exec();
 		const unreadCount = await getUnreadCount(role, userId);
-		return res.send({ role, favourites, credits, unreadCount });
+		return res.send({ role, favourites, connectedListings, credits, unreadCount });
 	});
 	//get conversation list
 	app.get('/api/conversation', requireLogin, async (req, res) => {

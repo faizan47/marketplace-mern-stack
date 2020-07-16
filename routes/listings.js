@@ -30,7 +30,6 @@ module.exports = app => {
 
 	app.delete('/api/listings/:listingId', requireLogin, async (req, res) => {
 		const userId = req.session.userId;
-
 		const listing = await Listing.findOneAndDelete({
 			_user: userId,
 			_id: req.params.listingId
@@ -40,10 +39,11 @@ module.exports = app => {
 	});
 
 	app.get('/api/listings/:listingId', async (req, res) => {
-		const listing = await (await Listing.findOne({ _id: req.params.listingId }))
+		const { userId } = req.session;
+		const listing = await Listing.findOne({ _id: req.params.listingId })
 			.populate({ path: '_user', select: 'company joinDate' })
-			.execPopulate();
-		return listing.status === 'published' || listing._user.id === req.session.userId
+			.exec();
+		return listing.status === 'published' || listing._user.id === userId
 			? res.send([ listing ])
 			: res.status(404).send({ message: 'Listing no longer publicly visible.' });
 	});

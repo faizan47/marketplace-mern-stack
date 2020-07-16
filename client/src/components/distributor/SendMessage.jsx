@@ -6,7 +6,7 @@ import sendMessageInputs from '../../formInputs/distributor/sendMessageInputs';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 import { initializeConversation } from '../../actions';
-
+import { Link } from 'react-router-dom';
 class sendMessage extends Component {
 	state = { displayModal: null };
 	modalLogic = () => {
@@ -37,7 +37,20 @@ class sendMessage extends Component {
 				</Modal>
 			);
 	};
+	renderAlreadyContactedMessage = () => {
+		return (
+			<article className="message is-success">
+				<div className="message-body">
+					<p className="has-text-centered">
+						You have already contacted this retailer! <Link to="/inbox">Go to inbox</Link>
+					</p>
+				</div>
+			</article>
+		);
+	};
 	render() {
+		if (this.props.user && this.props.user.connectedListings.includes(this.props.listingId))
+			return this.renderAlreadyContactedMessage();
 		return (
 			<Fragment>
 				{this.renderModal()}

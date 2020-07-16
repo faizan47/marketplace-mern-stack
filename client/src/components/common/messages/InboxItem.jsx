@@ -19,14 +19,14 @@ const InboxItem = ({
 		}
 	};
 	const renderReadStatus = () => {
-		if (role === 'distributor' && unreadByRetailer === 'false') {
+		if (role === 'distributor' && unreadByRetailer === 'false' && unreadByDistributor === 'false') {
 			return (
 				<span title="Read" className="icon has-text-success">
 					<i className="fas fa-lg fa-check-square" />
 				</span>
 			);
 		}
-		if (role === 'retailer' && unreadByDistributor === 'false') {
+		if (role === 'retailer' && unreadByDistributor === 'false' && unreadByRetailer === 'false') {
 			return (
 				<span title="Read" className="icon has-text-success">
 					<i className="fas fa-lg fa-check-square" />

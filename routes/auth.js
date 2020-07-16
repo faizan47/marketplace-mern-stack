@@ -31,9 +31,9 @@ module.exports = app => {
 		if (isVerified) {
 			req.session.userId = user._id;
 			await user.populate('favourites', '-id -__v -_user').execPopulate();
-			const { role, favourites, credits } = user;
+			const { role, favourites, credits, connectedListings } = user;
 			const unreadCount = await getUnreadCount(role, req.session.userId);
-			return res.send({ role, favourites, credits, unreadCount });
+			return res.send({ role, favourites, credits, unreadCount, connectedListings });
 		}
 		return res.status(401).send({ message: 'Invalid password.' });
 	});
@@ -44,11 +44,11 @@ module.exports = app => {
 	app.get('/api/current_user', async (req, res) => {
 		const { userId } = req.session;
 		if (userId) {
-			const { role, favourites, credits } = await User.findById(userId)
+			const { role, favourites, credits, connectedListings } = await User.findById(userId)
 				.populate('favourites', '-id -__v -_user')
 				.exec();
 			const unreadCount = await getUnreadCount(role, userId);
-			return res.send({ role, favourites, credits, unreadCount });
+			return res.send({ role, favourites, credits, unreadCount, connectedListings });
 		}
 		return res.send(false);
 	});

@@ -2,7 +2,7 @@ export const searchInputs = [
 	{
 		name: 'search',
 		label: 'Search Listings',
-		placeholder: 'John Doe',
+		placeholder: 'Enter Search Term',
 		type: 'text',
 		iconClass: 'fa-search',
 		optional: true
