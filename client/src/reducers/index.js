@@ -8,7 +8,7 @@ import conversationReducer from './conversationReducer';
 
 export default combineReducers({
 	user: userReducer,
-	form: formReducer,
+	// form: formReducer,
 	listings: listingReducer,
 	myListings: myListingsReducer,
 	messages: messagesReducer,

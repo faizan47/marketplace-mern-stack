@@ -1,8 +1,10 @@
 import React, { Fragment } from 'react';
 
-export default ({ placeholder, iconClass, label, input, type, meta }) => {
-	// console.log(meta);
+export default props => {
+	const { placeholder, iconClass, label, input, type, meta } = props;
 	const { touched, error } = meta;
+	if (placeholder === 'mySecretPassword') console.log(props);
+
 	return (
 		<Fragment>
 			<div className="field">
