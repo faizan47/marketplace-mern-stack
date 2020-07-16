@@ -9,7 +9,7 @@ export default props => {
 			<div className="field">
 				{label ? <label className="label">{label}</label> : null}
 				<div className="control has-icons-left">
-					<input {...input} className="input" placeholder={placeholder} />
+					<input {...input} type="text" className="input" placeholder={placeholder} />
 					<span className="icon is-small is-left">
 						<i className={`fas ${iconClass}`} />
 					</span>

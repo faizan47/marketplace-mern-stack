@@ -14,21 +14,6 @@ class FormTemplate extends React.Component {
 		return this.props.inputs.map(
 			({ name, type, label, placeholder, iconClass, selectOptions, radioValues, helperText }) => {
 				switch (type) {
-					case 'number':
-						return (
-							<Field
-								type="number"
-								key={name}
-								name={name}
-								component={Input}
-								{...{
-									type,
-									placeholder,
-									iconClass,
-									label
-								}}
-							/>
-						);
 					case 'select':
 						return (
 							<Select
@@ -112,6 +97,7 @@ class FormTemplate extends React.Component {
 		const errors = {};
 		this.props.inputs.map(({ name, type, optional }) => {
 			if (optional) return false;
+
 			if ((!values[name] && type !== 'file') || values[name] === 'defaultSelect') {
 				return (errors[name] = `${capitalizeFirstLetter(name)} is required.`);
 			} else if (type === 'email' && !isEmailValid(values[name])) {
@@ -119,6 +105,9 @@ class FormTemplate extends React.Component {
 			}
 			if (name === 'password confirmation' && values[name] !== values.password) {
 				return (errors[name] = 'Passwords must match');
+			}
+			if (type === 'number' && isNaN(values[name])) {
+				return (errors[name] = 'Must be a number');
 			}
 			return values[name];
 		});
@@ -151,22 +140,5 @@ class FormTemplate extends React.Component {
 		);
 	}
 }
-// const validate = (values, { inputs }) => {
-// 	const errors = {};
-// 	inputs.map(({ name, type, optional }) => {
-// 		if (optional) return false;
-// 		if ((!values[name] && type !== 'file') || values[name] === 'defaultSelect') {
-// 			return (errors[name] = `${capitalizeFirstLetter(name)} is required.`);
-// 		} else if (type === 'email' && !isEmailValid(values[name])) {
-// 			return (errors[name] = 'Invalid email');
-// 		}
-// 		if (name === 'password confirmation' && values[name] !== values.password) {
-// 			return (errors[name] = 'Passwords must match');
-// 		}
-// 		return values[name];
-// 	});
-// 	return errors;
-// };
 
-// export default reduxForm({ validate })(withRouter(FormTemplate));
 export default withRouter(FormTemplate);
