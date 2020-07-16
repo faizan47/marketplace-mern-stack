@@ -1,5 +1,5 @@
 import React from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { Form, Field } from 'react-final-form';
 import { Link, withRouter } from 'react-router-dom';
 import isEmailValid from '../../utils/isEmailValid';
 import capitalizeFirstLetter from '../../utils/capitalizeFirstLetter';
@@ -17,6 +17,7 @@ class FormTemplate extends React.Component {
 					case 'number':
 						return (
 							<Field
+								type="number"
 								key={name}
 								name={name}
 								component={Input}
@@ -56,7 +57,7 @@ class FormTemplate extends React.Component {
 								name={name}
 								component={Textarea}
 								{...{ placeholder, label }}
-								type="text"
+								type="textarea"
 							/>
 						);
 					case 'file':
@@ -88,13 +89,8 @@ class FormTemplate extends React.Component {
 			}
 		);
 	};
-	onSubmit = values => {
-		this.props.onSubmit(values, this.props.history);
-		if (this.props.resetOnSubmit) this.props.reset();
-	};
 	renderCancel = () => {
 		if (this.props.hideCancel) return;
-
 		return this.props.onCancel ? (
 			<button
 				onClick={() => (this.props.onCancel ? this.props.onCancel() : null)}
@@ -112,38 +108,65 @@ class FormTemplate extends React.Component {
 			</Link>
 		);
 	};
+	validate = values => {
+		const errors = {};
+		this.props.inputs.map(({ name, type, optional }) => {
+			if (optional) return false;
+			if ((!values[name] && type !== 'file') || values[name] === 'defaultSelect') {
+				return (errors[name] = `${capitalizeFirstLetter(name)} is required.`);
+			} else if (type === 'email' && !isEmailValid(values[name])) {
+				return (errors[name] = 'Invalid email');
+			}
+			if (name === 'password confirmation' && values[name] !== values.password) {
+				return (errors[name] = 'Passwords must match');
+			}
+			return values[name];
+		});
+		return errors;
+	};
+	onSubmit = (values, { reset }) => {
+		this.props.onSubmit(values, this.props.history);
+		if (this.props.resetOnSubmit) setTimeout(reset);
+	};
 	render() {
 		return (
-			<form className="column is-half px-0" onSubmit={this.props.handleSubmit(this.onSubmit)}>
-				{this.renderInputs()}
-				<div className="field is-grouped">
-					<div className="control">
-						<button className="button is-link">{this.props.SubmitBtnText}</button>
-					</div>
-					<div className="control">{this.renderCancel()}</div>
-				</div>
-			</form>
+			<Form
+				name={this.props.form}
+				onSubmit={this.onSubmit}
+				initialValues={this.props.initialValues ? this.props.initialValues : null}
+				validate={this.validate}
+			>
+				{({ handleSubmit }) => (
+					<form className="column is-half px-0" onSubmit={handleSubmit}>
+						{this.renderInputs()}
+						<div className="field is-grouped">
+							<div className="control">
+								<button className="button is-link">{this.props.SubmitBtnText}</button>
+							</div>
+							<div className="control">{this.renderCancel()}</div>
+						</div>
+					</form>
+				)}
+			</Form>
 		);
 	}
 }
-const validate = (values, { inputs }) => {
-	const errors = {};
+// const validate = (values, { inputs }) => {
+// 	const errors = {};
+// 	inputs.map(({ name, type, optional }) => {
+// 		if (optional) return false;
+// 		if ((!values[name] && type !== 'file') || values[name] === 'defaultSelect') {
+// 			return (errors[name] = `${capitalizeFirstLetter(name)} is required.`);
+// 		} else if (type === 'email' && !isEmailValid(values[name])) {
+// 			return (errors[name] = 'Invalid email');
+// 		}
+// 		if (name === 'password confirmation' && values[name] !== values.password) {
+// 			return (errors[name] = 'Passwords must match');
+// 		}
+// 		return values[name];
+// 	});
+// 	return errors;
+// };
 
-	inputs.map(({ name, type, optional }) => {
-		if (optional) return false;
-		if ((!values[name] && type !== 'file') || values[name] === 'defaultSelect') {
-			return (errors[name] = `${capitalizeFirstLetter(name)} is required.`);
-		} else if (type === 'email' && !isEmailValid(values[name])) {
-			return (errors[name] = 'Invalid email');
-		}
-		if (name === 'password confirmation' && values[name] !== values.password) {
-			return (errors[name] = 'Passwords must match');
-		}
-		return values[name];
-	});
-	return errors;
-};
-
-export default reduxForm({
-	validate
-})(withRouter(FormTemplate));
+// export default reduxForm({ validate })(withRouter(FormTemplate));
+export default withRouter(FormTemplate);

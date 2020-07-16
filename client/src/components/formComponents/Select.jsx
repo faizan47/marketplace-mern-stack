@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
 export default ({ name, selectOptions, iconClass, label }) => {
 	const renderSelect = ({ input, meta: { touched, error }, children }) => (
