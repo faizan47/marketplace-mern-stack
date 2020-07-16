@@ -1,5 +1,4 @@
 import React from 'react';
-// import { Field, reduxForm } from 'redux-form';
 import { Form, Field } from 'react-final-form';
 import { Link, withRouter } from 'react-router-dom';
 import isEmailValid from '../../utils/isEmailValid';
@@ -18,6 +17,7 @@ class FormTemplate extends React.Component {
 					case 'number':
 						return (
 							<Field
+								type="number"
 								key={name}
 								name={name}
 								component={Input}
@@ -76,10 +76,8 @@ class FormTemplate extends React.Component {
 							<Field
 								key={name}
 								name={name}
-								type="input"
 								component={Input}
 								{...{
-									TEST: 'HELLO',
 									type,
 									placeholder,
 									iconClass,
@@ -112,7 +110,6 @@ class FormTemplate extends React.Component {
 	};
 	validate = values => {
 		const errors = {};
-
 		this.props.inputs.map(({ name, type, optional }) => {
 			if (optional) return false;
 			if ((!values[name] && type !== 'file') || values[name] === 'defaultSelect') {

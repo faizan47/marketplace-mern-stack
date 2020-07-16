@@ -23,7 +23,6 @@
     "react-sharingbuttons": "^1.0.0",
     "react-toastify": "^6.0.8",
     "redux": "^4.0.5",
-    "redux-form": "^8.3.6",
     "redux-thunk": "^2.3.0",
     "socket.io-client": "^2.3.0",
     "time_ago_in_words": "^1.2.1"

@@ -24,18 +24,6 @@ const ImageUpload = ({ input, name, label, defaultImages, input: { onChange } })
 				withLabel={true}
 				errorClass="help is-danger"
 				labelClass="file-label"
-				// defaultImages={props.fieldAttrs.defaultImages}
-				// input={props.fieldAttrs.data.input}
-				// name={props.fieldAttrs.data.name}
-				// withIcon={true}
-				// withPreview={true}
-				// buttonText="Choose images"
-				// onChange={onDrop}
-				// buttonClassName="button is-primary"
-				// imgExtension={[ '.jpg', '.gif', '.png', '.gif', '.jpeg' ]}
-				// maxFileSize={5242880}
-				// errorClass="help is-danger"
-				// labelClass="file-label"
 			/>
 		</div>
 	);
