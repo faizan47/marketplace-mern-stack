@@ -1,6 +1,3 @@
 {
-    "ignore": [
-        "client/*",
-        "socket/*"
-    ]
+    "ignore": ["client/*", "socket/*"]
 }

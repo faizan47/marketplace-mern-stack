@@ -1,13 +1,14 @@
 .radio-input-hidden {
-	display: none;
+    display: none;
 }
 .radio-input-hidden:checked + .content {
-	box-shadow: 0 0.5em .5em -0.125em hsla(217.1, 70.8%, 52.9%, 0.48), 0 0px 0 1px hsla(217.1, 70.8%, 52.9%, 0.28);
-	outline: 1px solid hsl(217, 71%, 53%);
+    box-shadow: 0 0.5em 0.5em -0.125em hsla(217.1, 70.8%, 52.9%, 0.48),
+        0 0px 0 1px hsla(217.1, 70.8%, 52.9%, 0.28);
+    outline: 1px solid hsl(217, 71%, 53%);
 }
 .box.radio-box {
-	padding: 0;
+    padding: 0;
 }
 .radio-box-content {
-	padding: 1.25rem;
+    padding: 1.25rem;
 }

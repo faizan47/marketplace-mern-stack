@@ -1,180 +1,180 @@
 .label::first-letter {
-	text-transform: capitalize;
+    text-transform: capitalize;
 }
 .field-select {
-	padding: 10px 0;
+    padding: 10px 0;
 }
 
 /* Inline #6 | http://localhost:9000/listings */
 
 .bottom-absolute {
-	position: absolute;
-	bottom: 0;
+    position: absolute;
+    bottom: 0;
 }
 
 .right-absolute {
-	position: absolute;
-	right: 0;
+    position: absolute;
+    right: 0;
 }
 .cursor {
-	cursor: pointer;
+    cursor: pointer;
 }
 .object-fit-cover {
-	object-fit: cover;
+    object-fit: cover;
 }
 .single-listing-favourites-button {
-	position: absolute;
-	right: 20px;
-	top: 20px;
-	font-size: 30px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 30px;
 }
 
 /* Inline #6 | http://localhost:9000/listing/quidem-vel-quia-faci */
 
 .over-image-fav-button {
-	position: absolute;
-	top: 30px;
-	right: 30px;
-	z-index: 99;
-	font-size: 2.5rem;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    z-index: 99;
+    font-size: 2.5rem;
 }
 
 .pricing-block .is-info .panel-heading {
-	background-color: #eef6fc;
-	color: #1d72aa;
+    background-color: #eef6fc;
+    color: #1d72aa;
 }
 
 .pricing-block .panel-block {
-	justify-content: center;
+    justify-content: center;
 }
 
 /* Element | http://localhost:9000/AddCredits */
 .popular-badge {
-	position: absolute;
-	top: 6px;
-	right: -7px;
-	width: 64px;
-	transform: rotate(35deg);
+    position: absolute;
+    top: 6px;
+    right: -7px;
+    width: 64px;
+    transform: rotate(35deg);
 }
 .single-listing-buttons-container {
-	max-width: 100px;
-	margin: 0 auto;
+    max-width: 100px;
+    margin: 0 auto;
 }
 
 /* Element | http://localhost:9000/signup */
 
 div.radio-box-container:nth-child(2) > p:nth-child(2) {
-	display: none;
+    display: none;
 }
 
 /* Inline #8 | http://localhost:9000/listing/5f005b5ddc0b45027eed8fd0 */
 
 .react-sharing-button__text:hover,
 .react-sharing-button__link:hover {
-	color: white;
+    color: white;
 }
 
 .Toastify__close-button > svg {
-	background: rgba(10, 10, 10, .2);
-	border-radius: 100px;
-	height: 20px;
-	width: 20px;
-	padding: 4px 3px 4px 4px;
+    background: rgba(10, 10, 10, 0.2);
+    border-radius: 100px;
+    height: 20px;
+    width: 20px;
+    padding: 4px 3px 4px 4px;
 }
 
 .Toastify__toast {
-	border-left: solid 4px #363636;
+    border-left: solid 4px #363636;
 }
 .Toastify__toast--info {
-	background: #eef6fc;
-	border-color: #3298dc;
-	color: #1d72aa;
+    background: #eef6fc;
+    border-color: #3298dc;
+    color: #1d72aa;
 }
 
 .Toastify__toast--success {
-	background: #effaf3;
-	color: #257942;
-	border-color: #48c774;
+    background: #effaf3;
+    color: #257942;
+    border-color: #48c774;
 }
 
 .Toastify__toast--error {
-	background: #feecf0;
-	border-color: #f14668;
-	color: #cc0f35;
+    background: #feecf0;
+    border-color: #f14668;
+    color: #cc0f35;
 }
 
 .Toastify__toast--warning {
-	background: #fffbeb;
-	border-color: #ffdd57;
-	color: #947600;
+    background: #fffbeb;
+    border-color: #ffdd57;
+    color: #947600;
 }
 
 .chat-bubble {
-	position: relative;
-	border-radius: 20px;
-	min-width: min-content;
-	width: max-content;
-	max-width: 60%;
-	margin-bottom: 21px !important;
+    position: relative;
+    border-radius: 20px;
+    min-width: min-content;
+    width: max-content;
+    max-width: 60%;
+    margin-bottom: 21px !important;
 }
 .bubble-left {
-	margin-right: auto;
+    margin-right: auto;
 }
 .bubble-right {
-	margin-left: auto;
+    margin-left: auto;
 }
 .bubble-left small,
 .bubble-right small {
-	position: absolute;
-	bottom: -18px;
-	width: 110px;
+    position: absolute;
+    bottom: -18px;
+    width: 110px;
 }
 .bubble-right small {
-	right: 5px;
+    right: 5px;
 }
 .bubble-left small {
-	left: 5px;
+    left: 5px;
 }
 #chatForm .column.is-half {
-	width: 100%;
+    width: 100%;
 }
 
 #chatForm .column.is-half {
-	display: flex;
-	justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 
 #chatForm .field.is-grouped .control {
-	margin-right: 0;
+    margin-right: 0;
 }
 
 #chatForm form div:first-of-type {
-	width: 100%;
-	margin-right: 15px;
+    width: 100%;
+    margin-right: 15px;
 }
 #chatForm .help.is-danger {
-	display: none;
+    display: none;
 }
 
 .chat-container {
-	max-height: 60vh;
-	overflow-y: auto;
+    max-height: 60vh;
+    overflow-y: auto;
 }
 
 .listing-header.level.box {
-	padding: 0;
+    padding: 0;
 }
 .chat-panel {
-	max-width: 800px;
-	margin: 0 auto;
-	margin-top: -2.5em;
+    max-width: 800px;
+    margin: 0 auto;
+    margin-top: -2.5em;
 }
 #navMenu .tag.is-danger.ml-1.is-small {
-	font-size: 9px;
-	margin-top: 3px;
-	border-radius: 20px;
+    font-size: 9px;
+    margin-top: 3px;
+    border-radius: 20px;
 }
 
 #filter-form .column.is-half {
-	width: 100%;
+    width: 100%;
 }
