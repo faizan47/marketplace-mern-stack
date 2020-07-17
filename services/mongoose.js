@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const { mongoURI } = require("../config/keys");
+const mongoose = require('mongoose');
+const { mongoURI } = require('../config/keys');
 
 module.exports = () => {
     mongoose.connect(
@@ -8,17 +8,17 @@ module.exports = () => {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useFindAndModify: false,
-            useCreateIndex: true,
+            useCreateIndex: true
         },
         err => {
             if (err) {
                 console.log(err);
             } else {
-                console.log("Successfully connected to the database");
+                console.log('Successfully connected to the database');
             }
         }
     );
-    require("../models/User");
-    require("../models/Listing");
-    require("../models/Conversation");
+    require('../models/User');
+    require('../models/Listing');
+    require('../models/Conversation');
 };

@@ -1,9 +1,7 @@
-import React from "react";
-import time_ago_in_words from "time_ago_in_words";
+import React from 'react';
+import time_ago_in_words from 'time_ago_in_words';
 
-export default ({
-    currentListing: { title, description, category, quantity, datePosted },
-}) => (
+export default ({ currentListing: { title, description, category, quantity, datePosted } }) => (
     <div className="content">
         <h1 className="title is-2">{title}</h1>
         <div className="level">
@@ -26,9 +24,7 @@ export default ({
                     <span className="tag icon">
                         <i className="fas fa-clock" />
                     </span>
-                    <span className="tag is-light">
-                        {time_ago_in_words(new Date(datePosted))}
-                    </span>
+                    <span className="tag is-light">{time_ago_in_words(new Date(datePosted))}</span>
                 </span>
             </div>
         </div>

@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import FormTemplate from "../formComponents/FormTemplate";
-import { createListingInputs } from "../../formInputs/retailer/createListing";
-import { connect } from "react-redux";
-import { fetchListingById, updateListing } from "../../actions";
-import ContentLoader from "react-content-loader";
+import React, { Component } from 'react';
+import FormTemplate from '../formComponents/FormTemplate';
+import { createListingInputs } from '../../formInputs/retailer/createListing';
+import { connect } from 'react-redux';
+import { fetchListingById, updateListing } from '../../actions';
+import ContentLoader from 'react-content-loader';
 
 class EditListing extends Component {
     listingId = this.props.match.params.listingId;
@@ -39,11 +39,7 @@ class EditListing extends Component {
     }
 }
 const mapStateToProps = (state, ownProps) => ({
-    currentListing: state.myListings.find(
-        ({ _id }) => _id === ownProps.match.params.listingId
-    ),
+    currentListing: state.myListings.find(({ _id }) => _id === ownProps.match.params.listingId)
 });
 
-export default connect(mapStateToProps, { fetchListingById, updateListing })(
-    EditListing
-);
+export default connect(mapStateToProps, { fetchListingById, updateListing })(EditListing);

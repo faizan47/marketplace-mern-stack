@@ -1,8 +1,4 @@
-import {
-    FETCH_LISTINGS,
-    CREATE_LISTING,
-    SEARCH_LISTINGS,
-} from "../actions/types";
+import { FETCH_LISTINGS, CREATE_LISTING, SEARCH_LISTINGS } from '../actions/types';
 
 const listingReducer = (state = null, action) => {
     switch (action.type) {

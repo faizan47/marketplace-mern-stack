@@ -1,5 +1,5 @@
-import React from "react";
-import { Field } from "react-final-form";
+import React from 'react';
+import { Field } from 'react-final-form';
 
 export default ({ name, selectOptions, iconClass, label }) => {
     const renderSelect = ({ input, meta: { touched, error }, children }) => (

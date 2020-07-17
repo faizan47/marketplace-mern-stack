@@ -1,23 +1,13 @@
-import React from "react";
+import React from 'react';
 
-export default ({
-    panelClass,
-    bids,
-    buttonClass,
-    planName,
-    amount,
-    isPopular,
-    handlePlanData,
-}) => {
+export default ({ panelClass, bids, buttonClass, planName, amount, isPopular, handlePlanData }) => {
     return (
         <div className="column pricing-block is-relative">
             <article className={`panel ${panelClass}`}>
                 <p className="panel-heading">
                     {planName}
                     {isPopular ? (
-                        <span className="popular-badge tag is-danger">
-                            Popular
-                        </span>
+                        <span className="popular-badge tag is-danger">Popular</span>
                     ) : null}
                 </p>
                 <span className="panel-block is-size-5">{bids} Bids</span>

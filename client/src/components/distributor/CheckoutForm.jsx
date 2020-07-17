@@ -1,10 +1,10 @@
-import React from "react";
-import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
-import PaymentForm from "./PaymentForm";
-import { connect } from "react-redux";
-import { updateCredits } from "../../actions";
-import getStripeSecret from "../../utils/getStripeSecret";
-import { toast } from "react-toastify";
+import React from 'react';
+import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
+import PaymentForm from './PaymentForm';
+import { connect } from 'react-redux';
+import { updateCredits } from '../../actions';
+import getStripeSecret from '../../utils/getStripeSecret';
+import { toast } from 'react-toastify';
 
 const CheckoutForm = ({ amount, updateCredits, planName, onModalExit }) => {
     const stripe = useStripe();
@@ -15,19 +15,16 @@ const CheckoutForm = ({ amount, updateCredits, planName, onModalExit }) => {
             return;
         }
 
-        const result = await stripe.confirmCardPayment(
-            await getStripeSecret(amount * 100),
-            {
-                payment_method: {
-                    card: elements.getElement(CardElement),
-                },
+        const result = await stripe.confirmCardPayment(await getStripeSecret(amount * 100), {
+            payment_method: {
+                card: elements.getElement(CardElement)
             }
-        );
+        });
 
         if (result.error) {
             toast.error(result.error.message);
         } else {
-            if (result.paymentIntent.status === "succeeded") {
+            if (result.paymentIntent.status === 'succeeded') {
                 updateCredits(result.paymentIntent.id);
                 onModalExit();
             }

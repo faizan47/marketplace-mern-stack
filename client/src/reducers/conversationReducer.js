@@ -1,4 +1,4 @@
-import { GET_CHAT_BY_ID, SEND_MESSAGE } from "../actions/types";
+import { GET_CHAT_BY_ID, SEND_MESSAGE } from '../actions/types';
 
 const messagesReducer = (state = [], action) => {
     switch (action.type) {

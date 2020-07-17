@@ -6,10 +6,10 @@ import {
     ADD_TO_FAVOURITES,
     REMOVE_FROM_FAVOURITES,
     ADD_CREDITS,
-    INITIALIZE_CONVERSATION,
-} from "../actions/types";
+    INITIALIZE_CONVERSATION
+} from '../actions/types';
 
-const userReducer = (state = "", action) => {
+const userReducer = (state = '', action) => {
     switch (action.type) {
         case SIGN_IN:
             return action.payload;

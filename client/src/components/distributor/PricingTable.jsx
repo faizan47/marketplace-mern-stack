@@ -1,9 +1,9 @@
-import React from "react";
-import { Component } from "react";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
-import PricingBlock from "./PricingBlock";
-import CheckoutForm from "./CheckoutForm";
+import React from 'react';
+import { Component } from 'react';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import PricingBlock from './PricingBlock';
+import CheckoutForm from './CheckoutForm';
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 class PricingTable extends Component {
@@ -13,7 +13,7 @@ class PricingTable extends Component {
             showCheckoutForm: true,
             amount,
             planName,
-            showModal: false,
+            showModal: false
         });
     };
     render() {

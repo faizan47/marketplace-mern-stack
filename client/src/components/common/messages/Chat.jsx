@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import ContentLoader from "react-content-loader";
-import { getChatById, fetchUser, sendMessage } from "../../../actions";
-import FormTemplate from "../../formComponents/FormTemplate";
-import ChatBubble from "./ChatBubble";
-import { chatInputs } from "../../../formInputs/common/chatInputs";
-import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import ContentLoader from 'react-content-loader';
+import { getChatById, fetchUser, sendMessage } from '../../../actions';
+import FormTemplate from '../../formComponents/FormTemplate';
+import ChatBubble from './ChatBubble';
+import { chatInputs } from '../../../formInputs/common/chatInputs';
+import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 class Chat extends Component {
     componentDidMount() {
@@ -26,14 +26,11 @@ class Chat extends Component {
                 </div>
                 <div className="level-right">
                     <figure className="image is-64x64">
-                        <Link
-                            to={`/listing/${this.props.conversation._listing._id}`}
-                        >
+                        <Link to={`/listing/${this.props.conversation._listing._id}`}>
                             <img
                                 src={
-                                    this.props.conversation._listing
-                                        .images[0] ||
-                                    "https://bulma.io/images/placeholders/128x128.png"
+                                    this.props.conversation._listing.images[0] ||
+                                    'https://bulma.io/images/placeholders/128x128.png'
                                 }
                                 alt="listing header"
                             />
@@ -44,16 +41,14 @@ class Chat extends Component {
         );
     };
     renderChats = () => {
-        return this.props.conversation.messages.map(
-            ({ _id, message, time, _user: { role } }) => (
-                <ChatBubble
-                    key={_id}
-                    isSentByMe={role === this.props.role}
-                    time={time}
-                    message={message}
-                />
-            )
-        );
+        return this.props.conversation.messages.map(({ _id, message, time, _user: { role } }) => (
+            <ChatBubble
+                key={_id}
+                isSentByMe={role === this.props.role}
+                time={time}
+                message={message}
+            />
+        ));
     };
     sendMessage = values => {
         if (!values.message) return toast.warn("Can't send empty message");
@@ -65,7 +60,7 @@ class Chat extends Component {
                 <div className="panel-heading">
                     <div className="level">
                         <div className="level-left">
-                            {this.props.role === "distributor"
+                            {this.props.role === 'distributor'
                                 ? this.props.conversation.to.company
                                 : this.props.conversation.from.company}
                         </div>
@@ -97,11 +92,11 @@ class Chat extends Component {
 
 const mapStateToProps = ({ conversation, user: { role } }) => ({
     conversation,
-    role,
+    role
 });
 
 export default connect(mapStateToProps, {
     getChatById,
     fetchUser,
-    sendMessage,
+    sendMessage
 })(Chat);

@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import InboxItem from "./InboxItem";
-import { connect } from "react-redux";
-import { getInbox, fetchUser } from "../../../actions";
-import ContentLoader from "react-content-loader";
+import React, { Component } from 'react';
+import InboxItem from './InboxItem';
+import { connect } from 'react-redux';
+import { getInbox, fetchUser } from '../../../actions';
+import ContentLoader from 'react-content-loader';
 
 class Inbox extends Component {
     componentDidMount() {
@@ -20,7 +20,7 @@ class Inbox extends Component {
                     unreadByDistributor,
                     unreadByRetailer,
                     messages,
-                    active,
+                    active
                 }) => {
                     console.log(active);
                     return (
@@ -33,7 +33,7 @@ class Inbox extends Component {
                                 to,
                                 _listing: _listing || {},
                                 unreadByDistributor,
-                                unreadByRetailer,
+                                unreadByRetailer
                             }}
                             active={active}
                             lastMessage={messages[0]}
@@ -52,11 +52,7 @@ class Inbox extends Component {
         return (
             <>
                 <h1 className="title is-1">Inbox</h1>
-                {this.props.messages === null ? (
-                    <ContentLoader />
-                ) : (
-                    this.renderInbox()
-                )}
+                {this.props.messages === null ? <ContentLoader /> : this.renderInbox()}
             </>
         );
     }

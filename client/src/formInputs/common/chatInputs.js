@@ -1,10 +1,10 @@
 export const chatInputs = [
     {
-        name: "message",
+        name: 'message',
         // label: 'Enter your message',
-        placeholder: "Enter your message",
-        type: "text",
-        iconClass: "fa-keyboard",
-        optional: true,
-    },
+        placeholder: 'Enter your message',
+        type: 'text',
+        iconClass: 'fa-keyboard',
+        optional: true
+    }
 ];

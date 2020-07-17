@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import MarkAsFavourite from "../MarkAsFavourite";
-import Modal from "../Modal";
-import { Facebook, Twitter, Email } from "react-sharingbuttons";
-import "react-sharingbuttons/dist/main.css";
+import React, { Component } from 'react';
+import MarkAsFavourite from '../MarkAsFavourite';
+import Modal from '../Modal';
+import { Facebook, Twitter, Email } from 'react-sharingbuttons';
+import 'react-sharingbuttons/dist/main.css';
 
 class ActionButtons extends Component {
     state = { displayModal: null };
@@ -13,14 +13,8 @@ class ActionButtons extends Component {
         const URL = window.location.href;
         if (this.state.displayModal)
             return (
-                <Modal
-                    onModalExit={this.onModalExit}
-                    title="Share this listing"
-                >
-                    <Email
-                        subject={`Check this out - ${this.props.title}`}
-                        url={URL}
-                    />{" "}
+                <Modal onModalExit={this.onModalExit} title="Share this listing">
+                    <Email subject={`Check this out - ${this.props.title}`} url={URL} />{' '}
                     <Facebook url={URL} />
                     <Twitter shareText={this.props.description} url={URL} />
                 </Modal>

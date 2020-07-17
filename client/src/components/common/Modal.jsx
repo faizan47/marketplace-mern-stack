@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 
 class Modal extends Component {
     renderAction = () => {
@@ -9,9 +9,7 @@ class Modal extends Component {
                     <button
                         onClick={this.props.action.onConfirm}
                         className={`button ${
-                            this.props.action.type === "danger"
-                                ? "is-danger"
-                                : "is-warning"
+                            this.props.action.type === 'danger' ? 'is-danger' : 'is-warning'
                         }`}
                     >
                         {this.props.action.buttonText}
@@ -36,19 +34,14 @@ class Modal extends Component {
                             aria-label="close"
                         />
                     </header>
-                    <section className="modal-card-body">
-                        {this.props.children}
-                    </section>
+                    <section className="modal-card-body">{this.props.children}</section>
                     {this.renderAction()}
                 </div>
             </div>
         </div>
     );
     render() {
-        return ReactDOM.createPortal(
-            this.renderModal(),
-            document.getElementById("modal")
-        );
+        return ReactDOM.createPortal(this.renderModal(), document.getElementById('modal'));
     }
 }
 

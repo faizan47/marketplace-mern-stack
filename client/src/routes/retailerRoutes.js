@@ -1,8 +1,8 @@
-import React, { Fragment } from "react";
-import { Route, Switch } from "react-router-dom";
-import CreateListing from "../components/retailer/CreateListing";
-import MyListings from "../components/retailer/MyListings";
-import EditListing from "../components/retailer/EditListing";
+import React, { Fragment } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import CreateListing from '../components/retailer/CreateListing';
+import MyListings from '../components/retailer/MyListings';
+import EditListing from '../components/retailer/EditListing';
 
 export default () => (
     <Fragment>

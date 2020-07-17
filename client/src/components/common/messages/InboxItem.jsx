@@ -1,6 +1,6 @@
-import React from "react";
-import time_ago_in_words from "time_ago_in_words";
-import { Link } from "react-router-dom";
+import React from 'react';
+import time_ago_in_words from 'time_ago_in_words';
+import { Link } from 'react-router-dom';
 
 const InboxItem = ({
     role,
@@ -11,26 +11,26 @@ const InboxItem = ({
         to,
         _listing: { title },
         unreadByDistributor,
-        unreadByRetailer,
+        unreadByRetailer
     },
-    active,
+    active
 }) => {
-    let isBold = "has-text-weight-normal has-text-grey-dark";
+    let isBold = 'has-text-weight-normal has-text-grey-dark';
     const renderUnreadTag = role => {
-        if (role === "retailer" && unreadByRetailer === "true") {
-            isBold = "has-text-weight-semibold has-text-black-ter";
+        if (role === 'retailer' && unreadByRetailer === 'true') {
+            isBold = 'has-text-weight-semibold has-text-black-ter';
             return <span className="tag is-danger is-normal">Unread</span>;
         }
-        if (role === "distributor" && unreadByDistributor === "true") {
-            isBold = "has-text-weight-semibold";
+        if (role === 'distributor' && unreadByDistributor === 'true') {
+            isBold = 'has-text-weight-semibold';
             return <span className="tag is-danger is-normal">Unread</span>;
         }
     };
     const renderReadStatus = () => {
         if (
-            role === "distributor" &&
-            unreadByRetailer === "false" &&
-            unreadByDistributor === "false"
+            role === 'distributor' &&
+            unreadByRetailer === 'false' &&
+            unreadByDistributor === 'false'
         ) {
             return (
                 <span title="Read" className="icon has-text-success">
@@ -39,9 +39,9 @@ const InboxItem = ({
             );
         }
         if (
-            role === "retailer" &&
-            unreadByDistributor === "false" &&
-            unreadByRetailer === "false"
+            role === 'retailer' &&
+            unreadByDistributor === 'false' &&
+            unreadByRetailer === 'false'
         ) {
             return (
                 <span title="Read" className="icon has-text-success">
@@ -66,7 +66,7 @@ const InboxItem = ({
                 </div>
                 <div className="media-content">
                     <div className="content">
-                        <Link to={active ? `/inbox/${_id}` : "#"}>
+                        <Link to={active ? `/inbox/${_id}` : '#'}>
                             <p className="has-text-black">
                                 <span className="is-size-6 has-text-grey">
                                     {to.company || from.company}
@@ -76,11 +76,7 @@ const InboxItem = ({
                                 </small>
                                 <small>{renderUnreadTag(role)}</small>
                                 <br />
-                                <small
-                                    className={`is-block is-size-5 ${isBold}`}
-                                >
-                                    {message}
-                                </small>
+                                <small className={`is-block is-size-5 ${isBold}`}>{message}</small>
                                 <small className="has-text-grey-light is-size-7">
                                     About: {title}
                                 </small>
@@ -90,9 +86,7 @@ const InboxItem = ({
                 </div>
                 <div className="media-right">
                     {!active ? (
-                        <span className="tag is-danger is-normal">
-                            Listing no longer active.
-                        </span>
+                        <span className="tag is-danger is-normal">Listing no longer active.</span>
                     ) : null}
                     {renderReadStatus()}
                 </div>

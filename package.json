@@ -21,9 +21,5 @@
         "nodemon": "^2.0.4",
         "socket.io": "^2.3.0",
         "stripe": "^8.67.0"
-    },
-    "prettier": {
-        "tabWidth": 4,
-        "arrowParens": "avoid"
     }
 }

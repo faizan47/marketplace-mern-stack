@@ -1,6 +1,6 @@
-import axios from "axios";
-import { GET_CHAT_BY_ID, SEND_MESSAGE } from "./types";
-import { toast } from "react-toastify";
+import axios from 'axios';
+import { GET_CHAT_BY_ID, SEND_MESSAGE } from './types';
+import { toast } from 'react-toastify';
 
 export const getChatById = id => async dispatch => {
     try {
@@ -14,10 +14,10 @@ export const getChatById = id => async dispatch => {
 export const sendMessage = (values, id) => async dispatch => {
     try {
         const response = await axios.post(`/api/conversation/${id}`, {
-            values,
+            values
         });
         dispatch({ type: SEND_MESSAGE, payload: response.data });
     } catch (error) {
-        toast.error("Something went wrong!");
+        toast.error('Something went wrong!');
     }
 };

@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
-import { connect } from "react-redux";
-import { signOut } from "../../actions";
-import Modal from "./Modal";
-import PricingTable from "../distributor/PricingTable";
+import React, { Component } from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { signOut } from '../../actions';
+import Modal from './Modal';
+import PricingTable from '../distributor/PricingTable';
 
 class NavButtons extends Component {
     state = { showModal: false };

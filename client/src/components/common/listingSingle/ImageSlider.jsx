@@ -1,10 +1,8 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 class ImageSlider extends Component {
     state = {
-        mainImage:
-            this.props.images[0] ||
-            "https://bulma.io/images/placeholders/480x320.png",
+        mainImage: this.props.images[0] || 'https://bulma.io/images/placeholders/480x320.png'
     };
     setMainImage = url => {
         this.setState({ mainImage: url });
@@ -25,11 +23,7 @@ class ImageSlider extends Component {
             <>
                 <div className="card-image">
                     <figure className="image is-3by2">
-                        <img
-                            className="object-fit-cover"
-                            src={this.state.mainImage}
-                            alt="main"
-                        />
+                        <img className="object-fit-cover" src={this.state.mainImage} alt="main" />
                     </figure>
                 </div>
                 <div className="card-content pb-0 pr-0">

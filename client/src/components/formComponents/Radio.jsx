@@ -1,5 +1,5 @@
-import React from "react";
-import "./radioStyle.css";
+import React from 'react';
+import './radioStyle.css';
 
 export default ({ radioValue, message, input, meta: { touched, error } }) => (
     <div className="column radio-box-container my-1">
@@ -15,8 +15,6 @@ export default ({ radioValue, message, input, meta: { touched, error } }) => (
                 <p className="is-size-6">{message}</p>
             </div>
         </label>
-        {touched && error && (
-            <p className="help is-danger display-one">{error}</p>
-        )}
+        {touched && error && <p className="help is-danger display-one">{error}</p>}
     </div>
 );

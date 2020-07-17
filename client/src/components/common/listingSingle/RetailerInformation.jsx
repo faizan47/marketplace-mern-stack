@@ -1,13 +1,11 @@
-import React from "react";
-import time_ago_in_words from "time_ago_in_words";
-import SendMessage from "../../distributor/SendMessage";
+import React from 'react';
+import time_ago_in_words from 'time_ago_in_words';
+import SendMessage from '../../distributor/SendMessage';
 
 export default ({ user: { company, joinDate }, listingId }) => {
     return (
         <>
-            <span className="has-text-grey-dark mb-1">
-                Retailer Information
-            </span>
+            <span className="has-text-grey-dark mb-1">Retailer Information</span>
             <div className="media mt-2">
                 <div className="media-left">
                     <figure className="image is-48x48">

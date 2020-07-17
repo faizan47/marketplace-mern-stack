@@ -1,9 +1,9 @@
-import React from "react";
-import { withRouter } from "react-router-dom";
-import { signInInputs } from "../../formInputs/common/signInInputs";
-import { signIn } from "../../actions";
-import { connect } from "react-redux";
-import FormTemplate from "../formComponents/FormTemplate";
+import React from 'react';
+import { withRouter } from 'react-router-dom';
+import { signInInputs } from '../../formInputs/common/signInInputs';
+import { signIn } from '../../actions';
+import { connect } from 'react-redux';
+import FormTemplate from '../formComponents/FormTemplate';
 
 class SignInForm extends React.Component {
     onSubmit = values => {

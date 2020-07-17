@@ -1,17 +1,9 @@
-import React from "react";
-import ImageUploader from "react-images-upload";
+import React from 'react';
+import ImageUploader from 'react-images-upload';
 
-const ImageUpload = ({
-    input,
-    name,
-    label,
-    defaultImages,
-    input: { onChange },
-}) => {
+const ImageUpload = ({ input, name, label, defaultImages, input: { onChange } }) => {
     const onDrop = (pictureFiles, pictureDataURLs) => {
-        const URLs = pictureDataURLs.filter(url =>
-            url.includes("res.cloudinary")
-        );
+        const URLs = pictureDataURLs.filter(url => url.includes('res.cloudinary'));
         onChange([...pictureFiles, ...URLs]);
     };
 
@@ -26,7 +18,7 @@ const ImageUpload = ({
                 buttonText="Upload"
                 buttonClassName="button is-light"
                 onChange={onDrop}
-                imgExtension={[".jpg", ".gif", ".png", ".gif"]}
+                imgExtension={['.jpg', '.gif', '.png', '.gif']}
                 maxFileSize={5242880}
                 withPreview={true}
                 withLabel={true}

@@ -1,16 +1,11 @@
-import React from "react";
+import React from 'react';
 
 export default props => {
     const { placeholder, iconClass, label, input, meta } = props;
     const { touched, error } = meta;
     const inputMarkup =
-        input.type === "number" ? (
-            <input
-                {...input}
-                type="text"
-                className="input"
-                placeholder={placeholder}
-            />
+        input.type === 'number' ? (
+            <input {...input} type="text" className="input" placeholder={placeholder} />
         ) : (
             <input {...input} className="input" placeholder={placeholder} />
         );
